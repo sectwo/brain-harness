@@ -13,6 +13,10 @@
 연결되어야 다음에 필요할 때 맥락을 잃지 않고 이어갈 수 있기 때문에, 이 연결 구조 자체가 핵심이다.
 옵시디언의 그래프 뷰를 열면 이 연결이 실제로 시각화된다.
 
+다만 세션이 시작될 때 자동으로 주입되는 것은 `CLAUDE.md`의 `@` import와 SessionStart 훅(아래 "세션이
+시작할 때 읽는 순서")이 정한 노트뿐이고, 위키링크는 그 밖의 기억을 필요할 때 사람과 에이전트가 따라가
+찾는 경로다. 정리하면: **규칙(하네스 트리)은 계층으로 상속되고, 기억(vault 노트)은 시냅스로 연결된다.**
+
 기억의 기준(source of truth)은 항상 이 옵시디언 vault다. ECC·Headroom 같은 다른 도구의 기억과 다르면
 여기 내용이 우선한다.
 
@@ -44,6 +48,8 @@
 - **`Projects/<이름>/`** — 프로젝트별 vault (L2 + L3)
   - `Overview.md`, `Decisions.md`, `Handoff.md`, `Knowledge/` (L2)
   - `Agents/Claude.md`, `Agents/Codex.md`, `Sessions/` (L3)
+- 저장소 쪽에는 `.harness-project` 파일 하나로 그 저장소를 위 vault 프로젝트와 연결한다 (파일 내용은
+  `Projects/` 아래 프로젝트 이름).
 
 ## 세션이 시작할 때 읽는 순서
 
@@ -56,7 +62,18 @@
 ## 새 프로젝트 시작하기
 
 Claude Code에서 `/new-project` 명령으로 시작한다. `System/Templates/Project/` 템플릿을 바탕으로
-새 프로젝트의 L2 vault 구조(Overview/Decisions/Handoff/Knowledge)를 만들어 준다.
+새 프로젝트의 L2+L3 vault 구조(Overview/Decisions/Handoff/Knowledge + Agents/Sessions)를 만들어 준다.
+
+## 자주 쓰는 명령 (Claude Code 전용)
+
+- `/new-project` — 새 프로젝트 vault 만들기
+- `/handoff` — 세션 로그를 정리해 `Handoff.md`에 반영 (Handoff는 이 명령으로만 갱신한다)
+- `/cross-review` — Claude ↔ Codex 교차 리뷰 실행
+- `/brain-sync` — 원격 `brain-harness` 저장소에서 fast-forward pull
+
+명령 원본은 `System/commands/*.md`(vault, git 추적)이고, `System/scripts/install-commands.sh`가 그대로
+복사해 Claude Code가 실제로 읽는 `~/.claude/commands/`에 반영한다. 원본을 고쳤으면 이 스크립트를
+실행해야 실제 명령에 반영된다.
 
 ## 주요 문서
 
