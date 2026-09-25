@@ -27,7 +27,8 @@
 - 다크 네이비 + 화이트/라이트그레이를 섹션별로 교차시키는 톤 (제안된 흐름: NAVY Hero → WHITE Company →
   라이트그레이 Brands → NAVY Trusted Experience/Notice → WHITE Contact → 딥네이비 Footer). 최종 색 배치는 예비 시안 우선.
 - 메인 비주얼은 특정 제조사 제품 사진이 아니라 기어/산업기술 계열 그래픽을 사용한다. 실제 제품 사진은 BRANDS 페이지 내부에서만 쓴다.
-- 반응형(모바일) 구성 필요 — TODO(확인 필요): 구현 여부·범위 미착수.
+- 반응형(모바일) 구성 필요 — **전체 페이지** 반응형으로 구현 (이시영, 2026-09-26 인터뷰). 특정 페이지만
+  우선하지 않고 COMPANY/BRANDS/NOTICE/CONTACT 전부 모바일에서 잘 보이게 만든다.
 
 ## 사이트 구조 (페이지)
 상단 메인 메뉴는 4개로 단순화한다 (탐색 과정에서 COMPANY/PRODUCTS/BRANDS/APPLICATIONS/SUPPORT + 별도
@@ -83,12 +84,15 @@ FOOTER — INTRA T&M 로고 + 회사정보 + TEL/FAX/E-mail (웹사이트 주소
   | 2019 | 기업부설연구소 설립 |
 
   - YAMAZEN은 현재 BRANDS 목록에서는 제외하지만 실제 연혁이므로 연혁 표에는 유지한다.
-  - TODO(확인 필요): 2020년 이후 연혁, HERUTU 취급/거래 시작 연도.
+  - 2020년 이후 연혁은 추가하지 않기로 확정 (이시영, 2026-09-26 인터뷰). 위 표(1999~2019)가 최종.
+    추후 추가할 사건이 생기면 이시영이 별도로 알려주기로 함 — 그 전까지는 이 표 그대로 사용한다.
+  - TODO(확인 필요): HERUTU 취급/거래 시작 연도. 계약서 등 실제 계약일자를 확인해야 알 수 있음(이시영,
+    2026-09-26 인터뷰) — 확인 전까지는 연도를 비워두고 임의로 채우지 않는다.
 - **사업영역** (제품 모델이 아니라 회사가 다루는 기술·분야 중심):
   산업용 체결 공구(URYU) / 체결 액세서리(BIX) / 전동 체결 장비(HIOS) / 조립·생산 자동화(OHTAKE-ROOT) /
   품질관리·Poka-Yoke(HERUTU) / 공압 관련 제품(CHIYODA) / 전자 조립 장비(GOOT) / 산업용 공구(KTC)
 - **오시는 길**: 주소/TEL/FAX/E-mail + 지도 영역(위치 마커, [지도에서 보기], 가능하면 [길찾기], 모바일에서 지도
-  앱으로 바로 열리게). TODO(확인 필요): 어떤 지도 서비스/API를 쓸지는 사이트 구현 환경에 맞춰 결정.
+  앱으로 바로 열리게). 지도 서비스는 **카카오맵**으로 확정 (이시영, 2026-09-26 인터뷰).
 
 ### BRANDS 상세
 공통 템플릿: **브랜드 로고 → 브랜드 소개 → 주요 제품군 → 대표 제품사진(가능하면 직접 촬영) →
@@ -103,41 +107,50 @@ FOOTER — INTRA T&M 로고 + 회사정보 + TEL/FAX/E-mail (웹사이트 주소
    - 제품군: Fastening Tools(체결 공구: Oil Pulse/Impact Wrench/Nutrunner), Drills & Tappers(드릴 및 태퍼),
      Grinding & Abrasive Tools(그라인딩 및 연마 공구), Screwdrivers(드라이버),
      Fastening Control Systems(체결 관리 시스템: UDP·UCX·UEC 계열), Testers & Other Tools(테스터 및 기타 공구)
-   - 공식 홈페이지(후보, 최종 확인 필요): https://www.uryu.co.jp/ , 영문 https://www.uryu.co.jp/english/
+   - 공식 홈페이지(확정, 2026-09-26 인터뷰): https://www.uryu.co.jp/ , 영문 https://www.uryu.co.jp/english/
 2. **BIX** — 일본 드라이버 비트·임팩트 소켓 전문 제조사. 특주품·OEM 대응 가능.
    - 제품군: Driver Bits(드라이버 비트), Socket Bits(소켓 비트), Impact Sockets(임팩트 소켓),
      Special Sockets(특수 소켓), Custom Products(특주 제품)
-   - 공식 홈페이지(후보): https://www.bix-co.jp/
+   - 공식 홈페이지(확정): https://www.bix-co.jp/
 3. **HIOS** — 일본 산업용 전동 드라이버·체결기기 전문 제조사.
    - 제품군: Electric Screwdrivers(전동 드라이버), Screw Counters & Controllers(체결 수량 관리·제어기기),
      Torque Measuring Equipment(토크 측정·검사기기), Accessories(액세서리)
-   - 공식 홈페이지: TODO(확인 필요) — 자료에서 URL 미확보.
+   - 공식 홈페이지(확정, 2026-09-26 인터뷰): https://www.hios.com/
 4. **OHTAKE-ROOT** — 일본 자동 나사공급기 전문 제조사. (기존 회사소개서 표기 `OTAKE` 대신 공식 명칭
      `OHTAKE-ROOT` 사용)
    - 제품군: Automatic Screw Feeders(자동 나사공급기), Automation/Robotic Screw Feeders(자동화·로봇용
      나사공급기), Pneumatic Screw Feeders(공압식 나사공급기), Hoppers & Accessories(호퍼 및 액세서리)
-   - 공식 홈페이지(후보): https://ohtake-root.co.jp/ , 영문 https://ohtake-root.co.jp/en/
+   - 공식 홈페이지(확정): https://ohtake-root.co.jp/ , 영문 https://ohtake-root.co.jp/en/
 5. **HERUTU** — 일본 산업용 무선기기·포카요케(Poka-Yoke) 전문 제조사. 취급 시작이 비교적 최근이라
    과장 없이 간결하게 구성.
    - 제품군: Check Pen(체크펜), Transmitter/Receiver(송·수신기), Grease Gun(그리스건),
      Pliers Wrench(플라이어 렌치)
    - 실제 취급 모델(체크펜 모델번호 등)이 확정되지 않았으므로 **모델번호를 임의로 표시하지 않는다.**
-   - 공식 홈페이지(후보): https://www.herutu.co.jp/
+   - 공식 홈페이지(확정): https://www.herutu.co.jp/
 6. **CHIYODA** — 일본 산업용 공압 배관 부품 전문 제조사 (CHIYODA TSUSHO).
    - 제품군: Fittings(피팅), Tubes & Hoses(튜브 및 호스), Couplings(커플링), Hose Fittings(호스 피팅)
-   - 공식 홈페이지(후보): https://chiyoda-pneumatic.co.jp/
+   - 공식 홈페이지(확정): https://chiyoda-pneumatic.co.jp/
 7. **GOOT** — 일본 TAIYO ELECTRIC IND.의 납땜기기 전문 브랜드.
    - 제품군: Soldering Irons(납땜 인두기), Soldering Stations(납땜 스테이션),
      Desoldering Products(디솔더링 제품), Soldering Accessories(납땜 액세서리)
-   - 공식 홈페이지(후보): https://en.goot.jp/
+   - 공식 홈페이지(확정): https://en.goot.jp/
 8. **KTC** (KYOTO TOOL) — 일본 산업용·자동차 정비용 공구 전문 제조사. 취급 비중이 작아 가장 간결하게 구성.
    - 제품군: Hand Tools(수공구), Torque & Measuring Tools(토크 및 측정 공구), Power Tools(동력 공구),
      Automotive Tools(자동차 정비 공구)
-   - 공식 홈페이지(후보): https://ktc.jp/ , 영문 https://en.ktc.jp/
+   - 공식 홈페이지(확정): https://ktc.jp/ , 영문 https://en.ktc.jp/
 
 브랜드 이미지 운영: 가능하면 INTRA T&M에서 직접 촬영한 실제 취급 제품 사진을 쓴다. 브랜드마다 전 제품을
 찍지 않고 대표 제품·제품군 사진 몇 장만 사용한다 (예: URYU는 Oil Pulse / Impact Wrench / Drill / Grinder /
 Controller 계열 정도).
+
+**대표 제품사진 확보 현황 (2026-09-26 인터뷰)**: 기존 레거시 홈페이지(`www.intratnm.com`, 게시판형 구식
+사이트)를 확인한 결과:
+- **URYU / BIX / HIOS / CHIYODA / GOOT**: 레거시 사이트 게시판(`bbs/board.php?bo_table=uryu3|bix|hios|chiyoda|goot`)
+  안에 브랜드별 제품 사진이 이미 존재. 이시영 승인으로 이 사진들을 재사용하기로 함. 화질·저작권 등
+  문제가 확인되면 그때 다시 바꾼다.
+- **OHTAKE-ROOT / KTC / HERUTU**: 레거시 사이트에 해당 브랜드 사진이 없음(OHTAKE-ROOT와 비슷해 보이는
+  `nejicco`/`fujitec` 게시판이 있으나 각각 "SONY"·"FUJITEC" 명의라 다른 브랜드로 추정, 그대로 쓰지 않는다).
+  이 3개 브랜드는 대표 제품사진을 새로 확보(직접 촬영 또는 제조사 홈페이지 사진)해야 한다.
 
 ### NOTICE
 하위 메뉴 없이 단일 게시판 하나로 회사 공지 / 휴무 안내 / 제조사 안내 / 카탈로그 업데이트 / 신제품 안내를
@@ -146,7 +159,8 @@ Controller 계열 정도).
 ### CONTACT
 "제품이나 견적에 대해 궁금한 사항이 있으신가요? 필요한 제품 및 문의 내용을 보내주시면 담당자가 확인 후
 연락드리겠습니다." + `[ 제품·견적 문의하기 → ]` 버튼. 문의 내용은 최종적으로 회사 이메일
-`intra@intratnm.com`으로 전달되도록 구성한다. TODO(확인 필요): 폼→이메일 전송 구현 방식.
+`intra@intratnm.com`으로 전달되도록 구성한다. 전송 방식은 **Resend 등 이메일 API 연동**으로 확정
+(이시영, 2026-09-26 인터뷰).
 
 ### FOOTER
 INTRA T&M 로고 + "산업 현장을 위한 전문 공구와 기술" + 회사명(㈜인트라티앤엠 / INTRA T&M CO., LTD.) +
@@ -155,11 +169,16 @@ E-mail(intra@intratnm.com). **현재 홈페이지 웹 주소는 Footer에 표시
 
 ## 디자인
 - 브랜드 컬러: 다크 네이비 + 블루 포인트, 기어/정밀산업 그래픽을 아이덴티티 요소로 사용.
-- 참고 시안: 임이삭 프로젝트에서 이미 제작한 예비 시안 (레이아웃 기준, 파일 위치는 별도 확인 필요 —
-  TODO(확인 필요)).
+- **정정 (2026-09-26 인터뷰)**: 원래 자료에 있던 "임이삭이 만든 예비 시안 위에 콘텐츠만 교체" 전제는
+  사실이 아니다. Figma 같은 툴로 만든 별도 시각적 목업 파일은 없다. 대신 이시영이 콘텐츠 기획서에 직접
+  작성한 "메인페이지 흐름" 구조(섹션 순서)와 색상 톤 설명(다크 네이비+화이트/라이트그레이 교차, 기어/
+  산업기술 그래픽) 자체를 디자인 브리프로 삼기로 확인함. 별도 목업 파일을 더 기다리지 않고, 이 구조·톤
+  설명을 근거로 Tailwind로 바로 구현하며, 세부 타이포그래피·여백 등은 구현하면서 스크린샷으로 확인하고
+  조정한다.
 - 로고: 헤더 좌측 + Footer 좌측 2곳만 노출 권장. `OUR BRANDS`, `TRUSTED EXPERIENCE` 영역에는 INTRA 로고를
   넣지 않는다 (제조사 로고와 혼동 방지, 신뢰 섹션 단순화).
-- 각 브랜드 공식 로고 파일: TODO(확인 필요), 미확보.
+- 각 브랜드 공식 로고 파일: 회사 측에 보유분 없음, 각 제조사 공식 홈페이지에서 받아와야 함(이시영,
+  2026-09-26 인터뷰). TODO(확인 필요): 실제 다운로드·사용 권한 확인은 페이지 구현 단계에서 진행.
 
 ## 기술 스택
 - **Next.js (App Router) + TypeScript + Tailwind CSS** — 2026-09-26 결정, 근거는
@@ -169,18 +188,23 @@ E-mail(intra@intratnm.com). **현재 홈페이지 웹 주소는 Footer에 표시
 - React Native는 앱 배포용이라 이 프로젝트(웹 홈페이지)에 맞지 않아 기각했다.
 
 ## 배포 / 도메인
-- TODO(확인 필요)
+- **배포**: 회사 자체 서버/호스팅 (이시영, 2026-09-26 인터뷰). Node.js 실행 가능 여부는 미확인이라
+  확인 전까지는 Node 서버 배포를 기본 가정으로 개발한다 (아래 "결정된 구현 방식" 참고).
+- **도메인**: 기존 `www.intratnm.com` 그대로 사용 (이시영, 2026-09-26 인터뷰). 현재 레거시 사이트가 이
+  도메인에서 운영 중이므로, 새 홈페이지로 교체할 때 기존 사이트를 내리고 같은 도메인에 새로 배포한다.
 
 ## 남은 확인 사항 (자료 자체가 명시한 미확정 항목)
-- 2020년 이후 회사 연혁
-- HERUTU 취급/거래 시작 연도
-- 각 브랜드 공식 로고 파일
-- 각 브랜드 공식 카탈로그 연결 최종 URL (위 후보 URL은 리서치 단계 확인일 뿐 최종 확정 아님)
-- 브랜드별로 사용할 대표 제품사진 (직접 촬영 목록·실물 미정)
-- CONTACT 문의→이메일 연결 구현 방식
-- NOTICE 게시판 구현 방식
-- 모바일 반응형 구성
-- 오시는 길 지도 연동에 쓸 지도 서비스/API 선택
+- HERUTU 취급/거래 시작 연도 (계약일자 확인 후)
+- OHTAKE-ROOT / KTC / HERUTU 대표 제품사진 (나머지 5개 브랜드는 레거시 사이트 사진 재사용으로 확정, 2026-09-26)
+- 배포 서버가 Node.js 실행 환경인지 정적 파일 호스팅인지 (이시영이 추후 확인 예정)
+
+## 결정된 구현 방식 (2026-09-26 인터뷰)
+- **NOTICE 게시판**: 저장소 내 자체 구현 (Next.js API Route + 간단한 파일/DB). 외부 CMS·게시판 임베드는 쓰지 않는다.
+- **CONTACT 문의 폼**: Resend 등 이메일 API로 `intra@intratnm.com`에 전송.
+- **오시는 길 지도**: 카카오맵.
+- **배포**: 회사 자체 서버/호스팅. Node.js 실행 가능 여부가 아직 미확인이라, 확인 전까지는 Node 서버
+  배포(Next.js 그대로, SSR/API Route 포함)를 기본 가정으로 개발한다. 정적 호스팅으로 밝혀지면 그때
+  정적 export + 외부 폼/게시판 서비스로 전환을 재검토한다.
 
 ## 저장소
 - 로컬: `~/orca/projects/intra-tnm` (Orca로 관리)
