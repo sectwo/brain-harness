@@ -162,8 +162,11 @@ E-mail(intra@intratnm.com). **현재 홈페이지 웹 주소는 Footer에 표시
 - 각 브랜드 공식 로고 파일: TODO(확인 필요), 미확보.
 
 ## 기술 스택
-- 미정. 결정되면 [[Decisions]]에 기록 후 여기 요약.
-- 이번 자료는 콘텐츠·구조 기획서일 뿐 기술 스택과는 무관.
+- **Next.js (App Router) + TypeScript + Tailwind CSS** — 2026-09-26 결정, 근거는
+  [[Decisions#2026-09-26 — 기술 스택: Next.js + TypeScript + Tailwind CSS]].
+- 정적 페이지(COMPANY, BRANDS, FOOTER 등)는 SSG. CONTACT 문의 폼·NOTICE 게시판처럼 서버 로직이
+  필요한 부분은 Next.js API Route로 같은 저장소 안에서 처리.
+- React Native는 앱 배포용이라 이 프로젝트(웹 홈페이지)에 맞지 않아 기각했다.
 
 ## 배포 / 도메인
 - TODO(확인 필요)
