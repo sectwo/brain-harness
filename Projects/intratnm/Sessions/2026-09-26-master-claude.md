@@ -1,15 +1,15 @@
 # 세션 — 2026-09-26 / master / claude
 
 ## 목표
-Next.js 스캐폴딩 완료 + 홈페이지 제작요청자(이시영) 인터뷰로 Overview.md의 남은 확인 사항 채우기
+Next.js 스캐폴딩 완료 + 홈페이지 제작요청자(요청자) 인터뷰로 Overview.md의 남은 확인 사항 채우기
 
 ## 완료한 일
 - Next.js(App Router) + TypeScript + Tailwind CSS 스캐폴딩을 `~/orca/projects/intra-tnm`에 생성,
   기존 harness `AGENTS.md`/`CLAUDE.md`는 건드리지 않고 병합. `npm install`·`npm run build`·`npm run lint`
   모두 통과 확인 후 커밋(`0f6013f`).
 - 기술 스택 결정(Next.js+TS+Tailwind) vault 커밋 (`80751ce`).
-- 이시영 1차 인터뷰 진행 (하나씩 순서대로 질문하는 방식으로 전환, 상세는 [[Decisions#2026-09-26 —
-  이시영 1차 인터뷰: 남은 확인 사항 정리]]):
+- 요청자 1차 인터뷰 진행 (하나씩 순서대로 질문하는 방식으로 전환, 상세는 [[Decisions#2026-09-26 —
+  요청자 1차 인터뷰: 남은 확인 사항 정리]]):
   - 회사 연혁 2019년 확정(추가 없음), HERUTU 시작 연도 보류
   - 디자인 목업 없음 확인 → 콘텐츠 기획서의 구조·색상 설명을 디자인 브리프로 채택
   - 브랜드 로고 8개 전부 제조사 홈페이지에서 확보 필요, 카탈로그 URL 8개 전부 확정(HIOS: hios.com)
@@ -24,9 +24,9 @@ Next.js 스캐폴딩 완료 + 홈페이지 제작요청자(이시영) 인터뷰�
 - vault: `Overview.md`, `Decisions.md` 다수 수정 — 아직 커밋 전(이 세션 로그와 함께 커밋 예정)
 
 ## 막힌 점 / 확인 필요
-- HERUTU 취급 시작 연도 — 계약일자 확인 필요 (이시영이 확인 예정)
+- HERUTU 취급 시작 연도 — 계약일자 확인 필요 (요청자가 확인 예정)
 - OHTAKE-ROOT / KTC / HERUTU 대표 제품사진 — 신규 확보 필요
-- 배포 서버가 Node.js 실행 가능한지 정적 호스팅인지 — 이시영이 확인 예정. 확인 전까지 Node 서버
+- 배포 서버가 Node.js 실행 가능한지 정적 호스팅인지 — 요청자가 확인 예정. 확인 전까지 Node 서버
   배포를 기본 가정으로 개발 진행.
 
 ## 다음 할 일
