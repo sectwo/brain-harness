@@ -33,7 +33,13 @@ tags: [system, decisions]
 - **이유**: 하네스 문서가 원하는 상태를 이미 이루어진 사실처럼 적어 두면 다음 세션(사람이든 에이전트든)이 잘못된 전제로 작업하게 된다. 사실과 다른 문서는 "미적용/예정"으로 명시한다 (사람 요청: 다시 검증하고 다듬은 뒤 진행).
 - **대안**: 그냥 넘어가고 Orca 문제만 먼저 해결 → 다음 세션도 같은 착각을 반복할 위험이 있어 기각.
 - **전제조건 이행 완료 (2026-09-25)**: ~~옵시디언에서 `~/Brain` vault 등록~~ 완료 → ~~`git config --global`~~ 완료 (`임이삭 <misofamily@gmail.com>`) → ~~`gh auth login`~~ 완료 (계정 `sectwo`) → 저장소 범위는 `~/Brain` 전체 하나로 결정, **private**로 생성 → `git init` + 첫 커밋(`0097884`) + `gh repo create brain-harness --private --push` 완료. 원격: `https://github.com/sectwo/brain-harness`.
-- **남은 설계 항목 (1차 Fable 리뷰, 아직 미반영)**: SessionStart 자동 `git pull` 금지, 수동 동기화 명령(`/brain-sync`류)으로 대체 / 커밋은 자유, **push는 매번 사람 승인** / `~/.claude/commands/*.md` 원본을 vault로 옮기고 설치 스크립트·심링크 전략 마련 / `scripts/doctor.sh` 추가.
+- **남은 설계 항목 (1차 Fable 리뷰) 반영 완료 (2026-09-25, 커밋 `4d2dc39`)**:
+  - ~~SessionStart 자동 `git pull` 금지, 수동 동기화 명령으로 대체~~ → `/brain-sync` 추가 (사람이 실행할 때만 fast-forward pull, push는 안 함)
+  - ~~커밋은 자유, push는 매번 사람 승인~~ → `Rules.md` 2절에 명시
+  - ~~`~/.claude/commands/*.md` 원본을 vault로~~ → `~/Brain/System/commands/`가 원본, `install-commands.sh`로 복사 설치 (심링크는 Claude Code 지원 여부 미검증이라 복사 방식 채택)
+  - ~~`scripts/doctor.sh` 추가~~ → 완료, 실행 확인함 (옵시디언/Headroom/Orca/git·gh/명령 동기화/ECC 훅 점검)
+  - **미완료**: `~/.claude/settings.json`의 `ECC_DISABLED_HOOKS`에서 존재하지 않는 훅 id 제거는 Claude Code 자체 설정 파일 Bash 접근이 "Self-Modification" 분류로 자동 차단되어 못 함 (읽기도 막힘). 사람이 직접 지우거나 권한을 열어줘야 한다. 값은 여전히 `pre:observe,post:observe:continuous-learning,stop:evaluate-session` — 무해하지만 지워야 할 것은 `,post:observe:continuous-learning`.
+- **다음**: Orca `agentCmdOverrides.codex` 적용 (⌘Q 정상 종료 후 `orca-data.json` 수정) → 이번 커밋들 push(사람 승인 필요, 아직 안 함).
 
 ## 2026-09-25 — "브레인 하네스"로 명명, 확장 원칙과 정기 점검
 - **결정**: 이 하네스 체계를 **브레인(Brain) 하네스**로 부른다. 사람의 뇌처럼 계층을 나누고, 계층 수·구성은 고정하지 않고 필요하면 확장한다. 최상위 브레인(L1)에서 `Reviews.md`의 주기(기본 30일)마다 최신의 효율적이고 검증된 방법을 조사해 후보로 정리하고, 사람과 상의한 뒤에만 적용한다. 주기가 지나면 세션 시작 맥락이 알린다.
