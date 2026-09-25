@@ -15,7 +15,7 @@ tags: [system, rules]
 충돌하면 가까운 계층이 우선한다 (L3 > L2 > L1).
 
 ```
-L1  PC 전체      ~/Brain/System/            시스템 구성, 환경 설정, 공통 규칙, 공통 지식
+L1  전역(Global)  ~/Brain/System/            시스템 구성, 환경 설정, 공통 규칙, 공통 지식
 └─ L2  프로젝트   ~/Brain/Projects/<이름>/   + 저장소 AGENTS.md (프로젝트 고유 규칙·지식)
    └─ L3  에이전트·세션  Projects/<이름>/Agents/, Sessions/  (에이전트별 특이점, 세션 로그)
 ```
