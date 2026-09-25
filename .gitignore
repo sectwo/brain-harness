@@ -1,0 +1,9 @@
+# 옵시디언
+.DS_Store
+.obsidian/workspace*.json
+.obsidian/cache
+.trash/
+
+# 편집기·OS
+*.swp
+.idea/
