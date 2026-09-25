@@ -32,7 +32,8 @@ tags: [system, decisions]
   3. Orca가 띄우는 Codex는 `agentDefaultArgs.codex = --dangerously-bypass-approvals-and-sandbox`로 실행되어 `writable_roots` 샌드박스 설정이 무력화된다. L1 보호는 `AGENTS.md` 텍스트 지시 하나뿐이며 기술적으로 강제되지 않는다.
 - **이유**: 하네스 문서가 원하는 상태를 이미 이루어진 사실처럼 적어 두면 다음 세션(사람이든 에이전트든)이 잘못된 전제로 작업하게 된다. 사실과 다른 문서는 "미적용/예정"으로 명시한다 (사람 요청: 다시 검증하고 다듬은 뒤 진행).
 - **대안**: 그냥 넘어가고 Orca 문제만 먼저 해결 → 다음 세션도 같은 착각을 반복할 위험이 있어 기각.
-- **다음 전제조건 (brain-harness 저장소 작업 전)**: ~~옵시디언에서 `~/Brain` vault 등록(사람)~~ **완료 (2026-09-25 23:34, `obsidian.json`에 `~/Brain` 등록 확인)** → `git config --global user.name/email` 설정 (현재 미설정) → `gh auth login` (현재 미로그인) → 저장소 범위(`~/Brain` 전체 하나 권장, private 여부) 결정 후 `git init`.
+- **전제조건 이행 완료 (2026-09-25)**: ~~옵시디언에서 `~/Brain` vault 등록~~ 완료 → ~~`git config --global`~~ 완료 (`임이삭 <misofamily@gmail.com>`) → ~~`gh auth login`~~ 완료 (계정 `sectwo`) → 저장소 범위는 `~/Brain` 전체 하나로 결정, **private**로 생성 → `git init` + 첫 커밋(`0097884`) + `gh repo create brain-harness --private --push` 완료. 원격: `https://github.com/sectwo/brain-harness`.
+- **남은 설계 항목 (1차 Fable 리뷰, 아직 미반영)**: SessionStart 자동 `git pull` 금지, 수동 동기화 명령(`/brain-sync`류)으로 대체 / 커밋은 자유, **push는 매번 사람 승인** / `~/.claude/commands/*.md` 원본을 vault로 옮기고 설치 스크립트·심링크 전략 마련 / `scripts/doctor.sh` 추가.
 
 ## 2026-09-25 — "브레인 하네스"로 명명, 확장 원칙과 정기 점검
 - **결정**: 이 하네스 체계를 **브레인(Brain) 하네스**로 부른다. 사람의 뇌처럼 계층을 나누고, 계층 수·구성은 고정하지 않고 필요하면 확장한다. 최상위 브레인(L1)에서 `Reviews.md`의 주기(기본 30일)마다 최신의 효율적이고 검증된 방법을 조사해 후보로 정리하고, 사람과 상의한 뒤에만 적용한다. 주기가 지나면 세션 시작 맥락이 알린다.
