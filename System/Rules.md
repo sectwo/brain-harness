@@ -29,8 +29,8 @@ L1  PC 전체      ~/Brain/System/            시스템 구성, 환경 설정, �
 | L1 | `Reviews.md` | 브레인 정기 점검 주기와 기록 |
 | L1 | `Knowledge/` | 프로젝트를 넘어 쓰는 지식 (도구 사용법, 문제 해결, 패턴) |
 | L1 | `Templates/Project/` | 새 프로젝트용 vault 틀 (`/new-project`가 사용) |
-| L1 | `scripts/` | 공통 훅·상태줄 스크립트 |
-| L1 | `~/.claude/commands/` (vault 밖) | 공통 명령 원본 (`/handoff`, `/cross-review`, `/new-project`). Claude 전용 |
+| L1 | `scripts/` | 공통 훅·상태줄·점검 스크립트 (`install-commands.sh`, `doctor.sh` 포함) |
+| L1 | `commands/` | 공통 명령 **원본** (`/handoff`, `/cross-review`, `/new-project`, `/brain-sync`). Claude 전용 |
 | L2 | `Overview.md` | 요구사항, 기술 스택, 구조. 사람이 작성 |
 | L2 | `Decisions.md` | 프로젝트 결정 기록 |
 | L2 | `Handoff.md` | 현재 상태, 다음 할 일. `/handoff`로만 갱신 |
@@ -76,6 +76,22 @@ L1  PC 전체      ~/Brain/System/            시스템 구성, 환경 설정, �
   `<worktree명>`은 현재 git 브랜치 이름. 같은 날 같은 파일이 있으면 이어서 쓴다.
 - `Handoff.md`는 직접 고치지 않는다. `/handoff`로 한 번에 갱신한다
   (여러 worktree 에이전트가 같은 파일을 동시에 덮어쓰는 것을 막기 위함).
+
+**원격 저장소 (`brain-harness`, private, `github.com/sectwo/brain-harness`)**
+- **세션 시작 시 자동으로 `git pull`하지 않는다.** 동기화는 사람이 `/brain-sync`를 실행했을 때만 한다
+  (fast-forward만 허용, merge/rebase로 히스토리를 바꾸지 않는다).
+- **커밋은 자유롭게 한다.** 의미 있는 단위로 로컬 커밋을 남기는 것은 승인 없이 해도 된다.
+- **`git push`는 매번 사람이 명시적으로 승인한 뒤에만 한다.** `/brain-sync`도 push는 하지 않는다.
+- `/brain-sync`로 원격의 새 커밋을 받았고 그 안에 `System/commands/*.md` 변경이 있으면
+  `~/Brain/System/scripts/install-commands.sh`로 `~/.claude/commands/`에 반영한다 (아래 "명령 원본" 참고).
+
+**명령 원본과 설치**
+- `~/.claude/commands/*.md`는 Claude Code가 실제로 읽는 위치이지만 **버전 관리 대상이 아니다.**
+  진짜 원본은 `~/Brain/System/commands/*.md`(vault, git 추적됨)이고, `install-commands.sh`가
+  단순 복사로 반영한다 (심링크가 아닌 이유: Claude Code가 심링크된 명령 파일을 읽는지 검증 전이라
+  실패 시 명령이 통째로 사라지는 위험을 피하기 위함).
+- 명령 내용을 고칠 때는 **`~/Brain/System/commands/`의 원본을 고치고** `install-commands.sh`를 실행한다.
+  `~/.claude/commands/`를 직접 고치면 다음 pull/install 때 덮어써진다.
 
 ## 3. 작업 워크플로우
 모든 기능은 아래 순서를 따른다. **Orca에서 기능 하나당 worktree 하나.**

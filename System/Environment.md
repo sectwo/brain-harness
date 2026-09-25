@@ -16,7 +16,7 @@ tags: [system, environment]
 ## 도구와 설정 위치
 | 도구 | 역할 | 설정 위치 |
 |---|---|---|
-| Claude Code | 에이전트 | 전역 `~/.claude/settings.json`, `~/.claude/CLAUDE.md`, `~/.claude/commands/` / 프로젝트 `.claude/settings.json` |
+| Claude Code | 에이전트 | 전역 `~/.claude/settings.json`, `~/.claude/CLAUDE.md`, `~/.claude/commands/`(설치된 복사본, 원본은 `~/Brain/System/commands/`) / 프로젝트 `.claude/settings.json` |
 | Codex CLI | 에이전트 | `~/.codex/config.toml`, `~/.codex/AGENTS.md`. `~/.local/bin/codex` → ChatGPT 앱 내장 바이너리 링크 |
 | Orca | worktree·에이전트 실행 | `~/Library/Application Support/orca/profiles/local-default/orca-data.json` |
 | Orca가 띄우는 Codex | | `CODEX_HOME=~/Library/Application Support/orca/codex-runtime-home/home` (config.toml, AGENTS.md를 여기서 읽음) |
@@ -83,6 +83,15 @@ tags: [system, environment]
 | 후보 (L2, 웹 프로젝트) | `accessibility`, `seo`, `browser-qa`, `frontend-design-direction`, `brand-discovery` | 프로젝트 시작 시 상의 후 채택 |
 | 끔 | `continuous-learning-v2` 훅 | 옵시디언과 역할 중복 |
 | 안 씀 | `santa-loop`, `council`, `architecture-decision-records`, `knowledge-ops` | 반복 리뷰 비용 / Decisions·옵시디언과 중복 |
+
+## 명령어 설치와 하네스 점검
+- 명령 원본(`/handoff`, `/cross-review`, `/new-project`, `/brain-sync`)은 `~/Brain/System/commands/`에 있고,
+  `~/Brain/System/scripts/install-commands.sh`가 `~/.claude/commands/`로 단순 복사한다.
+  원본을 고쳤으면 이 스크립트를 다시 실행해야 반영된다 (자동으로 안 됨).
+- `brain-harness` 저장소 동기화는 `/brain-sync` 명령으로 사람이 원할 때만 한다 (자동 pull 없음, push는 별도 승인).
+  → [[System/Rules#2. 기억 저장소 (옵시디언)]]
+- `~/Brain/System/scripts/doctor.sh`: 옵시디언 vault 등록, Headroom 프록시, Orca `agentCmdOverrides`/`agentDefaultArgs`,
+  git/gh 상태, 명령어 동기화, ECC 훅 id를 한 번에 점검한다. 아무것도 고치지 않고 확인만 한다.
 
 ## 매일 쓰는 흐름
 1. `headroom doctor`로 프록시 확인 (launchd가 상시 띄워 두므로 보통은 확인만 하면 됨)
