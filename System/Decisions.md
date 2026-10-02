@@ -32,7 +32,7 @@ tags: [system, decisions]
   3. Orca가 띄우는 Codex는 `agentDefaultArgs.codex = --dangerously-bypass-approvals-and-sandbox`로 실행되어 `writable_roots` 샌드박스 설정이 무력화된다. L1 보호는 `AGENTS.md` 텍스트 지시 하나뿐이며 기술적으로 강제되지 않는다.
 - **이유**: 하네스 문서가 원하는 상태를 이미 이루어진 사실처럼 적어 두면 다음 세션(사람이든 에이전트든)이 잘못된 전제로 작업하게 된다. 사실과 다른 문서는 "미적용/예정"으로 명시한다 (사람 요청: 다시 검증하고 다듬은 뒤 진행).
 - **대안**: 그냥 넘어가고 Orca 문제만 먼저 해결 → 다음 세션도 같은 착각을 반복할 위험이 있어 기각.
-- **전제조건 이행 완료 (2026-09-25)**: ~~옵시디언에서 `~/Brain` vault 등록~~ 완료 → ~~`git config --global`~~ 완료 (`임이삭 <misofamily@gmail.com>`) → ~~`gh auth login`~~ 완료 (계정 `sectwo`) → 저장소 범위는 `~/Brain` 전체 하나로 결정, **private**로 생성 → `git init` + 첫 커밋(`0097884`) + `gh repo create brain-harness --private --push` 완료. 원격: `https://github.com/sectwo/brain-harness`.
+- **전제조건 이행 완료 (2026-09-25)**: ~~옵시디언에서 `~/Brain` vault 등록~~ 완료 → ~~`git config --global`~~ 완료 (사용자 본인 계정으로 설정) → ~~`gh auth login`~~ 완료 (계정 `sectwo`) → 저장소 범위는 `~/Brain` 전체 하나로 결정, **private**로 생성 → `git init` + 첫 커밋(`0097884`) + `gh repo create brain-harness --private --push` 완료. 원격: `https://github.com/sectwo/brain-harness`.
 - **남은 설계 항목 (1차 Fable 리뷰) 반영 완료 (2026-09-25, 커밋 `4d2dc39`)**:
   - ~~SessionStart 자동 `git pull` 금지, 수동 동기화 명령으로 대체~~ → `/brain-sync` 추가 (사람이 실행할 때만 fast-forward pull, push는 안 함)
   - ~~커밋은 자유, push는 매번 사람 승인~~ → `Rules.md` 2절에 명시
@@ -76,3 +76,22 @@ tags: [system, decisions]
   기능이라 L1이 더 맞다고 판단해 기각.
 - **다음**: 실제 작업에서 두 스킬이 기존 결정(Overview.md 디자인 브리프, Rules.md 워크플로우)과
   충돌하는 제안을 하면 그때 거르고, 필요하면 이 결정에 정정을 추가한다.
+
+## 2026-10-03 — 모델 운용 변경(Opus 5.5 기본·Fable 기록)과 /cross-review Codex 실행 방식 변경
+- **결정**:
+  1. `Rules.md` 5절: 메인 세션 기본 모델을 `opusplan`에서 **Opus 5.5**로 바꾼다(사용자가 `/model`로 기본값
+     저장). 모델 표에 "상세설계, 정말 중요한 설계 (쓰기 전에 사람에게 묻는다) → Fable" 행을 추가한다.
+     **브레인 vault 기록·커밋(세션 로그·Decisions·Handoff·Knowledge·System 문서)은 Fable 하위 에이전트가
+     맡는다** — 메인 세션이 Fable이 아니면 Agent 도구 `model: fable`로 위임. 프로젝트 코드 커밋은 해당 없음.
+  2. `Rules.md` 7절: "유도리 있게 진행한다" 불릿 추가 — 절차를 과하게 격식화하거나 사소한 것마다 허락을
+     구하지 않되, push·되돌리기 어려운 작업·L1 변경의 사전 확인은 유지.
+  3. `/cross-review` 명령(`System/commands/cross-review.md`) 3단계의 Codex 실행 방식을
+     `codex review --base … "<지시>"`에서 **`codex exec -m … -c model_reasoning_effort=… -s read-only "<지시>"`**
+     로 바꾼다. 커밋 안 된 변경은 먼저 기능 브랜치에 로컬 커밋한 뒤 지시문에서 `git diff <기준>...HEAD`로
+     확인하게 한다. 지시문 없는 기본 리뷰는 `codex review --base <기준>`도 가능.
+- **이유**: 사용자 지시(Opus 5.5 사용, 중요한 설계는 확인 후 Fable, 브레인 기록은 이후 모든 세션이
+  기준으로 읽으니 Fable이 담당). Codex CLI의 `codex review`는 `--base`/`--uncommitted`를 커스텀
+  지시문(PROMPT)과 함께 쓸 수 없다(`the argument '--base <BRANCH>' cannot be used with '[PROMPT]'`,
+  2026-10-03 확인) — 기존 명령 예시가 실제로 실행되지 않았다.
+- **대안**: `opusplan` 유지 → 사용자가 Opus 5.5로 직접 전환해 기각. `codex review`를 지시문 없이 사용 →
+  프로젝트 품질 게이트·사실 확인 지시를 못 넣어 기각.
