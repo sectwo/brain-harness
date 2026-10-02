@@ -8,7 +8,7 @@ tags: [intratnm, knowledge]
 
 | 파일 | 내용 |
 |---|---|
-| [[Nextjs-Worktree-And-Build]] | Next.js 16 worktree 만들 때 `npm install`·`next typegen`, Turbopack 심링크 거부, `agentRules`, proxy.ts, 검증 루틴 |
+| [[Nextjs-Worktree-And-Build]] | intratnm 고유: dev 포트 3001, proxy.ts·Web Crypto, ESLint set-state-in-effect, 검증 루틴 (worktree 범용 내용은 L1 [[System/Knowledge/Nextjs-Worktree]]) |
 | [[Notice-Admin-Structure]] | NOTICE 파일 저장소(`.data/notices.json`)와 HMAC 세션 관리자 로그인 1차 구현 |
 | [[Env-Vars-And-Fallbacks]] | `.env.example` 변수 5개와 미설정 시 자리표시 동작 |
 | [[Design-Tokens]] | 포인트 블루·오로라 배경·ScrollReveal·브랜드 3단 배치 등 구현된 디자인 값과 근거 |
