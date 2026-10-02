@@ -199,3 +199,25 @@
   (L1 변경이라 계획·확인 필요) — 아직 남음.
 - Fable 기록 방침·모델 운용 변경("운영 방침 변경" 참고)을 L1 Rules.md "5. 모델 선택"에 반영할지
   사용자와 상의 (L1 변경이라 계획·확인 필요) — 아직 남음.
+
+## 남은 worktree·브랜치 정리
+위 "master 병합 및 worktree 정리" 섹션의 "남은 worktree" 목록은 이 정리로 해소됐다.
+- **계기**: 사용자 지시 "남은 worktree들도 정리해줘".
+- **정리 전 점검**:
+  - `design-refresh`(feat/design-refresh, `6b794c4`)와 `margate`(summarize-agents-md, `4f5ab9e`):
+    HEAD가 master에 포함돼 있고 미추적 파일은 `node_modules`뿐이라 `git worktree remove --force`로 제거.
+  - `review-notice-contact`(detached HEAD, `775f0c1`): HEAD는 master에 포함돼 있었지만 스테이징된
+    변경 18개가 있었다. 비교 결과 NOTICE·CONTACT 초기 구현 스냅샷으로, master에 이미 들어간 내용이고
+    master 쪽이 더 최신(PageHero 적용, CONTACT 에러 포커스 접근성, pretendard 의존성 등)이었다.
+    worktree에만 있는 작업은 없다고 판단. 만약을 위해 스테이징 변경을 패치로 백업
+    (`git diff --cached --binary` → 세션 scratchpad의 `review-notice-contact-staged.patch`, 세션 임시
+    폴더라 영구 보관은 아님)한 뒤 `--force`로 제거.
+- **dev 서버**: design-refresh 경로에서 돌던 포트 3100 dev 서버 종료. master의 포트 3000 dev 서버는 유지.
+- **브랜치 삭제**: 병합된 브랜치 5개를 `git branch -d`로 삭제 — feat/design-refresh,
+  summarize-agents-md, feat/brands, feat/company-page, feat/notice (뒤의 3개는 worktree 없이 남아
+  있던 브랜치, 모두 master 포함 확인).
+- **결과**: 프로젝트 저장소에는 master worktree·브랜치 하나만 남음. push 안 함.
+
+### 참고(Fable 점검 중 발견)
+- 이전 vault 커밋 점검에서 `Overview.md`의 "오시는 길 지도: 앱키는 …(개발자)이 발급" 문구에 개발자
+  실명이 들어 있어 역할명 규칙상 검토 후보로 보고됨 — 이번엔 고치지 않았고 사용자 판단 대기.
