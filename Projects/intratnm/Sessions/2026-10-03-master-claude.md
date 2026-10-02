@@ -241,3 +241,14 @@
   바로 아래에 둠 — 같은 주제(무엇을 확인받고 무엇은 안 받는지)라서.
 - **`System/Decisions.md`**: 2026-10-03 결정 추가 (모델 운용 변경·/cross-review Codex 실행 방식 변경).
 - push 안 함.
+
+## push
+- 사용자 승인 후 두 저장소를 push했다.
+  - `intra-tnm` `master`: `0192867..909bddc` (origin/master = `909bddc` 확인)
+  - `brain-harness` `main`: `69d20cc..265bce7` (origin/main = `265bce7` 확인)
+- 프로젝트 저장소 worktree는 `master` 하나뿐.
+
+## /handoff (Fable 하위 에이전트)
+- 이 로그 이후 `/handoff` 실행: `Handoff.md` 갱신(last_handoff 2026-10-03), `Knowledge/` 노트 4개 신규,
+  `Agents/Claude.md`·`Agents/Codex.md` 특이점 추가, `System/Projects.md` intratnm 행 갱신. L1 Knowledge/Rules/
+  Environment는 손대지 않고 승격 후보만 보고.
