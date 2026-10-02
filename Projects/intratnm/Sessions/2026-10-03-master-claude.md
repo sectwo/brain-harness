@@ -221,3 +221,23 @@
 ### 참고(Fable 점검 중 발견)
 - 이전 vault 커밋 점검에서 `Overview.md`의 "오시는 길 지도: 앱키는 …(개발자)이 발급" 문구에 개발자
   실명이 들어 있어 역할명 규칙상 검토 후보로 보고됨 — 이번엔 고치지 않았고 사용자 판단 대기.
+
+## L1·L2 문서 정리 (실명·/cross-review·모델 규칙)
+위 "다음 할 일"의 L1 반영 제안 2건(`/cross-review` Codex 실행 방식, Fable 기록·모델 운용 변경)과
+"참고(Fable 점검 중 발견)"의 실명 검토 후보는 이 작업으로 완료됐다.
+- **승인**: 사용자가 계획을 보고 승인("계획 보여주고 진행해줘"). 기록·커밋은 Fable 하위 에이전트가 수행.
+- **백업**: L1 변경 전 `Rules.md`, `commands/cross-review.md`, `System/Decisions.md`를
+  `/Users/isaac/.brain-backups/2026-10-03/`에 복사 (vault `.gitignore`가 백업 폴더를 무시하지 않아 vault
+  밖에 둠, `.gitignore`는 손대지 않음).
+- **실명 정리 (5곳)**: `Overview.md` 3곳(카카오맵 앱키 발급 주체 2곳, 예비 시안 문구 1곳)과 프로젝트
+  `Decisions.md` 1곳을 "개발자"로, `System/Decisions.md`의 `git config --global` 완료 괄호(이름+이메일)를
+  "(사용자 본인 계정으로 설정)"으로 바꿈. 대표자 이름 등 공식 회사 정보는 그대로. 정리 후 vault 전체
+  grep 0건 확인.
+- **`System/commands/cross-review.md`**: 3단계 Codex 리뷰를 `codex exec -s read-only` 방식으로 교체
+  (`codex review --base`가 PROMPT와 함께 안 되는 제약 명시, 커밋 안 된 변경은 먼저 로컬 커밋, 지시문 없는
+  기본 리뷰는 `codex review --base`도 가능). `install-commands.sh` 실행 후 `~/.claude/commands/`와 diff 없음 확인.
+- **`System/Rules.md`**: 5절 표에 Fable 행 추가, 메인 세션 기본을 Opus 5.5로, "vault 기록·커밋은 Fable
+  하위 에이전트" 불릿 추가. "유도리 있게 진행" 불릿은 5절(모델)이 아니라 7절의 "L1 변경 사전 확인" 불릿
+  바로 아래에 둠 — 같은 주제(무엇을 확인받고 무엇은 안 받는지)라서.
+- **`System/Decisions.md`**: 2026-10-03 결정 추가 (모델 운용 변경·/cross-review Codex 실행 방식 변경).
+- push 안 함.
