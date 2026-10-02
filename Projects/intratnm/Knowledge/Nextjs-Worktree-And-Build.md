@@ -6,10 +6,15 @@ source: Sessions 2026-09-26-design-refresh, 2026-09-26-master, 2026-10-01-master
 # Next.js 16 worktree·빌드 특이점 (intratnm 고유)
 
 ## worktree를 새로 만들 때
-범용 내용(Turbopack `node_modules` 심링크 거부 → `npm install`, `next typegen` 먼저, `agentRules: false`,
-Codex 샌드박스 `--webpack` build)은 **L1 [[System/Knowledge/Nextjs-Worktree]]로 승격**(2026-10-03).
-아래는 이 프로젝트에만 해당하는 것.
+범용 내용(Turbopack `node_modules` 심링크 거부 → `npm install`, `next typegen` 먼저, `agentRules: false`)은
+**L1 [[System/Knowledge/Nextjs-Worktree]]로 승격**(2026-10-03). 아래는 이 프로젝트에만 해당하는 것.
 - dev 서버는 master가 포트 3000을 쓰고 있으므로 worktree는 3001 등 다른 포트로 띄운다.
+
+## Codex 리뷰 시 빌드
+- Codex `-s read-only` 샌드박스에서는 기본 Turbopack build가 포트 바인딩 제한으로 실패한다.
+  리뷰 지시문에서 `npm run build -- --webpack`을 쓰게 하고, 이 실패 자체는 코드 판정에 반영하지 않는다
+  ([[Projects/intratnm/Sessions/2026-10-01-master-codex]]).
+  (L1 승격 후보였으나 사용자 미승인으로 L2에 둔다, 2026-10-03.)
 
 ## 프로젝트 설정
 - `middleware.ts`는 Next 16에서 폐기 예고 → `@next/codemod`로 `src/proxy.ts`로 전환했다.

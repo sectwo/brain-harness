@@ -28,14 +28,8 @@ Next.js 16 프로젝트에서 기능별 worktree를 새로 만들어 빌드·타
 - Next 16 `next dev`는 `AGENTS.md`에 "agent rules" 안내 블록을 자동으로 덧붙인다.
 - **해결: `next.config.ts`에 `agentRules: false`**를 넣어 하네스 규칙 문서를 보호한다.
 
-### 4. Codex 샌드박스에서는 Turbopack build가 실패
-- Codex `-s read-only` 샌드박스에서는 기본 Turbopack build가 포트 바인딩 제한으로 실패한다.
-- **해결: 리뷰 지시문에서 `npm run build -- --webpack`을 쓰게 한다.** 실패 자체를 코드 판정에
-  반영하지 않는다.
-
 ## 출처
 - [[Projects/intratnm/Sessions/2026-10-03-master-claude]] — 심링크 거부 확인, `next typegen`
 - [[Projects/intratnm/Sessions/2026-09-26-design-refresh-claude]] — `--webpack` 우회
 - [[Projects/intratnm/Sessions/2026-09-26-master-claude]] — `agentRules: false`
-- [[Projects/intratnm/Sessions/2026-10-01-master-codex]] — Codex 샌드박스 webpack build
 - 프로젝트 고유 내용(proxy.ts, ESLint 규칙, 검증 루틴)은 [[Projects/intratnm/Knowledge/Nextjs-Worktree-And-Build]]

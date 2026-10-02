@@ -270,3 +270,8 @@
 - **보류**: 후보 5·6·8번은 사용자 미승인(2026-10-03) — L1에 올리지 않음. 8번 내용("백그라운드 임시
   출력은 세션 압축 사이 사라질 수 있음")도 Codex-Review-Output 노트에 넣지 않았다.
 - Rules.md·Environment.md는 고치지 않음. push 안 함.
+- **정정**: 미승인 6번(Codex 샌드박스 `--webpack` build) 내용이 L1 `Nextjs-Worktree.md`에 섞여 들어간 것을
+  발견했다. 사용자 지시("A로 되돌리고 push해줘")로 L1 노트·README에서 빼고 L2
+  `Knowledge/Nextjs-Worktree-And-Build.md`의 "Codex 리뷰 시 빌드" 절로 되돌렸다. 위 3번 줄의
+  "Codex 샌드박스 `--webpack`" 표기는 이 정정 전 기록이다. 이 정정은 Fable 하위 에이전트가 중간에
+  멈춰서(변경 없음 확인) 메인 세션이 직접 처리했다.
