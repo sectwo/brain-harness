@@ -252,3 +252,21 @@
 - 이 로그 이후 `/handoff` 실행: `Handoff.md` 갱신(last_handoff 2026-10-03), `Knowledge/` 노트 4개 신규,
   `Agents/Claude.md`·`Agents/Codex.md` 특이점 추가, `System/Projects.md` intratnm 행 갱신. L1 Knowledge/Rules/
   Environment는 손대지 않고 승격 후보만 보고.
+
+## L1 지식 승격
+- `/handoff`가 보고한 L1 승격 후보 중 사용자가 **1·2·3·4·7번만 승인**("추천한 1,2,3,4,7번 올려줘").
+  기록·커밋은 Fable 하위 에이전트가 수행.
+- 만든 L1 노트 5개 (`System/Knowledge/`, README 목록에 추가):
+  1. [[System/Knowledge/Codex-Review-Output]] — Codex 출력은 `head`로 자르지 말고 파일로 끝까지 받기 (10-02 로그)
+  2. [[System/Knowledge/Claude-Plugin-Install]] — 세션 중 설치한 플러그인은 완전 재시작해야 로드됨 (10-01 로그)
+  3. [[System/Knowledge/Nextjs-Worktree]] — Turbopack 심링크 거부 → `npm install`, `next typegen` 먼저,
+     `agentRules: false`, Codex 샌드박스 `--webpack` (09-26 ×2, 10-01 codex, 10-03 로그)
+  4. [[System/Knowledge/Chrome-DevTools-MCP]] — `fullPage` sticky/IntersectionObserver artifact,
+     `resize_page` 폭 차이 (09-26 design-refresh, 10-01, 10-03 로그)
+  7. [[System/Knowledge/Plugin-Supply-Chain-Check]] — 플러그인 설치 전 점검 체크리스트 + L1 Decisions 2026-10-01 링크
+- **L2 정리** (중복 금지): `Knowledge/Nextjs-Worktree-And-Build.md`에서 범용 내용을 L1으로 옮기고
+  L1 링크 + intratnm 고유 내용(dev 포트 3001, proxy.ts·Web Crypto, ESLint 규칙, 검증 루틴)만 남김.
+  `Knowledge/README.md` 설명도 맞춤. `Handoff.md`에는 승격 관련 표시가 없어 손대지 않음.
+- **보류**: 후보 5·6·8번은 사용자 미승인(2026-10-03) — L1에 올리지 않음. 8번 내용("백그라운드 임시
+  출력은 세션 압축 사이 사라질 수 있음")도 Codex-Review-Output 노트에 넣지 않았다.
+- Rules.md·Environment.md는 고치지 않음. push 안 함.
