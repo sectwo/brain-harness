@@ -12,10 +12,13 @@ description: 현재 변경을 다른 에이전트로 교차 리뷰한다 (강도
    - 가능하면 선택지 UI로 묻는다. 사람이 고르기 전에는 리뷰를 실행하지 않는다.
    - 사용량 경고(usage-check)가 떠 있으면 함께 알리고 한 단계 낮은 강도도 제시한다.
 3. **실행** (고른 강도의 모델·추론 수준. 실행 전에 "어떤 모델로 돌리는지와 이유"를 한 줄로 알린다)
-   - Codex 리뷰:
-     `codex review --base <기준> -c model="<모델>" -c model_reasoning_effort="<low|medium|high>" "<지시>"`
-     커밋 안 된 변경만 볼 때는 `--base` 대신 `--uncommitted`.
+   - Codex 리뷰: 현재 Codex CLI는 `codex review`의 `--base <기준>`·`--uncommitted`를 커스텀 지시문(PROMPT)과
+     함께 쓸 수 없다 (`the argument '--base <BRANCH>' cannot be used with '[PROMPT]'`, 2026-10-03 확인).
+     그래서 지시문을 넣는 리뷰는 `codex exec` 읽기 전용으로 돌린다:
+     1. 커밋 안 된 변경이 있으면 먼저 기능 브랜치에 로컬 커밋한다 (규칙상 로컬 커밋은 자유).
+     2. `codex exec -m "<모델>" -c model_reasoning_effort="<low|medium|high>" -s read-only "<지시: 먼저 git diff <기준>...HEAD로 변경을 확인하라. 파일은 수정하지 말고 리뷰만 한다. …>"`
      지시에는 강도별 범위, 심각도 표기(치명/높음/참고), 프로젝트 품질 게이트, "사실 정보 지어내기 금지" 확인을 넣는다.
+     지시문 없이 기본 리뷰만 할 때는 `codex review --base <기준> -c model="<모델>" -c model_reasoning_effort="<low|medium|high>"`도 가능하다.
    - Claude 리뷰: 강도에 맞는 모델(가벼움 Haiku, 표준 Sonnet, 심층 Opus)의 하위 에이전트로 diff를 리뷰하거나
      `/code-review`를 가벼움=low, 표준=medium, 심층=high로 실행한다.
 4. **결과 정리**: 치명·높음은 전부, 참고는 가벼움·표준에서 5개 이내로 요약한다.
