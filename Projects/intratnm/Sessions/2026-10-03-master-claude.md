@@ -275,3 +275,74 @@
   `Knowledge/Nextjs-Worktree-And-Build.md`의 "Codex 리뷰 시 빌드" 절로 되돌렸다. 위 3번 줄의
   "Codex 샌드박스 `--webpack`" 표기는 이 정정 전 기록이다. 이 정정은 Fable 하위 에이전트가 중간에
   멈춰서(변경 없음 확인) 메인 세션이 직접 처리했다.
+
+## UI/UX 개편 (A안) 1~4단계 + SEO 기본
+위 "L1 지식 승격"·push 이후 같은 날 이어진 작업. 메인 세션 모델은 Opus 5.5, 이 vault 기록은 Fable 하위
+에이전트가 수행. 코드 저장소 `master` 기준이며 아래 커밋 해시는 `git log`로 확인한 값이다.
+
+### SEO 기본 + 정리 (`feat/seo-basics`, 표준 리뷰)
+- sitemap.xml(공개 페이지 + 브랜드 8개 + 공지. 공지 저장소가 손상돼 있으면 공지만 빼고 응답),
+  robots.txt(`/admin`·`/api` 차단), OG 이미지, `metadataBase`(`NEXT_PUBLIC_SITE_URL`; 빈 값·잘못된 값이면
+  `https://www.intratnm.com`), 관리자 페이지 noindex, 헤더 활성 메뉴 대비 수정, 한글 `word-break: keep-all`,
+  `.env.example` 실명 → 역할명.
+- 교차 리뷰: Codex 표준 — 높음 2·참고 1, 모두 반영. 커밋 `312639d`, `0529059`.
+
+### UI/UX 개편 A안 — 범위와 사용자 결정
+- A안 = 구조·문구·회사 정보는 그대로 두고 **화면만** 개편. 계획은 Fable 하위 에이전트가 수립,
+  방향은 "정밀 산업 스위스 미니멀" 한 가지로 통일.
+- 사용자 결정(하나씩 질문해 확정): 히어로는 기어 2개 + 눈금 링 선화 / 버튼 6px·칩 4px(알약 금지) /
+  헤더 로고는 처음엔 흰 탭 → 이후 흰 헤더로 변경 / 헤더에 문의 버튼 없음 / 4단계로 나눠 단계마다 리뷰 /
+  `/brands` 배경 유지.
+- GSAP 미도입: CSS + IntersectionObserver로 충분해 라이브러리를 넣지 않음(번들 약 46KB 절약).
+
+### 1단계 — 기반
+- 디자인 토큰·타이포 유틸·`Button`·`icons.tsx`·`ScrollReveal` variant·Header·Footer, `neutral` 회색을
+  토큰으로 치환, 대비 미달 4곳 수정.
+- 표준 리뷰 지적 0. 커밋 `310563d`, `d1ed024`.
+
+### 2단계 — 메인페이지
+- 6개 섹션 재구성, 기어 선화 재설계, 브랜드 카드 3종, 섹션별 모션. 히어로 기어 뒤 회사명 워터마크 추가.
+- 표준 리뷰 지적 0. 커밋 `b12104d`, `41636bf`.
+- **도구 지식**: 첫 리뷰 실행에서 `codex exec`가 stdin 입력을 기다리며 16분 멈춰 중단함. `< /dev/null`을
+  붙여 재실행하니 정상 진행 — 이후 `codex exec`는 항상 stdin을 닫고 돌린다.
+
+### 3단계 — 서브페이지 + 사용자 피드백
+- COMPANY·BRANDS·NOTICE·CONTACT·관리자 페이지 적용. CONTACT는 클라이언트 페이지라 metadata를 못 넣던
+  문제를 서버 `layout`을 두어 해결(SEO 게이트 위반 해소).
+- 사용자 피드백 반영: 히어로 회사명을 배경 글자로 → 기어 링에 곡선 회사명 추가 → 중복이라 제거 →
+  헤더를 흰색으로.
+- 표준 리뷰 참고 1(FAX 줄 아이콘 누락) 반영. 커밋 `330003d`, `f2999bd`, `42b9444`, `c2bdefa`.
+
+### 풀페이지 스냅 시험 → 기각, 히어로 스크롤 연동 채택
+- 사용자 요청 "휠을 내리면 화면이 넘어가는 방식"을 CSS `scroll-snap` proximity → mandatory → 섹션마다
+  화면 한 장으로 순서대로 시험. **사용자 판단으로 기각** — OUR BRANDS 전체를 한 화면에 보기 어렵고
+  다른 섹션은 여백 과다. 시험 브랜치는 삭제.
+- 대신 자유 스크롤 유지 + 히어로 스크롤 연동(큰 기어 40°, 작은 기어 24:14 비율로 반대 회전, 배경 회사명
+  왼쪽으로 이동하며 옅어짐) + 섹션 제목 액센트 바 그리기.
+- 히어로 회사명 서체: Saira Stencil → Saira Expanded("&"가 Et 장식형이라 이질적) → 4종 비교 후
+  **Chakra Petch 700** 확정(채움 4~12%, 외곽선 20%).
+- 가벼운 리뷰 지적 0. 커밋 `58456bb`, `43c3713`, `b3c22c2`. 이 시점까지 사용자 승인으로 push
+  (`909bddc..b3c22c2`, origin/master = `b3c22c2`).
+
+### 4단계 — 마무리
+- OG 이미지 새 디자인: `gearLineArtSvg()` 정적 SVG로 분리(Next가 OG 라우트에서 `react-dom/server`를
+  막음), OG 렌더러가 한글 어절 줄바꿈을 못 해 어절 단위 `span`으로 처리.
+- `design-system/intra-tnm/MASTER.md` 신규 — 코드 기준 디자인 시스템 문서.
+- Lighthouse 지적 2건 수정(링크 문구에 sr-only 맥락, 오시는 길 `dl` 구조).
+- 결과(운영 빌드, 모바일): `/`, `/company`, `/brands`, `/brands/uryu`, `/notice`, `/contact` 모두
+  접근성·모범 사례·SEO 100. 메인 LCP 129ms, CLS 0.
+- 가벼운 리뷰 높음 1(OG 라우트가 Edge 런타임을 가정할 수 있음 → `export const runtime = "nodejs"` 명시) 반영.
+  커밋 `13b810b`, `0d11f9d`. **master는 origin보다 2커밋 앞섬(push 전).**
+
+### 배포 참고
+- 히어로 회사명 서체(Chakra Petch)는 `next/font/google`로 **빌드 시** 자체 호스팅된다. 방문자는 외부
+  접속이 없지만 **빌드하는 머신은 인터넷 연결이 필요**하다 — 나야나 배포 방식을 정할 때 고려.
+
+### vault 기록
+- `Knowledge/Design-Tokens.md`를 개편 후 기준으로 갱신(상세는 저장소 MASTER.md 링크, vault는 요약만),
+  `Decisions.md`에 결정 3건 추가. `Handoff.md`는 규칙대로 손대지 않음(`/handoff`로 갱신).
+
+### 다음 할 일
+- master 2커밋(`13b810b`, `0d11f9d`) push 여부 사용자 확인.
+- 배포 시 빌드 머신 인터넷 연결 가능 여부 확인(Chakra Petch 자체 호스팅 때문).
+- 사진·로고 수령 후 `BrandPhotoPlaceholder` 자리표시자 교체.
