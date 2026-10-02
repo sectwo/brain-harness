@@ -178,3 +178,24 @@
   Fable을 통해서 진행 — 중요하니까". 이번 기록부터 Fable 하위 에이전트가 vault 기록·커밋을 맡는다.
 - **유도리**: 사용자 — "너무 딱딱하게 생각하지 말고 유도리있게 진행하자". 절차를 과하게 격식화하지
   않되, push·되돌리기 어려운 작업·L1 변경의 사전 확인은 유지한다.
+
+## master 병합 및 worktree 정리
+위 "교차 리뷰" 섹션의 다음 할 일 중 "master 병합 여부 상의 → worktree 정리"는 이 섹션으로 완료됐다.
+- **계기**: 사용자가 "진행 중인 인트라티앤엠 웹사이트 프로젝트에 적용해서 진행해볼까?"라고 해서
+  `feat/visual-refresh`를 master에 병합했다.
+- **병합**: `git merge --ff-only feat/visual-refresh`로 fast-forward 병합(`ee929fd` → `909bddc`).
+  7개 파일, +124/-51.
+- **병합 후 검증**: master에서 lint·tsc·build 통과. 포트 3000 dev 서버에서 Chrome DevTools(1440px)로
+  확인 — OUR BRANDS 스태거 항목 9개가 리빌 후 모두 opacity 1이고 인라인 style이 비어 있으며 가로
+  스크롤 없음.
+- **정리**: 포트 3001 dev 서버 종료, `git worktree remove ~/orca/workspaces/intra-tnm/visual-refresh`,
+  `git branch -d feat/visual-refresh`.
+- **push**: 프로젝트 저장소 push는 하지 않음(사용자 승인 필요).
+- **남은 worktree**(사실만 기록, 상태 판단 안 함): `design-refresh`(feat/design-refresh),
+  `margate`(summarize-agents-md), `review-notice-contact`(detached HEAD).
+
+### 다음 할 일
+- L1 `/cross-review` 명령의 Codex 실행 예시를 `codex exec` 읽기 전용 방식으로 고칠지 사용자와 상의
+  (L1 변경이라 계획·확인 필요) — 아직 남음.
+- Fable 기록 방침·모델 운용 변경("운영 방침 변경" 참고)을 L1 Rules.md "5. 모델 선택"에 반영할지
+  사용자와 상의 (L1 변경이라 계획·확인 필요) — 아직 남음.
