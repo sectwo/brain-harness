@@ -51,3 +51,28 @@ tags: [system, decisions]
 - **결정**: 이 하네스 체계를 **브레인(Brain) 하네스**로 부른다. 사람의 뇌처럼 계층을 나누고, 계층 수·구성은 고정하지 않고 필요하면 확장한다. 최상위 브레인(L1)에서 `Reviews.md`의 주기(기본 30일)마다 최신의 효율적이고 검증된 방법을 조사해 후보로 정리하고, 사람과 상의한 뒤에만 적용한다. 주기가 지나면 세션 시작 맥락이 알린다.
 - **이유**: 하네스를 한 번 만들고 끝내지 않고 계속 좋아지게 하되, 검증 안 된 유행을 무분별하게 들이지 않기 위함 (사람 요청).
 - **대안**: 필요할 때만 수동 점검 → 잊기 쉬움. 자동 적용 → 검증·상의 없이 전역 설정이 바뀌어 제외.
+
+## 2026-10-01 — 서드파티 Claude Code 플러그인 2종 L1 설치 (karpathy-skills, ui-ux-pro-max)
+- **결정**: 사람이 발견한 두 커뮤니티 플러그인을 검토 후 사용자(L1) 범위로 설치함.
+  1. `andrej-karpathy-skills@karpathy-skills` — Andrej Karpathy의 LLM 코딩 관찰(가정 명시, 최소 변경,
+     외과적 수정, 목표 중심 실행)을 담은 행동 가이드라인. 마켓플레이스: `github.com/multica-ai/andrej-karpathy-skills`.
+  2. `ui-ux-pro-max@ui-ux-pro-max-skill` — UI/UX 작업(스타일·팔레트·폰트·차트·접근성) 시 자동 활성화되는
+     로컬 데이터 기반 디자인 스킬. 마켓플레이스: `github.com/nextlevelbuilder/ui-ux-pro-max-skill`.
+  둘 다 intratnm 하나가 아니라 앞으로 만들 모든 프로젝트에 적용되는 범용 기능이라 L1에 둠.
+- **검증 절차**: 설치 전 두 저장소 소스를 직접 읽어 확인함 — `.claude/skills/`에 실제 로드되는 내용은
+  SKILL.md(프롬프트/가이드라인)와 로컬 데이터(CSV/JSON)를 다루는 스크립트뿐, 네트워크 호출·
+  `subprocess`·`os.system`·`eval`/`exec`·설치 훅(postinstall) 없음을 확인. ui-ux-pro-max README가
+  권장하는 `npm install -g ui-ux-pro-max-cli`(전역 npm, 출처 미검증) 경로는 쓰지 않고, 두 플러그인 모두
+  `claude plugin marketplace add` + `claude plugin install`(Claude Code 표준 플러그인 방식, 스킬
+  디렉터리만 참조)로만 설치함. 설치 전 `~/.claude/plugins/known_marketplaces.json`·
+  `installed_plugins.json`을 `~/.claude/plugins/.backup-2026-10-01/`에 백업함.
+- **이유**: 둘 다 공식 Anthropic 도구는 아니지만(커뮤니티 제작, MIT 라이선스) 소스 검토 결과 실행
+  코드가 안전하고, 프롬프트/로컬 데이터 스킬이라 되돌리기 쉬움(`claude plugin uninstall`). 특히
+  ui-ux-pro-max의 자동 활성화 범위가 "시각적 UI/UX 작업"으로 좁게 선언돼 있어 intratnm처럼 이미
+  Overview.md에 디자인 방향이 확정된 프로젝트의 결정을 덮어쓰기보다 체크리스트로 보조할 걸로 기대함
+  (사람 요청, 직접 발견한 두 저장소를 검토 후 추가해 달라고 함).
+- **대안**: ui-ux-pro-max를 README 권장대로 전역 npm CLI로 설치 → 출처 미검증 전역 패키지라 기각,
+  플러그인 방식으로 대체. 프로젝트(L2) 범위로만 설치 → intratnm 외 다른 프로젝트에서도 쓸 범용
+  기능이라 L1이 더 맞다고 판단해 기각.
+- **다음**: 실제 작업에서 두 스킬이 기존 결정(Overview.md 디자인 브리프, Rules.md 워크플로우)과
+  충돌하는 제안을 하면 그때 거르고, 필요하면 이 결정에 정정을 추가한다.
