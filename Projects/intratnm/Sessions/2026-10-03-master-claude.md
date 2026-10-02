@@ -346,3 +346,4 @@
 - master 2커밋(`13b810b`, `0d11f9d`) push 여부 사용자 확인.
 - 배포 시 빌드 머신 인터넷 연결 가능 여부 확인(Chakra Petch 자체 호스팅 때문).
 - 사진·로고 수령 후 `BrandPhotoPlaceholder` 자리표시자 교체.
+- 정정(10-03): 위 "네이비 배경 위 `#38bdf8` 대비 약 8.44:1"은 측정 오류, WCAG 공식 재계산 값은 **8.25:1**(네이비 `#0b1830`은 초기 커밋 `2f4aa3f` 이후 변경 없음). Knowledge/Design-Tokens.md도 같이 확정.
