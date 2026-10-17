@@ -30,6 +30,9 @@ tags: [brain-harness, session]
 - 교차 리뷰: 코드 diff 없음(설정·문서만) — 건너뛰기
 ## 막힌 점 / 확인 필요
 - 없음. 참고: 플러그인 변경은 새 세션부터 적용(이 세션 훅은 ECC 2.2.2). 옛 캐시 ecc/2.2.2·ui-ux-pro-max/2.13.0 남아 있음
+## /handoff
+- Handoff 재작성(Fable). L1 승격(사용자 승인): [[System/Knowledge/Plugin-Supply-Chain-Check]]에 "갱신·버전 고정" 절 보강(백업 ~/.brain-backups/2026-10-18/)
+- 뺀 내용 → 남은 곳: 즉시 작업 ①② → 이 로그·위 Decisions 2건 / 관련 결정 "L1 플러그인 갱신 방침"·"플랫폼 방향 회의" → System·Projects Decisions 그대로 / 시작 맥락 확인 → 새 할 일 1번에 합침
 ## 다음 세션에
 - Handoff 3번 /cross-review 점검표 6관점 추가
 - 새 세션에서 ECC 2.2.3 훅(GateGuard 등) 실제 동작 확인
