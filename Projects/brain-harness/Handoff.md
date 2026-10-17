@@ -1,35 +1,43 @@
 ---
 project: brain-harness
-last_handoff: 2026-10-17
+last_handoff: 2026-10-18
 tags: [brain-harness, handoff]
 ---
 # Handoff — brain-harness
 
-> 새 세션은 이 노트부터 읽는다. `/handoff`로만 갱신한다.
+> 새 세션은 이 노트부터 읽는다. `/handoff`로만 갱신한다. 이력은 쓰지 않는다 — 언제 무엇을 했는지는 Sessions/, 왜는 Decisions.
+
+<!-- 규칙: 60줄 이내. "현재 상태"는 매번 다시 쓴다(누적 금지). 완료된 "다음 할 일"은 지운다 — 완료 사실은 세션 로그에 있다.
+금지: 날짜·커밋 해시·"~했다" 이력, 리뷰 이력, 완료 항목 목록, 결정 본문(링크 3개 이내로만). -->
 
 ## 현재 상태
-- 2026-10-17: 프로젝트 생성. 브레인 하네스(vault 자체)를 intratnm과 분리된 L2 프로젝트로 둔다
-  (→ [[Projects/brain-harness/Decisions]] 2026-10-17, [[System/Decisions]] 2026-10-17 분리 결정).
-- 2026-10-17: 로드맵 1단계(비용·마찰 줄이기) 완료 — GateGuard 예외, 모델 배치, 세션 길이, Headroom 지식.
-  구성도(`System/diagrams/`)와 `docs/` 목차도 같은 날 추가. 기록은 [[Projects/brain-harness/Sessions/2026-10-17-main-claude]].
+- 로드맵 1·2단계 적용 완료. 2단계(기록 구조 단순화)는 템플릿 4종, 전체 경로 위키링크, 세션 시작 색인
+  (`session-context.sh`, Codex는 `--handoff`), 명령·Rules 갱신까지 동작한다. 새 세션에서 시작 맥락 길이·색인 실측만 남았다.
+- 로드맵 3단계(반복 작업 스킬화)는 첫 스킬 `step-choice`(`System/skills/`, `install-commands.sh`가 `~/.claude/skills/`로 복사)만 있다.
+  다음 스킬은 미정.
+- Codex CLI는 ChatGPT.app 내장 codex-cli 링크로 동작한다. 앱 업데이트로 경로가 바뀌면 끊긴다 (복구법은 [[System/Environment]] Codex 행).
+- `doctor.sh`는 `~/.claude/skills` 동기화를 아직 점검하지 않는다.
+- 1단계(GateGuard 예외·모델 배치) 효과는 아직 측정하지 않았다.
+- `Agents/`·`Knowledge/`는 비어 있다. Codex 관련 스킬·내용은 사용자가 추후 추가 예정.
 - 로드맵 전체는 [[Projects/brain-harness/Overview]].
+- 저장소: `~/Brain` `main` (origin과 같음. `.obsidian/graph.json` 수정만 미커밋)
 
 ## 진행 중인 worktree
 | worktree | 담당 | 작업 | 상태 |
 |---|---|---|---|
-| main | Claude | 프로젝트 분리, 로드맵 1단계 기록 | 기록 완료 |
+| main | Claude | 로드맵 2단계 적용, /handoff | 완료 — 새 세션 시작 권장 |
 
 ## 다음 할 일
-1. [ ] 로드맵 2단계 — 기록 구조 단순화. 상세 설계는 Fable 하위 에이전트로 (→ [[Projects/brain-harness/Decisions]] 2026-10-17)
-2. [ ] (사람) Codex `~/.codex/config.toml` `writable_roots`에 `/Users/isaac/Brain/Projects/brain-harness` 추가 여부 확인
-   (현재는 intratnm 경로만 있음. L1 변경이라 확인 후 백업·수정)
-3. [ ] 1단계 효과 측정 — 다음 기능 하나 작업 후 `costs.jsonl` 세션별 최대값으로 GateGuard 예외·모델 배치 효과 비교
-4. [ ] (사람) vault 커밋 push 여부 확인
+1. [ ] (Claude·Codex) 새 세션에서 시작 맥락 길이·색인 확인 — 2단계 7/8. intra-tnm 쪽 세션도 함께
+2. [ ] (Claude) 1단계 효과 측정 — 다음 기능 하나 작업 후 `costs.jsonl` 세션별 최대값으로 비교 (합산 금지)
+3. [ ] (Claude) 로드맵 3단계 검토 — step-choice 다음 스킬 후보 고르기 (Overview 3단계 표)
+4. [ ] (Claude) `doctor.sh`에 `~/.claude/skills` 동기화 점검 추가 — 작은 후속
+5. [ ] (사람) Codex 관련 스킬·내용 추가 (추후 예정)
 
 ## 막힌 점 / 확인 필요
-- 프로젝트가 2개가 되면서 `[[Projects/brain-harness/Decisions]]`·`[[Projects/brain-harness/Handoff]]` 같은 짧은 링크가 어느 프로젝트를 가리키는지 모호해졌다.
-  Obsidian은 파일명으로 찾으므로 같은 이름이 둘이면 링크가 엉킬 수 있다. 2단계(기록 구조 단순화)에서 다룬다.
+- 없음
 
 ## 관련 결정
-- 2026-10-17 — 브레인 하네스를 별도 L2 프로젝트로 분리 ([[Projects/brain-harness/Decisions]], [[System/Decisions]])
-- 2026-10-17 — 로드맵 2단계 상세 설계는 Fable 하위 에이전트로 ([[Projects/brain-harness/Decisions]])
+- [[System/Decisions#2026-10-18 — 로드맵 2단계: 기록 구조 단순화]] — 문서 역할·상한·색인·전체 경로 링크
+- [[System/Decisions#2026-10-18 — 단계별 객관식 질문 스킬(step-choice)과 설정 직접 적용]]
+- [[Projects/brain-harness/Decisions#2026-10-17 — 브레인 하네스를 별도 L2 프로젝트로 분리]] — 결정 기록 위치(L1/L2) 기준
