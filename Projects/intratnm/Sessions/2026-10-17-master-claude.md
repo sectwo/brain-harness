@@ -37,37 +37,12 @@ tags: [intratnm, session]
 - 없음(설계 결정 없음).
 
 ## 막힌 점 / 확인 필요
-- **세션 비용 관리 방침**: 누적 $231 경고에 대해 하위 작업 모델 하향 여부를 사용자가 정해야 함.
-  현재 규칙([[System/Rules]] 5절)은 Fable이 vault 기록을 맡는다고 돼 있어, 하향하면 이 부분 운용이 바뀐다.
+- **세션 비용 관리 방침**: 로드맵 1단계로 해결됨 → [[Projects/brain-harness/Sessions/2026-10-17-main-claude]].
 
 ## 다음 할 일
-- 세션 비용 관리 방침(모델 하향 여부) 사용자 결정.
+- 세션 비용 관리 방침: 로드맵 1단계로 해결됨 → [[Projects/brain-harness/Sessions/2026-10-17-main-claude]].
+- 다음 intratnm `/handoff` 때 Handoff.md의 "세션 비용 … 사용자 결정 대기" 항목 정리(1단계로 해결됨).
 - 나머지는 [[Handoff]] "다음 할 일" 참고(배포 서버 Node.js 확인, 로고·사진 수령, 카카오 앱키, 동의 문구 등).
 
-## 추가 — 브레인 구성도와 문서 목차 (같은 날 이어서)
-- **archify 점검·실행**: [tt-a1i/archify](https://github.com/tt-a1i/archify)(MIT, 커밋 `88d1ae4`) 소스 점검 —
-  런타임 의존성 0, 설치 훅 없음, 네트워크는 선택적 업데이트 확인뿐. 전역 설치 없이 세션 임시 폴더에 clone 해
-  `ARCHIFY_UPDATE_CHECK_DISABLED=1 node archify/bin/archify.mjs finalize architecture … --quality showcase --json`으로 실행.
-- **구성도 첫 안 → 사실 오류 3건 수정**: (1) Claude → 저장소 "구현·커밋" 연결이 빠져 있어 추가,
-  (2) 저장소 → GitHub "git push" 연결 추가, (3) L1 스크립트 → 명령 원본 '실행'으로 잘못 그린 연결 제거
-  (스크립트는 명령을 실행하지 않고 `install-commands.sh`로 복사만 한다). 수정 후 4개 게이트
-  (validate · deliver · check · browser-check) 모두 pass. 기록 단계에서 최종 파일로 finalize를 다시 돌려
-  같은 해시(HTML `7e5d60…`, JSON `7289b8…`)로 4개 pass 재확인 — 옛 `*.browser-check.json`이 남아 있으면
-  browser-check가 "unowned evidence path"로 실패하므로 치우고 돌려야 함(diagrams/README 갱신법에 적음).
-- **vault 변경 (사용자 승인, L1 백업 `~/.brain-backups/2026-10-17/`)**: `System/diagrams/`(HTML·JSON·README),
-  `docs/README.md`(GitHub용 문서 목차), `System/Rules.md` 1절에 `diagrams/` 행과 `docs/` 설명 추가,
-  `System/Decisions.md`에 결정 추가. 커밋 2건 후 `brain-harness` `main` push(사용자가 GitHub 관리까지 요청해
-  이번 변경에 한해 승인된 것으로 봄).
-
-## 로드맵 1단계(비용·마찰) 적용 (같은 날 이어서)
-- **사용자 승인**: "브레인 발전 로드맵 1단계: 비용·마찰 줄이기". 위 "막힌 점"의 세션 비용 관리 방침이 이걸로 정해짐.
-- **바꾼 것** (L1, 백업 `~/.brain-backups/2026-10-17/` — settings는 `claude-settings.json`, vault 파일은 `*-stage1`):
-  - `~/.claude/settings.json` env: `GATEGUARD_EXEMPT_GLOBS`(Brain·세션 임시 폴더·메모리 폴더·orca workspaces),
-    `GATEGUARD_BASH_ROUTINE_DISABLED=1`. 메인 세션이 처리. 새 세션부터 적용.
-  - `System/Rules.md` 5절: vault 기록을 판단 기록(Fable) / 사실 기록(Sonnet)으로 나눔, "세션 길이" 불릿 추가.
-  - `System/Knowledge/ECC-GateGuard.md`(현재 설정값·이유), `System/Knowledge/Headroom-Output-Compression.md`(긴 출력은 나눠 실행).
-  - `System/Decisions.md`: `2026-10-17 — 로드맵 1단계` 결정 추가.
-- **기준값**: `costs.jsonl` 세션별 최대값 기준 이번 세션(`b05b868a`) Opus 약 $251 + Sonnet 약 $52 = 약 $303(API 가격 환산).
-  줄마다 누적값이라 합산하면 약 $14,000로 부풀려짐 — 합산 금지. 요금제 사용률 5시간 12%, 7일 2%.
-- **다음**: 새 세션에서 GateGuard 예외·모델 배치 효과 확인(다음 기능 하나 작업 후 같은 방식으로 비교).
-  vault push 여부는 사용자에게 확인.
+## 하네스 작업 (옮김)
+같은 날 이어서 한 브레인 하네스 작업(구성도·docs/, 로드맵 1단계)은 [[Projects/brain-harness/Sessions/2026-10-17-main-claude]]로 옮겼다 (2026-10-17 프로젝트 분리).

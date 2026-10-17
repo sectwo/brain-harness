@@ -135,3 +135,21 @@ tags: [system, decisions]
   - 모든 vault 기록을 계속 Fable → 비용 과다로 기각.
   - 모든 기록을 Sonnet → 판단이 필요한 기록(Decisions·Handoff·L1)의 정확성 우려로 기각.
 - **효과 측정**: 다음 기능 하나 작업 후 같은 방식(`costs.jsonl` 세션별 최대값)으로 비교한다.
+
+## 2026-10-17 — 브레인 하네스를 L2 프로젝트(brain-harness)로 분리
+- **결정**:
+  1. vault `~/Brain` 자체를 L2 프로젝트 `brain-harness`로 둔다. 루트에 `.harness-project`(`brain-harness`),
+     `CLAUDE.md`(`@AGENTS.md`, `@Projects/brain-harness/Handoff.md`, `@Projects/brain-harness/Overview.md`),
+     `AGENTS.md`(프로젝트 고유 규칙)를 만든다. 저장소가 vault 자체라 `.claude/settings.json`의 `additionalDirectories`는 필요 없다.
+  2. `Projects/brain-harness/`를 `System/Templates/Project`에서 만든다. Overview에 로드맵(2026-10-17 사용자 승인)을 둔다.
+  3. `Rules.md` 1절에 한 문장 추가 — vault 자체가 `brain-harness` 프로젝트(L2)이고, `System/`은 하네스의 내용(L1),
+     하네스를 만드는 작업 기록은 `Projects/brain-harness/`에 둔다. `Projects.md`에 행 추가.
+  4. 결정 위치 구분 — 규칙·설정 자체를 바꾸는 결정은 계속 이 파일(`System/Decisions`)에, 로드맵 순서·진행 방식 같은
+     하네스 프로젝트 안의 선택은 `Projects/brain-harness/Decisions.md`에 쓴다.
+  5. Codex `~/.codex/config.toml` `writable_roots`에 `Projects/brain-harness` 경로 추가는 사람 확인 대기(미적용).
+- **이유**: 사용자 요청 — intra-tnm과 하네스는 다른 프로젝트인데, 하네스 설계·로드맵 작업이 intratnm 세션 로그·Handoff에
+  섞여 있었다. 분리하면 각 프로젝트의 Handoff만 읽어도 맥락이 맞고, 로드맵 5단계(두 번째 프로젝트로 검증)도 자연스럽게 된다.
+- **대안**: `System/` 아래에 하네스 세션 로그 두기 → L1이 작업 기록으로 비대해져 기각.
+  intratnm에 계속 기록 → 프로젝트 분리 원칙 위반이라 기각.
+- **백업**: `~/.brain-backups/2026-10-17/` — `System_Rules.md-harness-split`, `System_Decisions.md-harness-split`,
+  `System_Projects.md-harness-split`, `Projects_intratnm_Sessions_2026-10-17-master-claude.md-harness-split`.
