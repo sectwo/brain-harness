@@ -3,7 +3,7 @@ project: brain-harness
 date: 2026-10-18
 agent: claude
 worktree: sectwo/하네스-업데이트-자업
-summary: Handoff 1번(즉시 작업 ③) — /cross-review 표준·심층 점검표에 6관점 추가, 결정 기록 완료. 게이트·커밋·병합·install은 남음
+summary: Handoff 1번(즉시 작업 ③) — /cross-review 표준·심층 점검표에 6관점 추가, 결정 기록·게이트·main 병합·install 완료
 tags: [brain-harness, session]
 ---
 # 세션 — 2026-10-18 / sectwo/하네스-업데이트-자업 / claude
