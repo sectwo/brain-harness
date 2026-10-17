@@ -1,8 +1,13 @@
 #!/bin/sh
-# 브레인 하네스 상태 점검. 아무것도 고치지 않고 확인만 한다. 사람이 직접 실행한다.
+# 브레인 하네스 상태 점검. 아무것도 고치지 않고 확인만 한다. 사람이 직접 실행하고, 세션 시작 때 --quiet로 자동 실행된다.
 # 점검 항목은 2026-09-25 2차 Fable 리뷰에서 "문서와 실제가 달랐던" 지점들 위주로 골랐다.
+#
+# 옵션:
+#   --quiet   git fetch(네트워크)를 건너뛴다. session-context.sh가 세션 시작 때 WARN 줄만 골라 쓴다.
 
 BRAIN="${HARNESS_BRAIN:-$HOME/Brain}"
+QUIET=0
+[ "${1:-}" = "--quiet" ] && QUIET=1
 ok()   { echo "  OK   $1"; }
 warn() { echo "  WARN $1"; }
 info() { echo "  --   $1"; }
@@ -64,7 +69,7 @@ if git -C "$BRAIN" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   else
     warn "gh 로그인 안 됨 (gh auth login 필요)"
   fi
-  git -C "$BRAIN" fetch origin >/dev/null 2>&1
+  [ "$QUIET" = "1" ] || git -C "$BRAIN" fetch origin >/dev/null 2>&1
   counts=$(git -C "$BRAIN" rev-list --left-right --count origin/main...main 2>/dev/null)
   if [ -n "$counts" ]; then
     behind=$(echo "$counts" | awk '{print $1}')
@@ -93,6 +98,25 @@ if [ -d "$SRC" ]; then
   [ "$diff_found" = "0" ] && ok "모든 명령어 파일이 vault와 일치"
 else
   warn "$SRC 없음"
+fi
+echo
+
+echo "## 스킬 동기화 (vault ↔ ~/.claude/skills)"
+SKILL_SRC="$BRAIN/System/skills"
+SKILL_DST="$HOME/.claude/skills"
+if [ -d "$SKILL_SRC" ]; then
+  diff_found=0
+  for d in "$SKILL_SRC"/*/; do
+    [ -f "$d/SKILL.md" ] || continue
+    name=$(basename "$d")
+    if [ ! -d "$SKILL_DST/$name" ] || ! diff -rq "$d" "$SKILL_DST/$name" >/dev/null 2>&1; then
+      warn "$name: vault와 ~/.claude/skills 불일치 (install-commands.sh 실행 필요)"
+      diff_found=1
+    fi
+  done
+  [ "$diff_found" = "0" ] && ok "모든 스킬이 vault와 일치"
+else
+  info "$SKILL_SRC 없음 (스킬 원본 없음)"
 fi
 echo
 

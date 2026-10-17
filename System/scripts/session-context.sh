@@ -93,6 +93,16 @@ fi
 if [ -f "$USAGE" ] && command -v jq >/dev/null 2>&1; then
   jq -r '"- 사용량(마지막 기록): 5시간 \(.five_hour.used_pct // "?")% · 7일 \(.seven_day.used_pct // "?")% · 모델 \(.model // "?")"' "$USAGE" 2>/dev/null
 fi
+# 하네스 점검 (doctor.sh --quiet: 네트워크 없이, WARN 줄만)
+if [ -f "$SYSTEM/scripts/doctor.sh" ]; then
+  warns=$(sh "$SYSTEM/scripts/doctor.sh" --quiet 2>/dev/null | sed -n 's/^  WARN //p')
+  if [ -z "$warns" ]; then
+    echo "- 점검(doctor): 경고 0"
+  else
+    echo "- 점검(doctor): 경고 $(echo "$warns" | wc -l | tr -d ' ')개 — 자세히는 \`sh $SYSTEM/scripts/doctor.sh\`"
+    echo "$warns" | head -3 | sed 's/^/  - /'
+  fi
+fi
 # 정기 점검 주기 확인 (Reviews.md의 last_review + review_interval_days)
 reviews="$SYSTEM/Reviews.md"
 if [ -f "$reviews" ]; then
