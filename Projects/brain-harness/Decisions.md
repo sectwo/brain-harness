@@ -70,3 +70,16 @@ tags: [brain-harness, decisions]
   상보적 학습 시스템 이론(McClelland 외 1995: 빠른 일화 저장소 + 느린 의미 저장소)과도 맞다.
 - **대안**: 완전 격리 CLAUDE_CONFIG_DIR → ECC 없는 환경이라 측정이 비현실적이어서 기각. jsonl grep 기준선만 → 비교 기준선으로 함께 씀. 기본 설정 그대로 → 텔레메트리 기본 켬·자동 소멸 없음·주입 50개라 기각.
 - **기록**: [[System/Decisions#2026-10-18 — 실험 트랙 추가: 검증 전 도구를 격리해 시험, 기억·학습 방침 문구 정리]], 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
+
+## 2026-10-18 — 3단계에 유지보수 체계를 ②로 추가: 원본 목록·upstream-check·정기 점검 순서
+- **결정** (사용자 제기, 선택 창 — "3단계 ②로 당기기"): 사용자가 "적용한 스킬·라이브러리와 각색한 내용도 꾸준히 업데이트가 필요하다, 하네스를 어떻게 유지보수해야 하나"를 물었다.
+  3단계 순서를 ① 자동 점검(완료) → ② 유지보수 체계 → ③ 비용 기록 → ④ 자율성 기준표 → ⑤ 규칙 등록 절차로 바꿨다(옛 ②비용·③자율성·④규칙이 하나씩 밀림).
+  내용: `System/Upstreams.md`(종류 설치·각색, 고정 버전 태그·커밋, 우리 위치, 각색 출처 파일·커밋, 마지막 확인일),
+  `upstream-check.sh`(최신 태그·릴리스 대 고정 버전, 각색 원본 파일의 그 커밋 이후 변경 diff; 네트워크를 쓰므로 세션 시작이 아니라 정기 점검 때),
+  정기 점검 고정 순서(upstream-check → 공급망 점검 [[System/Knowledge/Plugin-Supply-Chain-Check]] → 재각색 판단 → 기한 된 실험 판정 → rules-review).
+  갱신 강도: 보안 수정은 바로 제안, 일반 갱신은 정기 점검 때 일괄, 메이저는 실험 트랙.
+- **이유**: 설치(ECC 2.2.3, chrome-devtools MCP 1.10.1, ui-ux-pro-max 고정 불가, karpathy, claude-mem 14.0.1, bun 1.4.3, Codex CLI, Headroom)·각색(ponytail 6관점, rules-distill·config-gc,
+  cost-tracker, 4축 점수, one-skill·claude-mem 아이디어)이 10개를 넘는데 언제 확인했고 원본이 무엇이 바뀌었는지 모아 둔 곳이 없다. 각색은 원본이 좋아지거나 고쳐져도 알 길이 없다.
+  비용 집계보다 먼저 두는 이유: ui-ux-pro-max는 update 한 번에 main 최신으로 올라가는 등 갱신 사고 위험이 지금 있다.
+- **대안**: 3단계 끝에 추가 → 위험을 늦게 잡아 기각. 목록만 먼저 → 확인 자동화 없이는 목록이 낡아 기각.
+- **기록**: [[Projects/brain-harness/Overview]] 3단계, 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
