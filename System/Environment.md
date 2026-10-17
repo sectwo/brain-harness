@@ -30,7 +30,7 @@ tags: [system, environment]
 - `hooks.SessionStart` — `session-context.sh`: L1 요약 + 프로젝트 맥락 주입 (+ `doctor.sh --quiet`의 WARN 줄)
 - `hooks.UserPromptSubmit` — `usage-check.sh`: 사용량 80% 이상이면 경고 주입
 - `hooks.PreToolUse`(matcher `Bash`) — `precommit-check.sh`: 에이전트의 `git commit` 직전 5MB 넘는 파일·빌드 산출물 폴더·새 파일 300개 초과면 차단.
-  명령 실행 **전** 상태를 보므로 `git reset … && git commit`처럼 한 명령에서 빼면 여전히 막힌다(나눠서 실행). 사람 확인 후 우회: 명령 앞 `BRAIN_PRECOMMIT_OK=1`. Codex에는 아직 미연결
+  명령 실행 **전** 상태를 보므로 `git reset … && git commit`처럼 한 명령에서 빼면 여전히 막힌다(나눠서 실행). 사람 확인 후 우회: 명령 앞 `BRAIN_PRECOMMIT_OK=1`. Codex에는 아직 미연결. 회귀 시험: `sh ~/Brain/System/scripts/tests/precommit-check.test.sh`
 - `permissions.additionalDirectories` — `~/Brain`
 - `enabledPlugins."ecc@ecc"`, `extraKnownMarketplaces.ecc` — ECC 플러그인 설치 출처 (ref `v2.2.3` 고정)
 - `skipDangerousModePermissionPrompt: true`, `hooks.SessionStart`에 Orca가 추가한 항목 하나 더 있음 —

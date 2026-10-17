@@ -15,17 +15,21 @@ input=$(cat)
 cmd=$(printf '%s' "$input" | jq -r '.tool_input.command // empty' 2>/dev/null)
 cwd=$(printf '%s' "$input" | jq -r '.cwd // empty' 2>/dev/null)
 
-# git commit이 들어 있는 명령만 본다 (git -C <경로> commit 포함)
-printf '%s' "$cmd" | grep -Eq '(^|[;&|[:space:]])git([[:space:]]+-C[[:space:]]+[^[:space:]]+)?[[:space:]]+commit([[:space:]]|$)' || exit 0
-case "$cmd" in *BRAIN_PRECOMMIT_OK=1*) exit 0 ;; esac
+# git commit이 들어 있는 명령만 본다. git과 commit 사이의 전역 옵션(-C "<경로>", -c k=v, --no-pager 등)도 허용한다.
+# 옵션 토큰을 넓게 받아 `git log --grep commit` 같은 것도 걸리지만, 그때는 점검만 하고 문제가 없으면 통과한다.
+printf '%s' "$cmd" | grep -Eq '(^|[;&|[:space:]])git([[:space:]]+[^;&|[:space:]]+)*[[:space:]]+commit([[:space:]]|$)' || exit 0
+# 우회는 명령(또는 ; && || 뒤 명령) 맨 앞의 환경 변수 할당일 때만
+printf '%s' "$cmd" | grep -Eq '(^|[;&|])[[:space:]]*BRAIN_PRECOMMIT_OK=1[[:space:]]+git[[:space:]]' && exit 0
 
-# 저장소 위치: git -C <경로> > 맨 앞 cd <경로> > 훅의 cwd
-dir=$(printf '%s' "$cmd" | sed -nE 's/.*git[[:space:]]+-C[[:space:]]+("[^"]+"|[^[:space:]]+)[[:space:]]+commit.*/\1/p' | head -1)
+# 저장소 위치: git … -C <경로> > 맨 앞 cd <경로> > 훅의 cwd
+dir=$(printf '%s' "$cmd" | sed -nE 's/.*git[[:space:]].*-C[[:space:]]+("[^"]+"|[^[:space:]]+).*/\1/p' | head -1)
 [ -n "$dir" ] || dir=$(printf '%s' "$cmd" | sed -nE 's/^[[:space:]]*cd[[:space:]]+("[^"]+"|[^[:space:];&]+).*/\1/p' | head -1)
 dir=$(printf '%s' "$dir" | sed 's/^"//; s/"$//')
 case "$dir" in "~"*) dir="$HOME${dir#\~}" ;; esac
 [ -n "$dir" ] || dir="$cwd"
 case "$dir" in /*) ;; *) dir="$cwd/$dir" ;; esac
+# `git commit -C HEAD`(메시지 재사용)의 -C를 경로로 잘못 읽었을 수 있으므로 저장소가 아니면 cwd로 다시 본다
+git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1 || dir="$cwd"
 git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 
 # 커밋에 들어갈 파일: 스테이징된 것(크기는 인덱스) + (-a/--all이면) 수정된 추적 파일(크기는 작업 트리)

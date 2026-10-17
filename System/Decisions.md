@@ -274,5 +274,6 @@ tags: [system, decisions]
   백업: `~/.brain-backups/2026-10-18/stage3-autocheck/`(settings.json, doctor.sh, session-context.sh).
 - **이유**: 매 세션 doctor를 사람이 돌리지 않아 불일치(명령·스킬 미설치, 설정 어긋남)를 늦게 알았다. 큰 파일·산출물이 한 번 커밋되면 히스토리에서 지우기 어렵다(되돌리기 어려운 작업).
   검증: 시험 저장소에서 통과·차단 13가지 경우(작은 파일, 커밋 아님, 5MB, -C, cd, 우회, node_modules, 새 파일 310개, -am/-a -m/--all, --amend, 공백 파일명) 기대대로, 실제 세션에서 차단·통과 확인. `sh -n`·doctor.sh 오류 없음.
+  교차 리뷰(표준, Codex gpt-5.6-terra): git 전역 옵션 커밋 미감지(높음)·우회 문자열 위치(참고)를 고치고 회귀 시험 `System/scripts/tests/precommit-check.test.sh`(16건)를 추가했다. `commit -C HEAD` 오인도 수정.
 - **대안**: 전역 git `core.hooksPath` → 사람 커밋까지 막고 저장소별 husky 등 기존 hook을 무력화해서 기각. Claude·Codex 동시 연결 → Codex 훅 형식·세션 시험이 더 필요해 Claude 먼저. doctor 전체 출력 주입 → 시작 맥락 80줄 기준 초과로 WARN 줄만.
 - **기록**: [[Projects/brain-harness/Overview]] 3단계, 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
