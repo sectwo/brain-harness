@@ -3,7 +3,7 @@
 > 사람이 작성하는 기준 문서. 에이전트는 여기 없는 회사 정보를 지어내지 않는다. 회사 정보·요구사항의
 > 최종 확인자는 홈페이지 제작요청자 **요청자**이다.
 > 아래 콘텐츠는 요청자가 ChatGPT로 정리해 전달한 콘텐츠 기획서
-> (2026-09-26 수신, [[Decisions#2026-09-26 — 요청자 콘텐츠 기획서 반영]] 참고)를 그대로 옮긴 것이다.
+> (2026-09-26 수신, [[Projects/intratnm/Decisions#2026-09-26 — 요청자 콘텐츠 기획서 반영]] 참고)를 그대로 옮긴 것이다.
 > 디자인이 아니라 **콘텐츠·구조 기획서**이며, 별도의 시각적 디자인 목업은 없다 — 아래 "디자인" 절의
 > "정정(2026-09-26 인터뷰)" 참고. 이 문서 자체의 "메인페이지 흐름" 구조와 색상 톤 설명을 디자인
 > 브리프로 삼는다.
@@ -218,7 +218,7 @@ E-mail(intra@intratnm.com). **현재 홈페이지 웹 주소는 Footer에 표시
 
 ## 기술 스택
 - **Next.js (App Router) + TypeScript + Tailwind CSS** — 2026-09-26 결정, 근거는
-  [[Decisions#2026-09-26 — 기술 스택: Next.js + TypeScript + Tailwind CSS]].
+  [[Projects/intratnm/Decisions#2026-09-26 — 기술 스택: Next.js + TypeScript + Tailwind CSS]].
 - 정적 페이지(COMPANY, BRANDS, FOOTER 등)는 SSG. CONTACT 문의 폼·NOTICE 게시판처럼 서버 로직이
   필요한 부분은 Next.js API Route로 같은 저장소 안에서 처리.
 - React Native는 앱 배포용이라 이 프로젝트(웹 홈페이지)에 맞지 않아 기각했다.
@@ -241,7 +241,7 @@ E-mail(intra@intratnm.com). **현재 홈페이지 웹 주소는 Footer에 표시
   **NOTICE가 관리자 로그인+DB 구조로 확정되면서 이 확인이 NOTICE 구현 자체를 위해서도 필수가 됐다**
   (정적 호스팅이면 로그인·DB를 못 돌린다). 구현 전 최우선 확인 필요. 근거: 레거시 사이트가 `bo_table=`
   쿼리 파라미터를 쓰는 PHP 게시판(그누보드류) 구조라 정적/PHP 공유호스팅일 가능성이 있음
-  ([[Decisions#2026-09-26 — Fable 리뷰 반영: 문서 정합성 정리]] 참고).
+  ([[Projects/intratnm/Decisions#2026-09-26 — Fable 리뷰 반영: 문서 정합성 정리]] 참고).
 - CONTACT 개인정보 수집·이용 동의 문구 / 개인정보처리방침 — 회사에 기존 문구 없음, 사람이 새로
   작성·검토해야 함(에이전트가 법적 문구를 지어내지 않음).
 - TRUSTED EXPERIENCE 고객사 실명 노출 — 잠정 승인됐으나 "추후 확인 후 변경될 수도 있음"(요청자,

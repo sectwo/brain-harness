@@ -3,6 +3,7 @@ project: intratnm
 date: 2026-09-25
 agent: claude
 worktree: master
+summary: "홈페이지 제작 전 프로젝트 하네스 환경 구성(저장소 AGENTS.md·CLAUDE.md·설정, vault 템플릿)"
 tags: [intratnm, session]
 ---
 # 세션 — 2026-09-25 / master / claude
@@ -19,4 +20,4 @@ tags: [intratnm, session]
 - Mac에서 직접 할 일: Headroom 프록시 상시 실행, Codex 프록시·vault 권한, ECC 설치 (docs/SETUP.md)
 
 ## 다음 할 일
-- [[Overview]] 요구사항 작성 → 기술 스택 결정
+- [[Projects/intratnm/Overview]] 요구사항 작성 → 기술 스택 결정

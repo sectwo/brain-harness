@@ -35,7 +35,7 @@ tags: [intratnm, agent]
 - `codex exec`를 Bash로 돌릴 때 **stdin을 닫지 않으면 입력을 기다리며 멈춘다**(10-03, 개편 2단계 리뷰에서 16분
   대기 후 중단). 항상 `< /dev/null`을 붙여 실행한다.
 - Next.js OG 라우트(`opengraph-image.tsx`)에서는 `react-dom/server`를 import할 수 없고, Satori가 한글 어절
-  줄바꿈을 못 하며, `runtime = "nodejs"`를 명시해야 한다(10-03) → [[Knowledge/SEO-And-OG-Image]].
+  줄바꿈을 못 하며, `runtime = "nodejs"`를 명시해야 한다(10-03) → [[Projects/intratnm/Knowledge/SEO-And-OG-Image]].
 - 세션이 길어지면(10-03 → 10-17 연속) 비용 추적 훅 경고가 누적 기준($50)을 크게 넘긴다(10-17 약 $231). 경고가
   오면 사용자에게 알리고 하위 작업 모델 하향을 제안한다 — 바꾸는 건 사용자 결정 뒤.
 - Headroom 연결 확인법(10-17): `ANTHROPIC_BASE_URL`이 `http://localhost:8787`인지, 8787 LISTEN 프로세스와

@@ -3,6 +3,7 @@ project: intratnm
 date: 2026-09-25
 agent: claude
 worktree: master
+summary: "스타터팩 점검, Headroom·Codex 설정, 세션 시작 맥락 자동 주입, 교차 리뷰 규칙, L1/L2/L3 하네스 트리 구축"
 tags: [intratnm, session]
 ---
 # 세션 — 2026-09-25 / master / claude
@@ -22,8 +23,8 @@ tags: [intratnm, session]
 - Codex CLI: ChatGPT 앱 내장 바이너리를 `~/.local/bin/codex`로 링크(사람이 실행), ChatGPT 계정 로그인 확인
 - Orca Codex 실행 명령 권장: `headroom wrap codex --no-proxy --code-memory none`
 - `headroom perf` 기준치(Codex 연결 전): 49 요청 전부 Claude, 37.4% 절감, 캐시 적중 92%
-- 세션 이어가기 하네스: `.claude/hooks/session-context.sh` 추가, SessionStart 훅 등록, AGENTS.md 작업 시작 절차에 추가 (→ [[Decisions#2026-09-25 — 세션 시작 시 맥락 자동 주입]])
-- 교차 리뷰 절차와 모델 선택 규칙: AGENTS.md에 추가, `/cross-review` 명령 신규 (→ [[Decisions#2026-09-25 — 교차 리뷰 방식과 모델 선택]]). 사람 요청: 리뷰 전 항상 알리고 선택하게, 토큰은 요금제 안에서 유동적으로, 모델은 상황에 맞게
+- 세션 이어가기 하네스: `.claude/hooks/session-context.sh` 추가, SessionStart 훅 등록, AGENTS.md 작업 시작 절차에 추가 (→ [[Projects/intratnm/Decisions#2026-09-25 — 세션 시작 시 맥락 자동 주입]])
+- 교차 리뷰 절차와 모델 선택 규칙: AGENTS.md에 추가, `/cross-review` 명령 신규 (→ [[Projects/intratnm/Decisions#2026-09-25 — 교차 리뷰 방식과 모델 선택]]). 사람 요청: 리뷰 전 항상 알리고 선택하게, 토큰은 요금제 안에서 유동적으로, 모델은 상황에 맞게
 
 - (이어서) 재시작 후 SessionStart 훅 출력 들어오는 것 확인. ~~사람이 옵시디언에서 `~/Brain` 보관함 열기 완료~~
   **(정정, 2차 Fable 리뷰에서 발견)**: 실제로는 미완료였다. `obsidian.json`에 `~/Brain`이 vault로 등록된 적이 없고
@@ -55,4 +56,4 @@ tags: [intratnm, session]
 
 ## 다음 할 일
 - Orca 재시작 후 Codex 경유 확인 (위 막힌 점)
-- [[Overview]] 작성 → Claude Code 재시작 → 계획 단계
+- [[Projects/intratnm/Overview]] 작성 → Claude Code 재시작 → 계획 단계

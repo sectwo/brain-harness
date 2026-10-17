@@ -3,6 +3,7 @@ project: intratnm
 date: 2026-09-26
 agent: claude
 worktree: design-refresh
+summary: "전체 페이지 배경·연혁·브랜드 3단 배치 리디자인(design-refresh worktree), Pretendard 적용, 빌드·스크린샷 검증"
 tags: [intratnm, session]
 ---
 # 세션 — 2026-09-26 / design-refresh / claude

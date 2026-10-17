@@ -9,11 +9,11 @@ tags: [system, knowledge]
 
 | 파일 | 내용 |
 |---|---|
-| [[Orca-Codex-Headroom]] | Orca에서 띄우는 Codex를 Headroom 프록시로 보내는 법 |
-| [[ECC-GateGuard]] | ECC GateGuard 훅이 작업을 멈출 때 대응 |
-| [[Headroom-Output-Compression]] | Headroom이 도구 출력을 압축할 때 원문 보는 법 |
-| [[Codex-Review-Output]] | `codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기 |
-| [[Claude-Plugin-Install]] | 세션 중 설치한 플러그인은 로드 안 됨 — 프로세스 완전 재시작 필요 |
-| [[Nextjs-Worktree]] | Next.js(Turbopack) worktree: `npm install`·`next typegen`·`agentRules: false` |
-| [[Chrome-DevTools-MCP]] | `fullPage`/`resize_page` 캡처 artifact — 실제 스크롤·실측으로 재확인 |
-| [[Plugin-Supply-Chain-Check]] | 서드파티 Claude Code 플러그인 설치 전 공급망 점검 체크리스트 |
+| [[System/Knowledge/Orca-Codex-Headroom]] | Orca에서 띄우는 Codex를 Headroom 프록시로 보내는 법 |
+| [[System/Knowledge/ECC-GateGuard]] | ECC GateGuard 훅이 작업을 멈출 때 대응 |
+| [[System/Knowledge/Headroom-Output-Compression]] | Headroom이 도구 출력을 압축할 때 원문 보는 법 |
+| [[System/Knowledge/Codex-Review-Output]] | `codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기 |
+| [[System/Knowledge/Claude-Plugin-Install]] | 세션 중 설치한 플러그인은 로드 안 됨 — 프로세스 완전 재시작 필요 |
+| [[System/Knowledge/Nextjs-Worktree]] | Next.js(Turbopack) worktree: `npm install`·`next typegen`·`agentRules: false` |
+| [[System/Knowledge/Chrome-DevTools-MCP]] | `fullPage`/`resize_page` 캡처 artifact — 실제 스크롤·실측으로 재확인 |
+| [[System/Knowledge/Plugin-Supply-Chain-Check]] | 서드파티 Claude Code 플러그인 설치 전 공급망 점검 체크리스트 |

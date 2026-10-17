@@ -1,5 +1,6 @@
 ---
 project: intratnm
+summary: "NOTICE 파일 저장소(`.data/notices.json`)와 HMAC 세션 관리자 로그인 1차 구현"
 tags: [intratnm, knowledge, notice, admin]
 source: Sessions 2026-09-26-master (NOTICE 구현, 커밋 80e7d82)
 ---

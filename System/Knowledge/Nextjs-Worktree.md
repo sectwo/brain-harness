@@ -1,5 +1,6 @@
 ---
 level: 1
+summary: "Next.js(Turbopack) worktree: `npm install`·`next typegen`·`agentRules: false`"
 tags: [knowledge, nextjs, worktree, turbopack]
 source: intratnm 2026-09-26, 2026-10-01, 2026-10-03
 ---

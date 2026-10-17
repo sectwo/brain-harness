@@ -1,5 +1,6 @@
 ---
 level: 1
+summary: "`codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기"
 tags: [knowledge, codex, cross-review]
 source: intratnm 2026-10-02
 ---

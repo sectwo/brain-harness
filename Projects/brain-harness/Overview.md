@@ -85,7 +85,7 @@ tags: [brain-harness, overview]
 - `System/` = 하네스의 내용(L1): 규칙, 환경, 전역 결정, 공통 지식, 템플릿, 스크립트, 명령 원본, 구성도.
 - `Projects/brain-harness/` = 하네스를 만드는 작업 기록(L2·L3): 이 Overview(로드맵), Decisions(진행 방식 결정), Handoff, Sessions.
 - vault 루트 `AGENTS.md`·`CLAUDE.md`·`.harness-project`가 이 저장소를 brain-harness 프로젝트로 연결한다.
-- 규칙·설정 자체를 바꾸는 결정은 [[System/Decisions]]에, 로드맵 순서·진행 방식 결정은 [[Decisions]]에 쓴다.
+- 규칙·설정 자체를 바꾸는 결정은 [[System/Decisions]]에, 로드맵 순서·진행 방식 결정은 [[Projects/brain-harness/Decisions]]에 쓴다.
 
 ## 기술 스택
 - Obsidian vault (Markdown) + sh 스크립트(`System/scripts/`) + Claude Code·Codex 설정(`~/.claude`, `~/.codex`).

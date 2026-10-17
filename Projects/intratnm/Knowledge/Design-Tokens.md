@@ -1,5 +1,6 @@
 ---
 project: intratnm
+summary: "개편 A안 디자인 토큰·컴포넌트 요약과 결정 근거 (상세는 저장소 `design-system/intra-tnm/MASTER.md`)"
 tags: [intratnm, knowledge, design]
 source: Sessions 2026-09-26-design-refresh, 2026-10-01-master, 2026-10-02-master, 2026-10-03-master
 ---
@@ -15,7 +16,7 @@ source: Sessions 2026-09-26-design-refresh, 2026-10-01-master, 2026-10-02-master
   "정밀"은 색이 아니라 디테일(눈금·헤어라인·인덱스 번호·tabular 숫자·기어 선화)로 표현.
 - 쓰지 않는 것: 알약 모양 버튼·칩, 큰 그림자·hover 들썩임, 제3의 강조색, 그라디언트 글자, 이모지 아이콘,
   글래스모피즘, 무한 반복 장식 애니메이션, 풀페이지 스냅(시험 후 기각), 모션 라이브러리(GSAP 미도입).
-  근거는 [[Decisions#2026-10-03 — UI/UX 개편 A안: 정밀 산업 스위스 미니멀]].
+  근거는 [[Projects/intratnm/Decisions#2026-10-03 — UI/UX 개편 A안: 정밀 산업 스위스 미니멀]].
 
 ## 색 (`src/app/globals.css`)
 - 토큰: `navy`(`#0b1830`) / `navy-deep`(Footer) / `navy-soft` / `blue-accent`(`#0369a1`) / `blue-accent-hover` /
@@ -32,7 +33,7 @@ source: Sessions 2026-09-26-design-refresh, 2026-10-01-master, 2026-10-02-master
 
 ## 타이포·간격
 - Pretendard Variable 전체. 예외는 히어로 배경 회사명 한 곳 — **Chakra Petch 700**(`next/font/google`, 빌드 시
-  자체 호스팅 → 빌드 머신 인터넷 필요). 서체 선정 경위는 [[Decisions#2026-10-03 — 히어로 회사명 서체 Chakra Petch]].
+  자체 호스팅 → 빌드 머신 인터넷 필요). 서체 선정 경위는 [[Projects/intratnm/Decisions#2026-10-03 — 히어로 회사명 서체 Chakra Petch]].
 - 유틸 `text-display / h1 / h2 / h3 / lead / eyebrow`, 숫자 `tabular-nums`, 한글 `keep-all`, 제목 `text-wrap: balance`.
 - 모서리: 칩 4px(`rounded-chip`), 버튼·입력 6px(`rounded-control`), 카드 8px(`rounded-card`). 그림자 없음,
   hover는 테두리 `blue-accent` + 1px 위로.
@@ -41,7 +42,7 @@ source: Sessions 2026-09-26-design-refresh, 2026-10-01-master, 2026-10-02-master
 - 메인 히어로: 오로라(진입 시 3초 1회 정착, 10-02) + 기어 2개·눈금 링 선화(`GearLineArt`) + 배경 회사명
   "INTRA T&M"(채움 4~12%·외곽선 20%). 스크롤 연동: 큰 기어 40°·작은 기어 24:14 비율 반대 회전, 회사명
   왼쪽으로 밀리며 옅어짐(`ScrollProgressVar`). 자유 스크롤 유지 —
-  [[Decisions#2026-10-03 — 풀페이지 스냅 기각, 자유 스크롤 + 히어로 스크롤 연동]].
+  [[Projects/intratnm/Decisions#2026-10-03 — 풀페이지 스냅 기각, 자유 스크롤 + 히어로 스크롤 연동]].
 - `ScrollReveal`(CSS + IntersectionObserver, 신규 의존성 없음): variant로 섹션별 효과(페이드·그리드 50ms·
   리스트 30ms 스태거·헤어라인 드로우). JS 미동작·IO 미지원 환경에서도 콘텐츠가 보인다. RAF 취소·정리 타이머
   처리는 10-03 교차 리뷰 반영(`909bddc`).

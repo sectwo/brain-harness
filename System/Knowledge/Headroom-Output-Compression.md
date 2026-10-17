@@ -1,5 +1,6 @@
 ---
 level: 1
+summary: "Headroom이 도구 출력을 압축할 때 원문 보는 법"
 tags: [knowledge, headroom]
 source: intratnm 2026-09-25
 ---

@@ -1,5 +1,6 @@
 ---
 level: 1
+summary: "ECC GateGuard 훅이 작업을 멈출 때 대응"
 tags: [knowledge, ecc]
 source: intratnm 2026-09-25
 ---

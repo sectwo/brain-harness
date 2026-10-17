@@ -1,5 +1,6 @@
 ---
 level: 1
+summary: "`fullPage`/`resize_page` 캡처 artifact — 실제 스크롤·실측으로 재확인"
 tags: [knowledge, chrome-devtools, mcp, screenshot]
 source: intratnm 2026-09-26, 2026-10-01, 2026-10-03
 ---

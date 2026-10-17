@@ -1,3 +1,11 @@
+---
+project: intratnm
+date: 2026-10-03
+agent: claude
+worktree: master
+summary: "회사 로고 Header·Footer 반영, 로고 색 맞춤, 비주얼 리파인·스크롤 모션, UI/UX 개편 A안 1~4단계, SEO 기본, 교차 리뷰"
+tags: [intratnm, session]
+---
 # 세션 — 2026-10-03 / master / claude
 
 ## 목표

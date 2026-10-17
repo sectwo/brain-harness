@@ -1,5 +1,6 @@
 ---
 project: intratnm
+summary: "sitemap·robots·metadataBase·CONTACT layout metadata, OG 라우트 특이점(react-dom/server 금지·한글 어절 span·Node 런타임)"
 tags: [intratnm, knowledge, seo, nextjs]
 source: Sessions 2026-10-03-master
 ---
@@ -29,4 +30,4 @@ source: Sessions 2026-10-03-master
 Lighthouse 지적 2건(링크 문구에 sr-only 맥락, 오시는 길 `dl` 구조)은 4단계에서 수정.
 
 ## 출처
-- [[Sessions/2026-10-03-master-claude]] — "SEO 기본 + 정리", "4단계 — 마무리"
+- [[Projects/intratnm/Sessions/2026-10-03-master-claude]] — "SEO 기본 + 정리", "4단계 — 마무리"

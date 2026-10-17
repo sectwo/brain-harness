@@ -3,6 +3,7 @@ project: brain-harness
 date: 2026-10-17
 agent: claude
 worktree: main
+summary: "브레인 구성도·문서 목차 작성, 로드맵 1단계(비용·마찰) 적용, 하네스를 L2 프로젝트로 분리"
 tags: [brain-harness, session]
 ---
 # 세션 — 2026-10-17 / main / claude

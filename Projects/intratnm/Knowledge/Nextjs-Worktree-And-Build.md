@@ -1,5 +1,6 @@
 ---
 project: intratnm
+summary: "intratnm 고유: dev 포트 3001, proxy.ts·Web Crypto, ESLint set-state-in-effect, 검증 루틴 (worktree 범용 내용은 L1 [[System/Knowledge/Nextjs-Worktree]])"
 tags: [intratnm, knowledge, nextjs, worktree]
 source: Sessions 2026-09-26-design-refresh, 2026-09-26-master, 2026-10-01-master-codex, 2026-10-03-master
 ---

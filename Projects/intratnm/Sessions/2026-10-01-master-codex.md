@@ -1,3 +1,11 @@
+---
+project: intratnm
+date: 2026-10-01
+agent: codex
+worktree: master
+summary: "디자인 리프레시 변경을 Codex가 표준 강도로 교차 리뷰(앵커 오프셋·eyebrow 대비 지적 2건)"
+tags: [intratnm, session]
+---
 # 세션 — 2026-10-01 / master / codex
 
 ## 목표

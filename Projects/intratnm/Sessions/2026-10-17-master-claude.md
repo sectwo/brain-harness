@@ -3,12 +3,13 @@ project: intratnm
 date: 2026-10-17
 agent: claude
 worktree: master
+summary: "Headroom 연결 확인, 10-03 작업 push 2건, /handoff 실행(코드 변경 없음)"
 tags: [intratnm, session]
 ---
 # 세션 — 2026-10-17 / master / claude
 
 > 2026-10-03 세션이 이어진 것이다. 10-03까지의 작업(UI/UX 개편 A안 1~4단계, SEO 기본, 풀페이지 스냅
-> 기각, 대비 수치 정정 등)은 [[2026-10-03-master-claude]]에 기록돼 있다. 이 로그는 10-17에 한 일만 적는다.
+> 기각, 대비 수치 정정 등)은 [[Projects/intratnm/Sessions/2026-10-03-master-claude]]에 기록돼 있다. 이 로그는 10-17에 한 일만 적는다.
 
 ## 목표
 - 세션 상태 점검(Headroom 연결 여부), 10-03에 남긴 push 2건 처리, `/handoff`.
@@ -33,7 +34,7 @@ tags: [intratnm, session]
 - 코드 저장소: 없음(push만).
 - vault: `/handoff`가 고친 파일은 Handoff.md·Knowledge·Agents·System/Projects.md (별도 커밋).
 
-## 결정 (→ [[Decisions]]에도 기록)
+## 결정 (→ [[Projects/intratnm/Decisions]]에도 기록)
 - 없음(설계 결정 없음).
 
 ## 막힌 점 / 확인 필요
@@ -42,7 +43,7 @@ tags: [intratnm, session]
 ## 다음 할 일
 - 세션 비용 관리 방침: 로드맵 1단계로 해결됨 → [[Projects/brain-harness/Sessions/2026-10-17-main-claude]].
 - 다음 intratnm `/handoff` 때 Handoff.md의 "세션 비용 … 사용자 결정 대기" 항목 정리(1단계로 해결됨).
-- 나머지는 [[Handoff]] "다음 할 일" 참고(배포 서버 Node.js 확인, 로고·사진 수령, 카카오 앱키, 동의 문구 등).
+- 나머지는 [[Projects/intratnm/Handoff]] "다음 할 일" 참고(배포 서버 Node.js 확인, 로고·사진 수령, 카카오 앱키, 동의 문구 등).
 
 ## 하네스 작업 (옮김)
 같은 날 이어서 한 브레인 하네스 작업(구성도·docs/, 로드맵 1단계)은 [[Projects/brain-harness/Sessions/2026-10-17-main-claude]]로 옮겼다 (2026-10-17 프로젝트 분리).

@@ -1,5 +1,6 @@
 ---
 level: 1
+summary: "서드파티 Claude Code 플러그인 설치 전 공급망 점검 체크리스트"
 tags: [knowledge, claude-code, plugin, security]
 source: intratnm 2026-10-01
 ---
@@ -22,7 +23,7 @@ source: intratnm 2026-10-01
    `~/.claude/plugins/.backup-<날짜>/`에 복사한다.
 6. **설치 후 확인**: `claude plugin details`(정적 컴포넌트 인벤토리)와 새 `claude -p` 프로세스(독립
    세션) 두 방법으로 정상 로드를 확인한다. 떠 있던 세션에서는 보이지 않으니
-   [[Claude-Plugin-Install]] 참고.
+   [[System/Knowledge/Claude-Plugin-Install]] 참고.
 7. **기록**: 결정·검토 과정·기각한 대안을 `System/Decisions.md`에 남긴다. 되돌리기는
    `claude plugin uninstall`.
 

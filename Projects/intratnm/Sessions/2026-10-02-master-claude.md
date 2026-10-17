@@ -1,3 +1,11 @@
+---
+project: intratnm
+date: 2026-10-02
+agent: claude
+worktree: master
+summary: "메인 히어로 카피·배경 다듬기(오로라 메시 배경), ui-ux-pro-max 재점검, Codex 가벼운 교차 리뷰"
+tags: [intratnm, session]
+---
 # 세션 — 2026-10-02 / master / claude
 
 ## 목표

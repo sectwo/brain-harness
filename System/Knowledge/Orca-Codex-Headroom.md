@@ -1,5 +1,6 @@
 ---
 level: 1
+summary: "Orca에서 띄우는 Codex를 Headroom 프록시로 보내는 법"
 tags: [knowledge, orca, codex, headroom]
 source: intratnm 2026-09-25
 ---

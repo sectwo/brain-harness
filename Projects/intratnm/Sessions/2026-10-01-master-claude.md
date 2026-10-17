@@ -3,6 +3,7 @@ project: intratnm
 date: 2026-10-01
 agent: claude
 worktree: master
+summary: "디자인 리프레시 병합, 교차 리뷰 반영, intra-tnm 비공개 원격 저장소 생성·push, 플러그인 공급망 점검"
 tags: [intratnm, session]
 ---
 # 세션 — 2026-10-01 / master / claude

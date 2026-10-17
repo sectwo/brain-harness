@@ -1,5 +1,6 @@
 ---
 project: intratnm
+summary: "`.env.example` 변수 5개와 미설정 시 자리표시 동작"
 tags: [intratnm, knowledge, env]
 source: Sessions 2026-09-26-master; 저장소 `.env.example`
 ---

@@ -1,3 +1,11 @@
+---
+project: intratnm
+date: 2026-09-26
+agent: claude
+worktree: master
+summary: "Next.js 스캐폴딩, 요청자 인터뷰 반영, COMPANY 페이지·NOTICE 1차 구현, 실명 제거, Fable 문서 정합성 리뷰"
+tags: [intratnm, session]
+---
 # 세션 — 2026-09-26 / master / claude
 
 ## 목표
@@ -8,7 +16,7 @@ Next.js 스캐폴딩 완료 + 홈페이지 제작요청자(요청자) 인터뷰�
   기존 harness `AGENTS.md`/`CLAUDE.md`는 건드리지 않고 병합. `npm install`·`npm run build`·`npm run lint`
   모두 통과 확인 후 커밋(`0f6013f`).
 - 기술 스택 결정(Next.js+TS+Tailwind) vault 커밋 (`80751ce`).
-- 요청자 1차 인터뷰 진행 (하나씩 순서대로 질문하는 방식으로 전환, 상세는 [[Decisions#2026-09-26 —
+- 요청자 1차 인터뷰 진행 (하나씩 순서대로 질문하는 방식으로 전환, 상세는 [[Projects/intratnm/Decisions#2026-09-26 —
   요청자 1차 인터뷰: 남은 확인 사항 정리]]):
   - 회사 연혁 2019년 확정(추가 없음), HERUTU 시작 연도 보류
   - 디자인 목업 없음 확인 → 콘텐츠 기획서의 구조·색상 설명을 디자인 브리프로 채택
@@ -39,8 +47,8 @@ Next.js 스캐폴딩 완료 + 홈페이지 제작요청자(요청자) 인터뷰�
 
 ### 완료한 일
 - Fable(리뷰 전용 서브에이전트)로 설계 문서(Overview·Decisions·README) 정합성 리뷰 → 발견된 모순
-  직접 수정, 사실 확인이 필요한 항목은 요청자에게 하나씩 순서대로 질문 (→ [[Decisions#2026-09-26 —
-  Fable 리뷰 반영: 문서 정합성 정리]], [[Decisions#2026-09-26 — 요청자 2차 인터뷰: Fable 리뷰 남은
+  직접 수정, 사실 확인이 필요한 항목은 요청자에게 하나씩 순서대로 질문 (→ [[Projects/intratnm/Decisions#2026-09-26 —
+  Fable 리뷰 반영: 문서 정합성 정리]], [[Projects/intratnm/Decisions#2026-09-26 — 요청자 2차 인터뷰: Fable 리뷰 남은
   확인 사항 정리]]). NOTICE가 회사 직원 직접 작성으로 정해지며 배포 서버 Node.js 지원 여부 확인이
   최우선 과제로 올라감.
 - **요청자 실명 제거**: 사람이 "이시영이라는 이름이 커밋에 대놓고 드러난다"고 지적 → Overview·

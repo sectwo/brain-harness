@@ -1,5 +1,6 @@
 ---
 level: 1
+summary: "세션 중 설치한 플러그인은 로드 안 됨 — 프로세스 완전 재시작 필요"
 tags: [knowledge, claude-code, plugin]
 source: intratnm 2026-10-01
 ---
@@ -27,4 +28,4 @@ source: intratnm 2026-10-01
 
 ## 출처
 - [[Projects/intratnm/Sessions/2026-10-01-master-claude]] — "홈페이지 리뉴얼 시도" 원인 진단·재시작 기록
-- 설치 전 점검 절차는 [[Plugin-Supply-Chain-Check]]
+- 설치 전 점검 절차는 [[System/Knowledge/Plugin-Supply-Chain-Check]]
