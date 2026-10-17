@@ -69,7 +69,9 @@ tags: [system, environment]
 ## ECC
 - 설치는 플러그인 한 가지 방식만 (중복 설치 시 훅 이중 등록). 버전: 2.2.3 (c05b2d6, `extraKnownMarketplaces.ecc.source.ref`=`v2.2.3`로 태그 고정 — [[System/Decisions#2026-10-18 — ECC 2.2.3 적용: 마켓플레이스 ref 태그 고정]])
 - 전역 `settings.json`의 `env`로 조정:
-  - `GATEGUARD_EXEMPT_GLOBS=/Users/isaac/Brain/**` — vault 문서는 GateGuard 첫 수정 확인을 건너뜀 (파괴적 Bash 확인은 유지)
+  - `GATEGUARD_EXEMPT_GLOBS=/Users/isaac/Brain/**,/private/tmp/claude-501/**,/Users/isaac/.claude/projects/*/memory/**,/Users/isaac/orca/workspaces/**`
+    — vault·세션 임시 폴더·메모리·Orca worktree는 GateGuard 파일별 첫 수정 확인을 건너뜀
+  - `GATEGUARD_BASH_ROUTINE_DISABLED=1` — 세션 첫 Bash의 사실 확인만 끔. 파괴적 Bash 확인은 유지. 상세·확인법 → [[System/Knowledge/ECC-GateGuard]]
   - `ECC_DISABLED_HOOKS=pre:observe,stop:evaluate-session` — 자동 학습(instinct) 끔. 옵시디언과 이중 기억 방지
     (ECC 2.2.3 `hooks/hooks.json` 기준 실제 id 2개만 유효. `post:observe:continuous-learning`은 존재하지 않는 id라
     무시된다 — 무해하지만 지운다. 버전을 올리면 `hooks.json`에서 id를 다시 확인)

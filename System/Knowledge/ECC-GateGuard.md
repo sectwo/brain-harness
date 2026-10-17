@@ -1,8 +1,8 @@
 ---
 level: 1
-summary: "ECC GateGuard 훅이 작업을 멈출 때 대응"
+summary: "ECC GateGuard 훅이 작업을 멈출 때 대응, 현재 예외 설정, 훅 판정을 가짜 입력으로 확인하는 법"
 tags: [knowledge, ecc]
-source: intratnm 2026-09-25
+source: intratnm 2026-09-25, brain-harness 2026-10-18
 ---
 # ECC GateGuard 대응
 
@@ -19,3 +19,13 @@ source: intratnm 2026-09-25
   - 이유: 2026-10-03~17 세션에서 GateGuard가 50회 넘게 작업을 막았고 대부분 worktree·세션 임시 폴더·메모리 폴더의
     첫 수정이었다. worktree 작업은 계획 승인 후 진행하고 교차 리뷰를 거치므로 첫 수정 확인이 중복이다.
   - 적용 시점: 훅이 시작 시 env를 읽으므로 **새 세션부터** 적용된다.
+
+## 설정 확인법 (파일을 바꾸지 않고 훅 판정만 본다)
+- 플러그인 루트 `~/.claude/plugins/cache/ecc/ecc/<버전>`에서 `CLAUDE_PLUGIN_ROOT`를 그 경로로 지정하고 `settings.json`의 env
+  (`GATEGUARD_*`, `ECC_DISABLED_HOOKS`)를 export한 뒤, 가짜 tool 입력 JSON을 훅에 넣는다.
+  - Edit/Write: `echo '<JSON>' | node scripts/hooks/run-with-flags.js pre:edit-write:gateguard-fact-force scripts/hooks/gateguard-fact-force.js standard,strict`
+    (JSON에 `session_id`, `tool_name`, `tool_input.file_path`). 예외 경로면 입력이 그대로 나오고, 예외 밖 첫 수정이면 deny JSON이 나온다.
+  - Bash: `scripts/hooks/pre-bash-dispatcher.js`에 `tool_input.command`를 넣는다. 루틴 비활성이면 `ls` 통과, `rm -rf`·`git reset --hard`는 deny.
+  - 훅 켜짐 여부: `scripts/lib/hook-flags.js`의 `isHookEnabled('<id>')` (예: `pre:observe`, `stop:evaluate-session`은 false여야 한다).
+- 시험이 끝나면 가짜 세션 id의 `~/.gateguard/state-<id>.json`을 지운다 (`STATE_DIR` 기본 `~/.gateguard`).
+- 2026-10-18 ECC 2.2.3에서 위 방법으로 예외 통과·예외 밖 차단·파괴적 명령 차단·루틴 비활성을 확인했다.

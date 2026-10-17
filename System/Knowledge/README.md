@@ -10,7 +10,7 @@ tags: [system, knowledge]
 | 파일 | 내용 |
 |---|---|
 | [[System/Knowledge/Orca-Codex-Headroom]] | Orca에서 띄우는 Codex를 Headroom 프록시로 보내는 법 |
-| [[System/Knowledge/ECC-GateGuard]] | ECC GateGuard 훅이 작업을 멈출 때 대응 |
+| [[System/Knowledge/ECC-GateGuard]] | ECC GateGuard 훅이 작업을 멈출 때 대응, 현재 예외 설정, 훅 판정을 가짜 입력으로 확인하는 법 |
 | [[System/Knowledge/Headroom-Output-Compression]] | Headroom이 도구 출력을 압축할 때 원문 보는 법 |
 | [[System/Knowledge/Codex-Review-Output]] | `codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기 |
 | [[System/Knowledge/Claude-Plugin-Install]] | 세션 중 설치한 플러그인은 로드 안 됨 — 프로세스 완전 재시작 필요 |

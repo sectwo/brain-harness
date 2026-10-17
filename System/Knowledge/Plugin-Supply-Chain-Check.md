@@ -36,6 +36,8 @@ source: intratnm 2026-10-01
 - ref는 **태그·브랜치 이름만** 된다. 커밋 SHA는 "Remote branch not found"로 실패한다 → 태그가 없으면 고정 불가, 갱신 때마다 점검.
 - 함정: settings 선언과 `known_marketplaces.json` 출처가 다르면 `add`는 "declared" 오류, `marketplace update`는 "not found".
   **선언을 먼저 바꾸고 같은 출처(`#ref`)로 add** 한다.
+- **옛 캐시 정리**: 적용하고 새 세션에서 동작을 확인한 뒤, 백업과 파일 수를 대조하고 `~/.claude/plugins/cache/<마켓>/<플러그인>/<옛버전>`을
+  지운다 — ECC 훅 부트스트랩은 `CLAUDE_PLUGIN_ROOT`가 없으면 cache 폴더를 순서대로 뒤져 옛 버전을 잡을 수 있다.
 - 사례: [[System/Decisions#2026-10-18 — ECC 2.2.3 적용: 마켓플레이스 ref 태그 고정]],
   [[System/Decisions#2026-10-18 — ui-ux-pro-max 2.15.0 적용: main 커밋, 태그 고정 불가]]
 
