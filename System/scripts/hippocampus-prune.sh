@@ -1,5 +1,5 @@
 #!/bin/sh
-# 해마(claude-mem) 소멸: N일(기본 30일)이 지난 일화를 지운다. (실험 트랙 스크립트, 2026-10-18 ~ 2026-11-01)
+# 해마(claude-mem) 소멸: N일(기본 30일)이 지난 일화를 지운다. (실험 트랙 스크립트, 2026-10-18 시작 — 쓰면서 보완)
 # claude-mem에는 자체 만료가 없어서 만들었다. 기준 → [[Projects/brain-harness/Decisions#2026-10-18 — 실험: claude-mem을 해마(임시 일화 기억)로 — brain-harness만, 2주]]
 #
 # 일화 단위(sdk_sessions)로 지운다. foreign_keys가 켜져 있으면 관찰·요약·중복 후보가 CASCADE로,

@@ -14,6 +14,20 @@
   "env": {
     "DO_NOT_TRACK": "1",
     "CLAUDE_MEM_TELEMETRY": "0",
-    "CLAUDE_MEM_TELEMETRY_ERRORS": "0"
+    "CLAUDE_MEM_TELEMETRY_ERRORS": "0",
+    "TASK_OBSERVER_WORKSPACE": "/Users/isaac/.brain-experiments/task-observer"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$CLAUDE_PROJECT_DIR/.claude/hooks/task-observer-start.sh\""
+          }
+        ]
+      }
+    ]
   }
 }
