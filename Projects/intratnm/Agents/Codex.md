@@ -14,6 +14,8 @@ tags: [intratnm, agent]
   (→ [[System/Decisions#2026-10-03 — 모델 운용 변경(Opus 5.5 기본·Fable 기록)과 /cross-review Codex 실행 방식 변경]]).
 - 이 프로젝트에서 실제로 쓴 조합: 가벼움 `gpt-5.6-luna`/low (`codex review --commit`, 10-01·10-02),
   표준 `gpt-5.6-terra`/medium (`codex exec`, 10-01·10-03). 모두 지적 반영됨.
+- 10-03 개편 A안 리뷰 이력: SEO 기본(표준, 높음 2·참고 1), 1·2단계(표준, 지적 0), 3단계(표준, 참고 1 — FAX
+  아이콘), 스크롤 연동(가벼움, 0), 4단계(가벼움, 높음 1 — OG 라우트 Node 런타임 명시). 전부 반영됨.
 
 ## 설정
 - Orca가 띄우는 Codex는 `CODEX_HOME=~/Library/Application Support/orca/codex-runtime-home/home`
@@ -25,5 +27,7 @@ tags: [intratnm, agent]
   로그(`Sessions/2026-10-01-master-codex.md`)가 vault에 작성되긴 했으나, Orca 재동기화 뒤에도 유지되는지는 미확인.
 - Codex 샌드박스에서는 Turbopack `npm run build`가 포트 바인딩 제한으로 실패한다. 리뷰 지시문에
   `npm run build -- --webpack`을 쓰게 하고, Turbopack 실패는 코드 판정에 반영하지 않는다(10-01 Codex 로그).
+- `codex exec`는 stdin을 열어 두면 입력을 기다리며 멈춘다(10-03, 16분 대기 후 중단). Bash에서 돌릴 때
+  `< /dev/null`을 붙인다.
 - 리뷰 범위를 지시할 때 `git diff <기준>...HEAD`로 범위를 못 박으면 Codex가 같은 명령으로 직접 확인하고
   회사 정보 변경 여부(`src/data/*`)까지 대조해 준다 — 지시문에 "새 회사 정보 생성 여부 확인"을 넣는다.
