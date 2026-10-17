@@ -7,3 +7,6 @@
 # 편집기·OS
 *.swp
 .idea/
+
+# 프로젝트 원본 자료 (대용량·회사 자료, git에 올리지 않음)
+Projects/intratnm/INTRA_TNM_홈페이지_자료/
