@@ -263,3 +263,16 @@ tags: [system, decisions]
 - **이유**: 표준 리뷰가 "버그 + 품질 게이트"만 보면 부하·속도·비대함처럼 동작은 맞아도 나중에 비용이 되는 문제를 놓친다. 관점을 고정 목록으로 주면 Claude·Codex 리뷰어가 같은 기준으로 보고 결과를 비교하기 쉽다. 가벼움은 비용을 낮게 유지하려고 그대로 둔다.
 - **대안**: ponytail 플러그인 설치 → 훅 3종·웹훅 추가 대비 얻는 것이 점검표 몇 줄이라 기각(벤치마킹 결정과 같은 이유). Rules.md 4절 표에도 6관점 기재 → 같은 사실이 두 곳에 생겨 "한 사실은 한 곳" 규칙에 어긋나 기각. 가벼움에도 6관점 → diff 100줄 미만에 과하고 비용 증가로 기각.
 - **기록**: [[Projects/brain-harness/Decisions#2026-10-18 — 외부 저장소 벤치마킹 6종: 채택·각색·보류]] (④번), 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
+
+## 2026-10-18 — 3단계① 자동 점검: 세션 시작 doctor·스킬 동기화·커밋 전 차단
+- **결정** (사용자 승인, 선택 창 2번 — 3단계 순서 ①자동 점검→②비용 집계→③자율성 기준표→④규칙 등록·rules-review, 항목별 worktree, 커밋 차단은 Claude 먼저):
+  a. `doctor.sh --quiet`(git fetch 생략)를 추가하고 `session-context.sh`가 세션 시작 때 불러 WARN 줄만(최대 3줄) "점검(doctor): 경고 N개"로 보여 준다. 시작 맥락 77줄(기준 80줄 이내), 실행 약 0.8초.
+  b. `doctor.sh`에 스킬 동기화 절(`System/skills` ↔ `~/.claude/skills`, `diff -rq`)을 추가했다.
+  c. 새 `System/scripts/precommit-check.sh`를 `~/.claude/settings.json` `hooks.PreToolUse`(matcher Bash)에 등록했다. 에이전트 명령에 `git commit`(`git -C` 포함)이 있을 때만 스테이징 파일(인덱스 크기), `-a/--all`이면 수정된 추적 파일(작업 트리 크기)을 보고
+  5MB 초과, 새로 추가되는 node_modules·.next·dist·build·.venv·__pycache__, 새 파일 300개 초과면 exit 2로 차단. 판단 불가(jq 없음, git 저장소 아님 등)는 통과. 사람 확인 후 우회는 명령 앞 `BRAIN_PRECOMMIT_OK=1`. 기준값은 처음 제안값으로 쓰면서 조정.
+  한계: 명령 실행 전 상태를 보므로 `git reset … && git commit`을 한 명령으로 하면 막힌다(안전한 쪽 오탐, 나눠 실행). Codex(`~/.codex/hooks.json` pre_tool_use)에는 아직 미연결 — 형식 확인 후 다음에.
+  백업: `~/.brain-backups/2026-10-18/stage3-autocheck/`(settings.json, doctor.sh, session-context.sh).
+- **이유**: 매 세션 doctor를 사람이 돌리지 않아 불일치(명령·스킬 미설치, 설정 어긋남)를 늦게 알았다. 큰 파일·산출물이 한 번 커밋되면 히스토리에서 지우기 어렵다(되돌리기 어려운 작업).
+  검증: 시험 저장소에서 통과·차단 13가지 경우(작은 파일, 커밋 아님, 5MB, -C, cd, 우회, node_modules, 새 파일 310개, -am/-a -m/--all, --amend, 공백 파일명) 기대대로, 실제 세션에서 차단·통과 확인. `sh -n`·doctor.sh 오류 없음.
+- **대안**: 전역 git `core.hooksPath` → 사람 커밋까지 막고 저장소별 husky 등 기존 hook을 무력화해서 기각. Claude·Codex 동시 연결 → Codex 훅 형식·세션 시험이 더 필요해 Claude 먼저. doctor 전체 출력 주입 → 시작 맥락 80줄 기준 초과로 WARN 줄만.
+- **기록**: [[Projects/brain-harness/Overview]] 3단계, 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]

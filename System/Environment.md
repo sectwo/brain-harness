@@ -27,8 +27,10 @@ tags: [system, environment]
 ## Claude Code 전역 설정 (`~/.claude/settings.json`)
 - `model: opusplan` — 플랜 모드는 Opus, 실행은 Sonnet (→ [[System/Rules#5. 모델 선택]])
 - `statusLine` — `~/Brain/System/scripts/statusline.sh`: 모델, 컨텍스트 %, 5시간·7일 사용량 표시 + `~/.claude/state/usage.json` 기록
-- `hooks.SessionStart` — `session-context.sh`: L1 요약 + 프로젝트 맥락 주입
+- `hooks.SessionStart` — `session-context.sh`: L1 요약 + 프로젝트 맥락 주입 (+ `doctor.sh --quiet`의 WARN 줄)
 - `hooks.UserPromptSubmit` — `usage-check.sh`: 사용량 80% 이상이면 경고 주입
+- `hooks.PreToolUse`(matcher `Bash`) — `precommit-check.sh`: 에이전트의 `git commit` 직전 5MB 넘는 파일·빌드 산출물 폴더·새 파일 300개 초과면 차단.
+  명령 실행 **전** 상태를 보므로 `git reset … && git commit`처럼 한 명령에서 빼면 여전히 막힌다(나눠서 실행). 사람 확인 후 우회: 명령 앞 `BRAIN_PRECOMMIT_OK=1`. Codex에는 아직 미연결
 - `permissions.additionalDirectories` — `~/Brain`
 - `enabledPlugins."ecc@ecc"`, `extraKnownMarketplaces.ecc` — ECC 플러그인 설치 출처 (ref `v2.2.3` 고정)
 - `skipDangerousModePermissionPrompt: true`, `hooks.SessionStart`에 Orca가 추가한 항목 하나 더 있음 —
@@ -93,7 +95,8 @@ tags: [system, environment]
 - `brain-harness` 저장소 동기화는 `/brain-sync` 명령으로 사람이 원할 때만 한다 (자동 pull 없음, push는 별도 승인).
   → [[System/Rules#2. 기억 저장소 (옵시디언)]]
 - `~/Brain/System/scripts/doctor.sh`: 옵시디언 vault 등록, Headroom 프록시, Orca `agentCmdOverrides`/`agentDefaultArgs`,
-  git/gh 상태, 명령어 동기화, ECC 훅 id를 한 번에 점검한다. 아무것도 고치지 않고 확인만 한다.
+  git/gh 상태, 명령어·스킬 동기화, ECC 훅 id를 한 번에 점검한다. 아무것도 고치지 않고 확인만 한다.
+  세션 시작 때 `--quiet`(git fetch 생략)로 자동 실행되어 WARN 줄이 시작 맥락에 나온다.
 
 ## 매일 쓰는 흐름
 1. `headroom doctor`로 프록시 확인 (launchd가 상시 띄워 두므로 보통은 확인만 하면 됨)
