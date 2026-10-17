@@ -291,3 +291,14 @@ tags: [system, decisions]
   계기: 외부 저장소 3종(OmniRoute, claude-mem, one-skill-to-rule-them-all) 검토 — Sonnet 하위 에이전트 3개의 읽기 전용 분석. claude-mem 시험 설치 여부는 사용자 결정 사항.
 - **대안**: 방침을 크게 풀고 바로 도입 → 기억 분열·공급망 위험이 커서 기각. 방침 유지·이번 도구만 예외 → 예외가 쌓여 기준이 흐려져 기각. 에이전트가 확인 없이 실험 시작 → 모르는 사이 도구가 늘어 기각.
 - **기록**: 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
+
+## 2026-10-18 — 설치 단계(bootstrap.sh)·README 설명서와 사용자 가이드 분리·구성도 갱신
+- **결정** (사용자 결정, 범위 "둘 다, 단계로" — 이번은 내 환경용만): 새 Mac·재설치용 `System/scripts/bootstrap.sh`를 추가했다. `--check`는 확인만 하고, 실행은
+  최소조건 확인 → 백업(`~/.brain-backups/<날짜>/bootstrap/`) → `~/.claude/CLAUDE.md`·`~/.codex/AGENTS.md`에 Rules 연결 → `System/Templates/claude-settings.harness.json` 조각을
+  `settings.json`에 jq 병합(기존 값 보존, 훅 중복 없음) → `install-commands.sh` → `doctor.sh` 순서다.
+  최소조건: 필수 macOS·git·jq·Claude Code / 권장 gh·Obsidian / 선택 Codex·Orca·Headroom·ECC·sqlite3. `doctor.sh`에 필수 도구 점검을 추가했다.
+  README는 왜·설계 원칙·mermaid 흐름도 3개·발전 방향을 담은 설명서로 바꾸고, 사용법은 `docs/guide.md`, 설치는 `docs/setup.md`로 분리했다.
+  구성도(`System/diagrams/`)는 기준일 2026-10-18로 갱신하고 설치·자동 점검·실험 영역을 추가했다. 공개용 템플릿 분리는 [[Projects/brain-harness/Overview]] 백로그.
+- **이유**: settings.json의 하네스 조각(훅·상태줄 등)이 문서 설명뿐이라 새 환경에서 재현할 수단이 없었다. README가 가이드와 설명을 섞어 낡은 내용(시작 맥락 순서, step-choice, 6관점)이 생겼다.
+- **대안**: 공개 템플릿까지 이번에 분리 → 민감 정보 점검이 필요해 보류. settings.json 전체를 버전 관리 → Orca가 직접 고쳐 충돌하므로 기각(조각 병합만).
+- **참고**: 이번 push는 사용자가 교차 리뷰 전 선 push를 1회 예외로 승인한 것 — 규칙 변경 아님. 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-심화-claude]]

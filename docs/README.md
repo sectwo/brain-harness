@@ -34,6 +34,8 @@ GitHub에서 처음 보는 사람은 이 페이지에서 시작하면 된다. �
 **정리 문서 (`docs/`)**
 - [stage2-record-structure.md](./stage2-record-structure.md) — 로드맵 2단계 설계안: 기록 구조 단순화(문서별 역할·상한, 템플릿 4종,
   세션 시작 색인, 링크 규칙, 기존 문서 정리 계획)
+- [guide.md](./guide.md) — 사용자 가이드: 최소조건, 빠른 시작, 하루 작업 흐름, 명령·스킬, 기록 규칙, 자동 점검, 문제 해결
+- [setup.md](./setup.md) — 설치·설정 가이드(`bootstrap.sh` 사용법)
 
 **L2 프로젝트 — intratnm 홈페이지 (`Projects/intratnm/`)**
 - [Handoff.md](../Projects/intratnm/Handoff.md) — 현재 상태와 다음 할 일 (`/handoff`로만 갱신)

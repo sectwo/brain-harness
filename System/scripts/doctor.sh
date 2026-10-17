@@ -15,6 +15,17 @@ info() { echo "  --   $1"; }
 echo "# 브레인 하네스 점검 ($(date '+%Y-%m-%d %H:%M'))"
 echo
 
+echo "## 필수 도구 (bootstrap.sh 최소조건)"
+# jq가 없으면 훅 4개가 조용히 꺼지므로 가장 먼저 본다.
+for tool in git jq claude; do
+  if command -v "$tool" >/dev/null 2>&1; then
+    ok "$tool 설치됨"
+  else
+    warn "$tool 없음 — 설치 필요 (docs/setup.md 최소조건 참고)"
+  fi
+done
+echo
+
 echo "## 옵시디언 vault 등록"
 OBS_JSON="$HOME/Library/Application Support/obsidian/obsidian.json"
 if [ -f "$OBS_JSON" ] && command -v jq >/dev/null 2>&1; then

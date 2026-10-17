@@ -2,66 +2,156 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "브레인 하네스 구성도 (2026-10-17)",
+    "title": "브레인 하네스 구성도 (2026-10-18)",
+    "subtitle": "설치 → 일하기 → 자동 점검 → 기억 저장소, 실험 트랙까지 한 장에",
     "output": "brain-harness.html",
     "quality_profile": "showcase",
-    "locale": "ko"
+    "locale": "ko",
+    "legend": {
+      "mode": "all",
+      "entries": {
+        "external": {
+          "label": "사람·외부 서비스·단계"
+        },
+        "frontend": {
+          "label": "작업 도구 (Orca)"
+        },
+        "backend": {
+          "label": "에이전트·스크립트·명령"
+        },
+        "database": {
+          "label": "기록·설정 (문서·파일)"
+        },
+        "cloud": {
+          "label": "저장소·원격 (GitHub)"
+        },
+        "security": {
+          "label": "점검·차단·압축 안전장치"
+        },
+        "messagebus": {
+          "visible": false
+        }
+      }
+    },
+    "views": [
+      {
+        "id": "daily",
+        "label": "일하는 흐름",
+        "focus": [
+          "user",
+          "orca",
+          "claude",
+          "codex",
+          "repo",
+          "github"
+        ],
+        "note": "사람 지시 → worktree → Claude 구현 → Codex 교차 리뷰 → push는 승인 후"
+      },
+      {
+        "id": "install",
+        "label": "처음 설치",
+        "focus": [
+          "clone",
+          "bootstrap",
+          "frag",
+          "instcmd",
+          "doctor"
+        ],
+        "note": "clone 후 bootstrap.sh --check로 확인하고 적용. 이 두 파일은 작성 중"
+      },
+      {
+        "id": "check",
+        "label": "자동 점검",
+        "focus": [
+          "sessctx",
+          "precommit",
+          "statusline",
+          "usagejson",
+          "usagecheck"
+        ],
+        "note": "훅이 세션 시작·커밋·프롬프트마다 알아서 점검하고 경고"
+      },
+      {
+        "id": "memory",
+        "label": "기억 계층",
+        "focus": [
+          "l1",
+          "l2",
+          "l3",
+          "handoff",
+          "commands"
+        ],
+        "note": "위에서 아래로 상속, 아래에서 위로는 /handoff 후 사람이 승인한 것만 승격"
+      },
+      {
+        "id": "exp",
+        "label": "실험 트랙",
+        "focus": [
+          "mem",
+          "prune",
+          "observer",
+          "obsws",
+          "review"
+        ],
+        "note": "brain-harness 안에서만 시험. 끝나면 채택·각색·기각을 기록"
+      }
+    ]
   },
   "components": [
     {
       "id": "user",
       "type": "external",
       "label": "사람 (사용자)",
-      "sublabel": "계획 승인 · push 승인",
+      "sublabel": "계획·push는 사람이 승인",
       "pos": [
         40,
         40
       ],
       "size": [
-        140,
-        60
+        190,
+        64
       ]
     },
     {
       "id": "orca",
       "type": "frontend",
       "label": "Orca",
-      "sublabel": "기능당 worktree 1개",
+      "sublabel": "기능 하나당 작업 폴더 하나",
       "pos": [
-        250,
+        260,
         40
       ],
       "size": [
-        140,
-        60
+        190,
+        64
       ]
     },
     {
       "id": "claude",
       "type": "backend",
       "label": "Claude Code",
-      "sublabel": "Opus 5.5 · 기록은 Fable",
+      "sublabel": "주 에이전트 · 기록은 Fable",
       "pos": [
-        470,
+        480,
         40
       ],
       "size": [
-        160,
-        60
+        190,
+        64
       ]
     },
     {
       "id": "headroom",
       "type": "security",
       "label": "Headroom 프록시",
-      "sublabel": "localhost:8787 압축",
+      "sublabel": "요청 압축 · localhost:8787",
       "pos": [
-        720,
+        700,
         40
       ],
       "size": [
-        160,
-        60
+        190,
+        64
       ]
     },
     {
@@ -70,86 +160,305 @@
       "label": "Anthropic API",
       "sublabel": "모델 호출",
       "pos": [
-        960,
+        920,
         40
       ],
       "size": [
-        140,
-        60
+        190,
+        64
       ]
     },
     {
       "id": "codex",
       "type": "backend",
       "label": "Codex",
-      "sublabel": "교차 리뷰 · read-only",
+      "sublabel": "다른 쪽이 만든 diff를 리뷰",
       "pos": [
-        470,
-        200
+        480,
+        190
       ],
       "size": [
-        160,
-        60
-      ]
+        190,
+        64
+      ],
+      "tag": "read-only"
     },
     {
       "id": "repo",
       "type": "cloud",
-      "label": "intra-tnm 저장소",
-      "sublabel": "Next.js 홈페이지 코드",
+      "label": "프로젝트 저장소",
+      "sublabel": "예: intra-tnm 홈페이지 코드",
       "pos": [
-        720,
-        200
+        700,
+        190
       ],
       "size": [
-        160,
-        60
+        190,
+        64
       ]
     },
     {
       "id": "github",
       "type": "cloud",
       "label": "GitHub",
-      "sublabel": "sectwo · private 저장소 2개",
+      "sublabel": "private 저장소 2개",
       "pos": [
-        960,
-        200
+        920,
+        190
       ],
       "size": [
-        160,
-        60
+        190,
+        64
       ],
       "tag": "push는 매번 승인"
+    },
+    {
+      "id": "clone",
+      "type": "external",
+      "label": "1. git clone ~/Brain",
+      "sublabel": "브레인 저장소를 내려받기",
+      "pos": [
+        40,
+        370
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "처음 한 번"
+    },
+    {
+      "id": "bootstrap",
+      "type": "backend",
+      "label": "2. bootstrap.sh",
+      "sublabel": "--check로 먼저 확인, 그 뒤 적용",
+      "pos": [
+        260,
+        370
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "frag",
+      "type": "database",
+      "label": "settings 조각 병합",
+      "sublabel": "claude-settings.harness.json",
+      "pos": [
+        480,
+        370
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "instcmd",
+      "type": "backend",
+      "label": "install-commands.sh",
+      "sublabel": "명령·스킬을 ~/.claude로 복사",
+      "pos": [
+        700,
+        370
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "doctor",
+      "type": "security",
+      "label": "doctor.sh",
+      "sublabel": "설치가 맞게 됐는지 확인",
+      "pos": [
+        920,
+        370
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "sessctx",
+      "type": "backend",
+      "label": "session-context.sh",
+      "sublabel": "세션 시작 때 맥락+경고 주입",
+      "pos": [
+        40,
+        540
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "SessionStart"
+    },
+    {
+      "id": "precommit",
+      "type": "security",
+      "label": "precommit-check.sh",
+      "sublabel": "큰 파일·산출물 커밋을 막음",
+      "pos": [
+        260,
+        540
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "PreToolUse"
+    },
+    {
+      "id": "statusline",
+      "type": "backend",
+      "label": "statusline.sh",
+      "sublabel": "상태줄에 모델·사용량 표시",
+      "pos": [
+        480,
+        540
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "usagejson",
+      "type": "database",
+      "label": "usage.json",
+      "sublabel": "5시간·7일 사용량 기록",
+      "pos": [
+        700,
+        540
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "~/.claude/state"
+    },
+    {
+      "id": "usagecheck",
+      "type": "security",
+      "label": "usage-check.sh",
+      "sublabel": "사용량 80% 넘으면 경고",
+      "pos": [
+        920,
+        540
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "UserPromptSubmit"
+    },
+    {
+      "id": "mem",
+      "type": "backend",
+      "label": "claude-mem 해마",
+      "sublabel": "임시 일화 기억 · v14.0.1",
+      "pos": [
+        40,
+        710
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "실험 ①"
+    },
+    {
+      "id": "prune",
+      "type": "backend",
+      "label": "hippocampus-prune.sh",
+      "sublabel": "30일 지난 기억을 수동으로 정리",
+      "pos": [
+        260,
+        710
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "수동 실행"
+    },
+    {
+      "id": "observer",
+      "type": "backend",
+      "label": "task-observer",
+      "sublabel": "작업 중 개선점을 기록하는 스킬",
+      "pos": [
+        480,
+        710
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "실험 ②"
+    },
+    {
+      "id": "obsws",
+      "type": "database",
+      "label": "관찰 작업 폴더",
+      "sublabel": "~/.brain-experiments/task-observer",
+      "pos": [
+        700,
+        710
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "review",
+      "type": "external",
+      "label": "첫 리뷰",
+      "sublabel": "세션 5회 또는 1주 → 사람이 판정",
+      "pos": [
+        920,
+        710
+      ],
+      "size": [
+        190,
+        64
+      ]
     },
     {
       "id": "scripts",
       "type": "backend",
       "label": "L1 스크립트",
-      "sublabel": "session-context · usage-check",
+      "sublabel": "훅·상태줄·점검 도구 모음",
       "pos": [
         40,
-        380
+        890
       ],
       "size": [
-        170,
+        190,
         64
       ],
-      "tag": "훅·상태줄"
+      "tag": "System/scripts"
     },
     {
       "id": "commands",
       "type": "backend",
-      "label": "명령 원본",
-      "sublabel": "handoff · cross-review",
+      "label": "명령·스킬 원본",
+      "sublabel": "handoff · cross-review 등",
       "pos": [
-        250,
-        380
+        260,
+        890
       ],
       "size": [
-        170,
+        190,
         64
       ],
-      "tag": "install-commands.sh"
+      "tag": "System/commands"
     },
     {
       "id": "l1",
@@ -157,11 +466,11 @@
       "label": "L1 System/",
       "sublabel": "Rules · Decisions · Knowledge",
       "pos": [
-        470,
-        380
+        480,
+        890
       ],
       "size": [
-        170,
+        190,
         64
       ],
       "tag": "PC 전체 공통"
@@ -169,14 +478,14 @@
     {
       "id": "l2",
       "type": "database",
-      "label": "L2 Projects/intratnm",
+      "label": "L2 Projects/<이름>",
       "sublabel": "Overview · Handoff · Decisions",
       "pos": [
-        720,
-        380
+        700,
+        890
       ],
       "size": [
-        180,
+        190,
         64
       ],
       "tag": "프로젝트 고유"
@@ -185,19 +494,67 @@
       "id": "l3",
       "type": "database",
       "label": "L3 Sessions · Agents",
-      "sublabel": "에이전트별 세션 로그",
+      "sublabel": "세션 로그 · 에이전트 특이점",
       "pos": [
-        960,
-        380
+        920,
+        890
       ],
       "size": [
-        170,
+        190,
         64
       ],
       "tag": "자기 파일만"
+    },
+    {
+      "id": "handoff",
+      "type": "backend",
+      "label": "/handoff",
+      "sublabel": "로그를 Handoff로 정리·승격 제안",
+      "pos": [
+        700,
+        1050
+      ],
+      "size": [
+        190,
+        64
+      ],
+      "tag": "Fable"
     }
   ],
   "boundaries": [
+    {
+      "kind": "region",
+      "label": "처음 설치 (새 PC에서 한 번)",
+      "wraps": [
+        "clone",
+        "bootstrap",
+        "frag",
+        "instcmd",
+        "doctor"
+      ]
+    },
+    {
+      "kind": "security-group",
+      "label": "자동 점검 (사람이 신경 쓰지 않아도 도는 안전장치)",
+      "wraps": [
+        "sessctx",
+        "precommit",
+        "statusline",
+        "usagejson",
+        "usagecheck"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "실험 트랙 (brain-harness 범위만, 격리)",
+      "wraps": [
+        "mem",
+        "prune",
+        "observer",
+        "obsws",
+        "review"
+      ]
+    },
     {
       "kind": "region",
       "label": "옵시디언 vault ~/Brain (git, 기억의 기준)",
@@ -206,7 +563,8 @@
         "commands",
         "l1",
         "l2",
-        "l3"
+        "l3",
+        "handoff"
       ]
     }
   ],
@@ -232,7 +590,7 @@
       "label": "API 요청"
     },
     {
-      "id": "headroom-api",
+      "id": "headroom-anthropic",
       "from": "headroom",
       "to": "anthropic",
       "label": "압축 후 전달"
@@ -251,16 +609,76 @@
       "label": "diff 리뷰"
     },
     {
-      "id": "scripts-claude",
-      "from": "scripts",
-      "to": "claude",
-      "label": "SessionStart 맥락 주입"
+      "id": "claude-repo",
+      "from": "claude",
+      "to": "repo",
+      "label": "구현·커밋"
+    },
+    {
+      "id": "repo-github",
+      "from": "repo",
+      "to": "github",
+      "label": "git push",
+      "variant": "security"
+    },
+    {
+      "id": "clone-bootstrap",
+      "from": "clone",
+      "to": "bootstrap"
+    },
+    {
+      "id": "bootstrap-frag",
+      "from": "bootstrap",
+      "to": "frag",
+      "label": "조각 병합"
+    },
+    {
+      "id": "frag-instcmd",
+      "from": "frag",
+      "to": "instcmd",
+      "label": "다음 단계"
+    },
+    {
+      "id": "instcmd-doctor",
+      "from": "instcmd",
+      "to": "doctor",
+      "label": "설치 후 점검"
+    },
+    {
+      "id": "statusline-usagejson",
+      "from": "statusline",
+      "to": "usagejson",
+      "label": "기록"
+    },
+    {
+      "id": "usagejson-usagecheck",
+      "from": "usagejson",
+      "to": "usagecheck",
+      "label": "읽음"
+    },
+    {
+      "id": "mem-prune",
+      "from": "mem",
+      "to": "prune",
+      "label": "30일 소멸"
+    },
+    {
+      "id": "observer-obsws",
+      "from": "observer",
+      "to": "obsws",
+      "label": "관찰 기록"
+    },
+    {
+      "id": "obsws-review",
+      "from": "obsws",
+      "to": "review",
+      "label": "쌓인 기록"
     },
     {
       "id": "commands-l1",
       "from": "commands",
       "to": "l1",
-      "label": "System/commands 원본"
+      "label": "원본 보관"
     },
     {
       "id": "l1-l2",
@@ -275,52 +693,76 @@
       "label": "상속"
     },
     {
-      "id": "l3-github",
+      "id": "l3-handoff",
       "from": "l3",
-      "to": "github",
-      "label": "vault push",
-      "variant": "security"
+      "to": "handoff",
+      "label": "세션 로그"
     },
     {
-      "id": "claude-repo",
-      "from": "claude",
-      "to": "repo",
-      "label": "구현·커밋"
+      "id": "handoff-l2",
+      "from": "handoff",
+      "to": "l2",
+      "label": "Handoff 갱신",
+      "variant": "emphasis"
     },
     {
-      "id": "repo-github",
-      "from": "repo",
-      "to": "github",
-      "label": "git push",
-      "variant": "security"
+      "id": "handoff-l1",
+      "from": "handoff",
+      "to": "l1",
+      "label": "L1 승격 후보 (사람 승인)",
+      "variant": "dashed"
+    },
+    {
+      "id": "scripts-claude",
+      "from": "scripts",
+      "to": "claude",
+      "label": "SessionStart 맥락 주입"
     }
   ],
   "cards": [
     {
       "dot": "cyan",
+      "title": "읽는 법",
+      "items": [
+        "위: 사람과 도구가 일하는 흐름",
+        "가운데: 설치 · 자동 점검 · 실험",
+        "아래: 기억 저장소 L1 > L2 > L3",
+        "점선은 선택 또는 사람 승인이 필요한 흐름"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "최소조건 (필수)",
+      "items": [
+        "macOS · git · jq · Claude Code"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "권장 / 선택",
+      "items": [
+        "권장: gh · Obsidian",
+        "선택: Codex · Orca · Headroom · ECC · sqlite3",
+        "sqlite3는 해마 정리(hippocampus-prune.sh)에 필요"
+      ]
+    },
+    {
+      "dot": "cyan",
       "title": "계층 (L3 > L2 > L1 우선)",
       "items": [
-        "L1 System/: 공통 규칙·환경·결정·지식 9개",
+        "L1 System/: PC 전체 공통 규칙·환경·결정·지식",
         "L2 Projects/<이름>/: 요구사항·Handoff·결정·지식",
         "L3 Sessions/·Agents/: 세션 로그와 에이전트 특이점",
         "아래에서 위로 승격은 사람이 승인한 것만"
       ]
     },
     {
-      "dot": "emerald",
-      "title": "작업 흐름",
-      "items": [
-        "계획 → 구현(worktree) → 교차 리뷰 → 품질 게이트 → 핸드오프",
-        "Claude 구현은 Codex가, Codex 구현은 Claude가 리뷰",
-        "리뷰 강도는 사람이 고름(건너뛰기·가벼움·표준·심층)"
-      ]
-    },
-    {
       "dot": "amber",
-      "title": "기록 방침",
+      "title": "작업 흐름·기록",
       "items": [
+        "계획 → 구현 → 교차 리뷰 → 품질 게이트 → 핸드오프",
+        "리뷰 강도는 사람이 고름(건너뛰기·가벼움·표준·심층)",
         "기억의 기준은 옵시디언 vault 하나",
-        "vault 기록·커밋은 Fable 하위 에이전트",
         "Handoff.md는 /handoff로만 갱신"
       ]
     },
@@ -329,8 +771,9 @@
       "title": "안전 규칙",
       "items": [
         "git push·L1 변경·되돌리기 어려운 작업은 사전 확인",
-        "회사 정보는 지어내지 않고 TODO(확인 필요)",
-        "실명 대신 역할명"
+        "커밋 전 큰 파일·산출물 자동 차단(우회는 사람 확인 후)",
+        "실험은 brain-harness 범위로만, 승인 없는 반영 금지",
+        "회사 정보는 지어내지 않고 TODO(확인 필요)"
       ]
     }
   ]

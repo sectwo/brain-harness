@@ -127,6 +127,7 @@ tags: [brain-harness, overview]
      커스터디 백오피스, 가장 중요한 지갑 관리 — 한 프로젝트.
   2. **DID 프로젝트**: 범위는 추후 논의 `TODO(확인 필요)`.
   - Claude 의견: 비밀키를 다루는 보안 최우선 분야 → 보안 강화 팩 선행(키·니모닉은 에이전트가 보지 않음, 보안 리뷰 심층 필수).
+- **공개용 템플릿 분리**: 개인 기록(Projects/·Sessions·이 PC 경로)을 뺀 System/ 틀과 빈 Projects로 남에게 배포. 민감 정보 점검 포함, 별도 worktree (사용자 결정 2026-10-18: 이번엔 내 환경용 설치 단계만).
 - **기능 확장 스킬** (site-qa, codex-review, brain-record, design-system 등): 프로젝트를 하며 필요할 때 만든다.
 
 ## 구조
