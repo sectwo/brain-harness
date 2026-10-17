@@ -41,3 +41,18 @@ tags: [brain-harness, decisions]
 - **대안**: Claude 추천 "가볍고 믿을 수 있게"(안정 우선) → 사용자가 확장 선택. 플러그인 포장 → 지금은 채택 안 함(나중 가능성).
   비용 상한 즉시 설정 → 수치 없이 정하면 근거가 없어 측정 뒤로. 스킬 먼저(옛 3단계) → 프로젝트를 하며 필요할 때 만들기로.
 - **기록**: 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-main-claude]]
+
+## 2026-10-18 — 외부 저장소 벤치마킹 6종: 채택·각색·보류
+- **결정** (사용자 결정, 선택 창으로 하나씩. 아직 적용 전 — 결정과 백로그만): 사용자가 공유한 저장소 6종(ECC, ui-ux-pro-max, karpathy-skills, ponytail, my-skills, firecrawl)을 Sonnet 하위 에이전트 3개가 분석했고 아래로 정했다.
+  ① **ECC**: 릴리스 2.2.3으로 갱신 + `.mcp.json`의 chrome-devtools MCP 버전 고정(upstream은 @1.10.1). main은 안 따른다. ② **ui-ux-pro-max**: 2.15로 갱신. (①②는 L1 변경 → [[System/Decisions#2026-10-18 — L1 플러그인 갱신 방침: ECC 2.2.3·chrome-devtools MCP 고정·ui-ux-pro-max 2.15]])
+  ③ **개발 원칙**(플러그인 설치 없이 각색): ponytail 우선순위 사다리(필요한가→이미 있나→표준 라이브러리→설치된 의존성) + `shortcut: <한계>, <업그레이드 시점>` 주석 규약 + karpathy 핵심 2줄(외과적 변경·단순함)을 개발 팩 AGENTS.md 틀의 상시 규칙으로. 출처(MIT) 표기.
+  ④ **/cross-review** 표준·심층 점검표에 ponytail-review/audit 6관점(버그·보안·부하·테스트·속도·비대함) 추가. 가벼움은 그대로.
+  ⑤ **규칙 등록·정기 정리**: ECC rules-distill(수집 후 판정)+config-gc(소프트 삭제·항목별 확인·로그) 틀을 각색한 vault 스킬 `rules-review`(대상 Rules.md, 정기 점검 때 선택 창으로 항목별 승인). `~/.claude` 정리는 config-gc 원본.
+  ⑥ **비용 기록**: ECC stop:cost-tracker 수집 그대로 + `System/scripts` 집계 스크립트(프로젝트별·세션별, 하네스 작업 비중; 세션별 최대값, 합산 금지). 표 열은 ponytail band 참고. 한계: 세션 단위.
+  ⑦ **지식 후보함**: ECC agent-self-evaluation 5축을 변형한 승격 가치 4축(다른 프로젝트에도 쓰이나·검증됐나·중복 없나·오래 유효한가) 점수, 정기 점검 때 점수순 제시. 자동 학습 훅은 계속 끔.
+  ⑧ **firecrawl**: 연구·설계 팩 `site-research` 스킬을 WebFetch+chrome-devtools로 먼저. 대량 수집·차단으로 막히면 firecrawl MCP(공식 서버 MIT)를 프로젝트 범위·버전 고정·키는 환경 변수·피드백 도구 끔으로 도입.
+  ⑨ **my-skills**: 설치·코드 복사 안 함(라이선스 없음). 아이디어 4개만 각색 — 세션 기록(jsonl) 분석(3·4단계 재료), 작업 후 변경 요약(개발 팩 CHANGELOG 한 줄), 프로젝트 시작 틀(intra-tnm 과정 기반 시작 체크리스트), 카드뉴스(콘텐츠·디자인 팩, 해당 프로젝트가 생길 때).
+  보류·건너뜀: living-docs-governance·knowledge-ops 건너뜀. skill-stocktake(스킬 늘면)·eval-harness·strategic-compact 보류. 6단계 전 검토: ecc security-scan(외부 npm)·safety-guard freeze 모드·security-review 체크리스트(보안 강화 팩).
+- **이유**: 3~5단계에 필요한 것(규칙 정리, 비용 집계, 후보함, 팩 규칙)은 이미 검증된 틀을 각색하면 빠르고, 플러그인·훅을 늘리면 공급망·비용 부담이 커진다. ponytail 자체 벤치마크는 재현하지 않았다.
+- **대안**: ECC main 추종 → 미공개 GateGuard 재작업·새 UserPromptSubmit 훅(250커밋) 검증 부담으로 기각. ponytail 플러그인 설치 → 훅 3종·웹훅 추가 대비 얻는 것은 규칙 몇 줄이라 각색으로. firecrawl 지금 도입 → 요금·보존 정책 미확인·도구 27개라 조건부로. my-skills 설치 → 라이선스 없음·빌드 산출물·개인 설정 커밋이라 기각.
+- **기록**: 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-main-claude]] (분석 원본은 세션 scratchpad 읽기 전용 클론)

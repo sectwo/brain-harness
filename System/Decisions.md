@@ -190,6 +190,15 @@ tags: [system, decisions]
 - **대안**: 스킬만 → Codex는 스킬을 모른다. 규칙+기억만 → 질문 형식이 매번 달라진다. 둘 다 기각.
 - **기록**: [[Projects/brain-harness/Sessions/2026-10-18-main-claude]]
 
+## 2026-10-18 — L1 플러그인 갱신 방침: ECC 2.2.3·chrome-devtools MCP 고정·ui-ux-pro-max 2.15
+- **결정** (사용자 결정, 적용은 아직): ECC는 설치된 2.2.2(e482e57)에서 **릴리스 2.2.3**으로만 올리고 main은 따르지 않는다.
+  설치된 `.mcp.json`이 `chrome-devtools-mcp@latest`를 npx로 받는 것을 **버전 고정**(upstream main 기준 @1.10.1)으로 바꾼다.
+  ui-ux-pro-max는 2.13.0(09170ee) → **2.15.0**. karpathy-skills 1.0.0은 upstream과 같아 그대로.
+  적용 전 필수: ① `~/.claude/plugins/` 설정·`installed_plugins.json` 백업 ② 새로 들어오는 훅·스크립트 공급망 점검(2026-10-01 설치 때와 같은 기준: 네트워크 호출·subprocess·eval·postinstall 유무) ③ 적용·검증 결과는 세션 로그에.
+- **이유**: 2.2.3은 이름·릴리스 워크플로 변경뿐이라 위험이 낮고, 고정 안 된 `@latest`는 실행마다 다른 코드를 받을 수 있다. ui-ux-pro-max 2.15는 버그 수정(아이콘 생성 SVG 손상 등) 포함, 훅·MCP 변경 없음.
+- **대안**: ECC main 추종 → 미공개 GateGuard 재작업·새 UserPromptSubmit 훅 등 250커밋 검증 부담으로 기각. 갱신 안 함 → `@latest` 공급망 위험이 남아 기각.
+- **기록**: [[Projects/brain-harness/Decisions#2026-10-18 — 외부 저장소 벤치마킹 6종: 채택·각색·보류]], 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-main-claude]]
+
 ## 2026-09-25 — intratnm에서 이관: 하네스 초기 결정 4건
 > 2026-10-18 로드맵 2단계에서 [[Projects/intratnm/Decisions]]의 2026-09-25 항목 4건을 본문 그대로 옮겼다 (하네스 결정이라 L1 소속).
 > 날짜는 원래 결정일. 본문의 "하네스를 L1/L2/L3 트리로 분리"는 이 파일의 "2026-09-25 — 하네스 트리 구조 (L1 → L2 → L3)"다.
