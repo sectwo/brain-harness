@@ -110,3 +110,28 @@ tags: [system, decisions]
 - **대안**: 구성도를 세션 임시 폴더에만 보관 → 세션이 끝나면 사라지고 공유가 안 돼 기각.
   archify를 전역 스킬·CLI로 설치 → L1 도구 추가라 별도 확인이 필요하고, 설치 없이 임시 clone으로 실행
   가능해 불필요하다고 판단해 보류.
+
+## 2026-10-17 — 로드맵 1단계: 비용·마찰 줄이기 (GateGuard 예외, 모델 배치, 세션 길이)
+- **결정** (사용자 승인한 "브레인 발전 로드맵 1단계" 중 적용분):
+  1. **GateGuard 예외** — `~/.claude/settings.json` env에 `GATEGUARD_EXEMPT_GLOBS`
+     (`/Users/isaac/Brain/**,/private/tmp/claude-501/**,/Users/isaac/.claude/projects/*/memory/**,/Users/isaac/orca/workspaces/**`)와
+     `GATEGUARD_BASH_ROUTINE_DISABLED=1`(세션 첫 Bash 사실 확인만 끔)을 둔다. 프로젝트 원본(master) 폴더 첫 수정 확인과
+     파괴적 명령 확인은 유지. 새 세션부터 적용. 백업 `~/.brain-backups/2026-10-17/claude-settings.json`.
+     현재값은 [[System/Knowledge/ECC-GateGuard]]에 기록.
+  2. **vault 기록 모델 배치** (`Rules.md` 5절) — 판단이 들어가는 기록(Decisions, `/handoff`의 Handoff, L1 변경,
+     중요한 설계)만 Fable 하위 에이전트, 사실을 받아 적는 기록(세션 로그, 단순 추가·정정)은 Sonnet 하위 에이전트.
+  3. **세션 길이** (`Rules.md` 5절) — 기능 하나(worktree 하나)를 master에 병합하면 `/handoff` 후 새 세션 시작이 기본.
+     비용 경고(훅)가 오면 에이전트가 먼저 세션 정리를 제안. 비용은 `costs.jsonl`의 세션별 최대값으로 판단(합산 금지).
+  4. [[System/Knowledge/Headroom-Output-Compression]]에 "정확한 출력이 필요한 확인은 명령을 짧게 나눠 실행" 항목 추가.
+- **이유**:
+  - 2026-10-03~17 세션에서 GateGuard가 50회 넘게 작업을 막았고 대부분 worktree·세션 임시 폴더·메모리 폴더 첫 수정이었다.
+    worktree 작업은 계획 승인 후 진행하고 교차 리뷰를 거치므로 첫 수정 확인이 중복.
+  - 비용 기준값: `~/.claude/metrics/costs.jsonl`은 줄마다 그 시점의 **세션 누적** `estimated_cost_usd`가 들어 있어
+    단순 합산하면 약 $14,000로 부풀려진다. 세션별 최대값 기준 이번 세션(`b05b868a`) Opus 약 $251, Sonnet 약 $52
+    (합 약 $303, API 가격 환산). 같은 시점 요금제 사용률 5시간 12%, 7일 2%(`~/.claude/state/usage.json`).
+    10-03부터 이어진 긴 세션이라 누적이 커졌고, 모든 vault 기록을 Fable로 돌리는 비용도 컸다.
+- **대안**:
+  - `ECC_GATEGUARD=off`로 전체 끄기 → 파괴적 명령 보호까지 사라져 기각.
+  - 모든 vault 기록을 계속 Fable → 비용 과다로 기각.
+  - 모든 기록을 Sonnet → 판단이 필요한 기록(Decisions·Handoff·L1)의 정확성 우려로 기각.
+- **효과 측정**: 다음 기능 하나 작업 후 같은 방식(`costs.jsonl` 세션별 최대값)으로 비교한다.
