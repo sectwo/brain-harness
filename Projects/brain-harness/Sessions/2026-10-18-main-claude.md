@@ -20,7 +20,7 @@ tags: [brain-harness, session]
 - /handoff(8/8)로 brain-harness Handoff 재작성. 뺀 내용 → 1단계 완료·프로젝트 분리·구성도 이력과 Codex writable_roots 해결은 [[Projects/brain-harness/Sessions/2026-10-17-main-claude]], 짧은 링크 모호성은 2단계 결정으로 해결
 - /handoff 뒤 플랫폼 방향 회의(선택 창 7문항): 기능 확장 우선·4종 프로젝트·자동 후보+정기 일괄 승인·종류별 팩·자동 점검+자율성 기준표+규칙 등록 절차·비용은 측정 먼저
   → 결정 [[Projects/brain-harness/Decisions#2026-10-18 — 플랫폼 방향 회의: 종류별 팩·지식 후보함·기반 우선 로드맵]]. 규칙 변경은 없음(3단계에서)
-- Fable 하위 에이전트가 기록: Overview(목적 비전, 3~6단계 재편, 백로그 — 블록체인 거래소 후보, 분할 수 TODO), Handoff 다음 할 일·관련 결정, Projects.md 상태
+- Fable 하위 에이전트가 기록: Overview(목적 비전, 3~6단계 재편, 백로그 — 거래소·커스터디·지갑 1개 + DID 1개 — 처음 기록 때 DID 누락, 사용자 확인 후 정정), Handoff 다음 할 일·관련 결정, Projects.md 상태
 ## 바꾼 파일
 - vault 안: 템플릿·스크립트·명령·Rules·Decisions·.gitignore — 위 커밋 참고
 - Projects/intratnm/Handoff.md — 91→57줄. 뺀 내용은 세션 로그·Knowledge·Decisions에 있음
