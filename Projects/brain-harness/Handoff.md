@@ -11,41 +11,39 @@ tags: [brain-harness, handoff]
 금지: 날짜·커밋 해시·"~했다" 이력, 리뷰 이력, 완료 항목 목록, 결정 본문(링크 3개 이내로만). -->
 
 ## 현재 상태
-- 로드맵 1·2단계 완료. 2단계(기록 구조 단순화)는 템플릿 4종, 전체 경로 위키링크, 세션 시작 색인(`session-context.sh`, Codex는 `--handoff`),
-  명령·Rules 갱신까지 동작하고 시작 맥락 길이 기준(80줄 이내)도 통과했다. 실측 수치는 세션 로그에 있다.
-- 로드맵은 3단계 플랫폼 기반 → 4단계 지식 축적 → 5단계 종류별 팩 → 6단계 두 번째 프로젝트. 벤치마킹으로 정한 즉시 작업 ①②(플러그인 갱신)는
-  끝났고, ③(`/cross-review` 6관점)과 3~5단계 항목은 아직이다. 단계별 항목·참고 저장소는 [[Projects/brain-harness/Overview]] 3~5단계.
-- ECC 2.2.3(마켓플레이스 ref 태그 고정)·chrome-devtools MCP 1.10.1·ui-ux-pro-max 2.15.0이 설치돼 있고 옛 캐시는 지웠다.
-  ui-ux-pro-max는 커밋 고정이 안 돼 **`claude plugin update` 한 번이면 main 최신으로 올라간다** — 갱신 전 공급망 점검 필수.
-- ECC 2.2.3 훅은 설정대로 동작한다: GateGuard 예외 경로(vault·worktree·임시·메모리)는 통과, 예외 밖 첫 수정·파괴적 Bash는 차단,
-  세션 첫 Bash 확인은 꺼짐, observe·evaluate-session 꺼짐. MCP 상태 훅은 플러그인 MCP 설정을 못 찾아 점검을 건너뛰기만 한다(무해).
-  설정값과 확인법은 [[System/Environment]] ECC 절, [[System/Knowledge/ECC-GateGuard]].
-- 스킬은 프로젝트를 하며 필요할 때 만든다(`step-choice`만 있음). 규칙 변경은 아직 없다.
-- Codex CLI는 ChatGPT.app 내장 codex-cli 링크로 동작한다. 앱 업데이트로 경로가 바뀌면 끊긴다 (복구법은 [[System/Environment]] Codex 행).
-- `doctor.sh`는 `~/.claude/skills` 동기화를 아직 점검하지 않는다.
-- 1단계(GateGuard 예외·모델 배치) 효과는 아직 측정하지 않았다.
-- `Agents/`·`Knowledge/`는 비어 있다. Codex 관련 스킬·내용은 사용자가 추후 추가 예정.
-- 저장소: `~/Brain` `main`은 origin과 같음. 이 worktree `sectwo/브레인-하네스-이어하기`에 `/handoff` 기록 커밋 1개가 main 미병합.
+- 로드맵 1·2단계 완료, 3단계(플랫폼 기반) 진행 중. 순서는 ① 자동 점검(완료) → ② 유지보수 체계 → ③ 비용 기록 → ④ 자율성 기준표 → ⑤ 규칙 등록 절차.
+  항목 하나당 worktree 하나. 세부 항목·참고 저장소는 [[Projects/brain-harness/Overview]] 3단계.
+- 자동 점검 동작 중: 세션 시작 때 `doctor.sh --quiet` 경고가 시작 맥락에 보이고(최대 3줄), Claude의 `git commit` 전에 `precommit-check.sh`가 큰 파일·산출물·대량 새 파일을 차단한다
+  (회귀 시험 `System/scripts/tests/precommit-check.test.sh`, 우회는 명령 앞 `BRAIN_PRECOMMIT_OK=1`). 스킬 동기화도 doctor가 본다. **Codex 커밋 차단은 아직 미연결.**
+- `/cross-review` 표준·심층은 6관점(버그·보안·부하·테스트·속도·비대함) 점검표로 본다. 가벼움은 그대로.
+- Rules 1절에 실험 트랙이 있다(격리 범위에서 시험, 시작 전 Decisions 기록, 끝나면 System/Decisions에 판정). 지금 실험 2개가 brain-harness 범위로만 켜져 있다.
+- 실험 ① claude-mem 해마: 이 저장소 `.claude/settings.json`(project scope)에 v14.0.1 고정, 텔레메트리 끔. 30일 소멸은 `System/scripts/hippocampus-prune.sh`를 **수동 실행**한다(자체 TTL 없음).
+  `claude-mem:handoff` 스킬이 우리 `/handoff`와 이름이 겹친다.
+- 실험 ② task-observer(one-skill): 프로젝트 스킬 `.claude/skills/task-observer/` + SessionStart 훅 `.claude/hooks/task-observer-start.sh`, 작업 폴더 `~/.brain-experiments/task-observer/`.
+  설치한 세션에서는 활성화를 못 봤다 — **새 세션에서 확인 필요.** 제안 반영은 사람 승인만.
+- 두 실험의 첫 리뷰는 brain-harness 세션 5회 또는 1주 중 먼저 오는 때. 리뷰마다 계속·조정·중단을 사람이 정한다.
+- ui-ux-pro-max는 커밋 고정이 안 돼 **`claude plugin update` 한 번이면 main 최신으로 올라간다** — 갱신 전 공급망 점검 필수([[System/Knowledge/Plugin-Supply-Chain-Check]]).
+- Codex CLI는 ChatGPT.app 내장 codex-cli 링크로 동작한다. 앱 업데이트로 경로가 바뀌면 끊긴다(복구법은 [[System/Environment]] Codex 행).
+- 저장소: `~/Brain` `main`은 origin과 같음. worktree `sectwo/하네스-업데이트-자업`도 main과 같음(병합 완료).
 
 ## 진행 중인 worktree
 | worktree | 담당 | 작업 | 상태 |
 |---|---|---|---|
-| sectwo/브레인-하네스-이어하기 | Claude | `/handoff` 기록 (1·2번 완료 반영, L1 지식 보강) | 커밋 완료, main 병합·push 예정 (push는 사람 승인) |
+| sectwo/하네스-업데이트-자업 | Claude | 3단계 ① 자동 점검·실험 2개 설치 | main 병합됨 — 다음 작업은 새 worktree에서 |
 
 ## 다음 할 일
-1. [ ] (Claude) **즉시 작업 ③** `/cross-review` 원본(`System/commands/`) 표준·심층 점검표에 6관점(버그·보안·부하·테스트·속도·비대함) 추가 후
-   `install-commands.sh`. 가벼움은 그대로
-2. [ ] (Claude) 3단계 플랫폼 기반 계획 — 자동 점검(세션 시작 doctor 자동, 커밋 직전 큰 파일·미추적 폴더 차단, 스킬 동기화), 자율성 기준표,
-   `rules-review` 스킬(rules-distill+config-gc 각색), 비용 집계 스크립트(세션별 최대값·합산 금지) + 세션 기록 jsonl 분석.
-   계획을 보여 주고 확인 후 적용 (Overview 3단계)
-3. [ ] (Claude) 1단계 효과 측정 — 다음 기능 하나 작업 후 `costs.jsonl` 세션별 최대값으로 비교 (합산 금지)
-4. [ ] (Claude) `doctor.sh`에 `~/.claude/skills` 동기화 점검 추가 — 3단계 자동 점검의 일부로 흡수
-5. [ ] (사람) Codex 관련 스킬·내용 추가 (추후 예정). 백로그 DID 프로젝트 범위는 시작 전에 논의. firecrawl 요금·보존 정책은 도입 전 확인
+1. [ ] (Claude) 새 세션에서 두 실험 활성화 확인 — task-observer 시작 프로토콜 출력·관찰 폴더 생성, claude-mem worker 동작·관찰 기록, 시작 맥락 80줄 이내 유지
+2. [ ] (Claude) 3단계 ② 유지보수 체계 — `System/Upstreams.md`·`upstream-check.sh`·정기 점검 고정 순서. 새 worktree, 계획 확인 후 적용
+3. [ ] (Claude) 실험 첫 리뷰(세션 5회 또는 1주 중 먼저) — 해마: 관찰 수·사용량·jsonl grep 대비 검색 품질·비밀 패턴 0건 /
+   task-observer: 세션당 추가 토큰·관찰 수·승인된 제안 수. 결과로 계속·조정·중단을 사람에게 묻는다
+4. [ ] (Claude) Codex `~/.codex/hooks.json` pre_tool_use에 `precommit-check.sh` 연결 — 훅 형식 확인 후
+5. [ ] (Claude) 3단계 ③ 비용 기록 — 집계 스크립트(프로젝트별·세션별 최대값, 합산 금지) + 세션 jsonl 분석. 1단계 효과 측정은 여기에 흡수
+6. [ ] (사람) OmniRoute 보류 추천에 대한 결정. Codex 관련 스킬·내용 추가(추후). 백로그 DID 범위는 시작 전 논의, firecrawl 요금·보존 정책은 도입 전 확인
 
 ## 막힌 점 / 확인 필요
-- 없음
+- OmniRoute: 에이전트는 보류를 추천했고 사용자 결정은 아직 없다(다음 할 일 6)
 
 ## 관련 결정
-- [[System/Decisions#2026-10-18 — ECC 2.2.3 적용: 마켓플레이스 ref 태그 고정]] — ref 태그 고정 방법과 갱신 절차
-- [[System/Decisions#2026-10-18 — ui-ux-pro-max 2.15.0 적용: main 커밋, 태그 고정 불가]] — 커밋 고정 불가, 다음 갱신 전 점검 조건
-- [[Projects/brain-harness/Decisions#2026-10-18 — 외부 저장소 벤치마킹 6종: 채택·각색·보류]] — 즉시 작업 ③과 3~5단계 채택 항목의 근거
+- [[Projects/brain-harness/Decisions#2026-10-18 — 실험: claude-mem을 해마(임시 일화 기억)로 — brain-harness만, 2주]] — 설정값·성공 기준·되돌리기, 리뷰 기준 변경
+- [[Projects/brain-harness/Decisions#2026-10-18 — 실험: one-skill(task-observer) — brain-harness만, 세션 5회 또는 1주]] — 유즈케이스·측정 항목·되돌리기
+- [[System/Decisions#2026-10-18 — 실험 트랙 추가: 검증 전 도구를 격리해 시험, 기억·학습 방침 문구 정리]] — 실험 규칙과 판정 절차

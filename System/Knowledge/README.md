@@ -13,7 +13,9 @@ tags: [system, knowledge]
 | [[System/Knowledge/ECC-GateGuard]] | ECC GateGuard 훅이 작업을 멈출 때 대응, 현재 예외 설정, 훅 판정을 가짜 입력으로 확인하는 법 |
 | [[System/Knowledge/Headroom-Output-Compression]] | Headroom이 도구 출력을 압축할 때 원문 보는 법 |
 | [[System/Knowledge/Codex-Review-Output]] | `codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기 |
-| [[System/Knowledge/Claude-Plugin-Install]] | 세션 중 설치한 플러그인은 로드 안 됨 — 프로세스 완전 재시작 필요 |
+| [[System/Knowledge/Claude-Plugin-Install]] | 세션 중 설치한 플러그인은 로드 안 됨(완전 재시작 필요) + 한 프로젝트에만 태그 고정 설치(--scope project) |
 | [[System/Knowledge/Nextjs-Worktree]] | Next.js(Turbopack) worktree: `npm install`·`next typegen`·`agentRules: false` |
 | [[System/Knowledge/Chrome-DevTools-MCP]] | `fullPage`/`resize_page` 캡처 artifact — 실제 스크롤·실측으로 재확인 |
 | [[System/Knowledge/Plugin-Supply-Chain-Check]] | 서드파티 Claude Code 플러그인 설치 전 공급망 점검 체크리스트 |
+| [[System/Knowledge/Binary-Install-Without-Brew]] | brew가 CLT 버전 때문에 막힐 때 GitHub 공식 릴리스 바이너리를 체크섬·코드 서명 확인 후 ~/.local/bin에 두는 법 |
+| [[System/Knowledge/PreToolUse-Commit-Guard]] | Claude Code PreToolUse(Bash) 훅으로 에이전트 git commit을 막는 패턴과 함정 6가지 (precommit-check.sh) |

@@ -16,6 +16,7 @@ tags: [brain-harness, session]
 - 플러그인 project scope(`.claude/settings.json`, ref v14.0.1, env로 텔레메트리 끔), `~/.claude-mem/settings.json`·`telemetry.json`. 스킬 27개(claude-mem:handoff 이름 겹침), 상시 약 2,500토큰
 - `System/scripts/hippocampus-prune.sh`(30일, 일화 단위 CASCADE, 백업 3개) — 가짜 DB 시험 통과
 **5) 유지보수 질문** → 3단계 ②로 유지보수 체계(Upstreams.md·upstream-check.sh·정기 점검 순서) 당김, Overview 3단계 순서 갱신. 결정 [[Projects/brain-harness/Decisions#2026-10-18 — 3단계에 유지보수 체계를 ②로 추가: 원본 목록·upstream-check·정기 점검 순서]]
+**6) task-observer 적용** (사용자: 2주 대신 유즈케이스 확인 후 바로 적용·작업하며 보완) — v3.7.0 프로젝트 스킬·시작 훅·CLAUDE.md 블록, 작업 폴더 ~/.brain-experiments/task-observer, 리뷰 알림 분기 시험 통과. 해마 실험도 같은 방식(세션 5회 또는 1주 첫 리뷰)으로 변경. 결정 [[Projects/brain-harness/Decisions#2026-10-18 — 실험: one-skill(task-observer) — brain-harness만, 세션 5회 또는 1주]]
 ## 바꾼 파일
 - System/: commands/cross-review.md, Decisions.md, Rules.md, Environment.md, scripts/(doctor.sh, session-context.sh, precommit-check.sh·hippocampus-prune.sh·tests/precommit-check.test.sh 새)
 - Projects/brain-harness/Decisions.md·Overview.md, .claude/settings.json(새), 이 세션 로그
@@ -30,3 +31,4 @@ tags: [brain-harness, session]
 - 해마 실험 측정: 주간 관찰 수·사용량·검색 비교·비밀 패턴 0건 → 11-01 판정
 - 3단계 ② 유지보수 체계는 새 worktree에서. one-skill·OmniRoute 결정
 - Codex hooks.json에 precommit-check 연결, 이후 ③ 비용 집계. push는 사람 승인
+- 뺀 내용 → 남아 있는 곳: ECC 2.2.3 훅 동작·설정값 → [[System/Environment]] ECC 절·[[System/Knowledge/ECC-GateGuard]] / 1단계 효과 측정 → Handoff 다음 할 일 5(비용 기록)에 흡수 / `Agents/`·`Knowledge/` 비어 있음, 스킬은 필요할 때 생성 → [[Projects/brain-harness/Overview]] 3단계 재편
