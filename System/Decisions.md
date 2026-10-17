@@ -277,3 +277,17 @@ tags: [system, decisions]
   교차 리뷰(표준, Codex gpt-5.6-terra): git 전역 옵션 커밋 미감지(높음)·우회 문자열 위치(참고)를 고치고 회귀 시험 `System/scripts/tests/precommit-check.test.sh`(16건)를 추가했다. `commit -C HEAD` 오인도 수정.
 - **대안**: 전역 git `core.hooksPath` → 사람 커밋까지 막고 저장소별 husky 등 기존 hook을 무력화해서 기각. Claude·Codex 동시 연결 → Codex 훅 형식·세션 시험이 더 필요해 Claude 먼저. doctor 전체 출력 주입 → 시작 맥락 80줄 기준 초과로 WARN 줄만.
 - **기록**: [[Projects/brain-harness/Overview]] 3단계, 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
+
+## 2026-10-18 — 실험 트랙 추가: 검증 전 도구를 격리해 시험, 기억·학습 방침 문구 정리
+- **결정** (사용자 결정, 선택 창 2번 — 방향 "실험 트랙 추가", 문구 "이대로 적용"): `System/Rules.md`를 세 곳 고쳤다.
+  1절 정기 점검 검증 기준에 "또는 실험 트랙으로 직접 잰 결과"를 더하고, 1절에 **실험 트랙** 절을 신설했다 — 격리(별도 설정 폴더 `CLAUDE_CONFIG_DIR` 등 또는 L2 프로젝트 하나 범위),
+  시작 전 `Projects/brain-harness/Decisions.md`에 목적·기간(기본 2주)·성공 기준·되돌리기 기록, 실험에서도 막는 것(계정·약관 위반 위험 기능 — TLS 위장·구독 우회 등, 비밀 값 외부 전송, 승인 없는 push),
+  끝나면 [[System/Decisions]]에 채택·각색·기각, 기한이 지났는데 미결이면 되돌림.
+  2절: 다른 도구의 기억은 기준이 될 수 없고 옵시디언이 우선, 실험 중인 기억 도구는 격리 범위 안에서만. 6절: 자동 **수집**은 vault 안·실험 격리 범위에서 허용하고 **반영**은 사람 승인,
+  ECC continuous-learning instinct는 vault 밖에 쌓고 자동 반영하므로 계속 끈다.
+  백업: `~/.brain-backups/2026-10-18/Rules.before-experiment-track.md`.
+- **이유**: 사용자가 "브레인 하네스의 발전을 막는 방침이 있다"고 지적했다. "검증된 것만"은 직접 시험을 못 해 남의 벤치마크만 기다리게 되는 닭과 달걀 문제였다.
+  "기억은 옵시디언 하나·자동 학습 끔"의 원래 목적(기억 분열, 승인 없는 규칙화 방지)은 유지하되, 문구가 시험과 자동 수집까지 막았고 로드맵 4단계(후보 자동 수집)와도 어긋났다.
+  계기: 외부 저장소 3종(OmniRoute, claude-mem, one-skill-to-rule-them-all) 검토 — Sonnet 하위 에이전트 3개의 읽기 전용 분석. claude-mem 시험 설치 여부는 사용자 결정 사항.
+- **대안**: 방침을 크게 풀고 바로 도입 → 기억 분열·공급망 위험이 커서 기각. 방침 유지·이번 도구만 예외 → 예외가 쌓여 기준이 흐려져 기각. 에이전트가 확인 없이 실험 시작 → 모르는 사이 도구가 늘어 기각.
+- **기록**: 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
