@@ -3,7 +3,7 @@ project: brain-harness
 date: 2026-10-18
 agent: claude
 worktree: main
-summary: 로드맵 2단계(기록 구조 단순화) 적용 완료(7/8 새 세션 확인 남음), step-choice 스킬 추가, Codex 연결 복구, 두 저장소 push, /handoff
+summary: 로드맵 2단계 적용 완료(7/8 새 세션 확인 남음), step-choice 스킬, Codex 연결 복구, 두 저장소 push, /handoff, 플랫폼 방향 회의로 로드맵 3~6단계 재편
 tags: [brain-harness, session]
 ---
 # 세션 — 2026-10-18 / main / claude
@@ -11,15 +11,16 @@ tags: [brain-harness, session]
 - 2026-10-17 세션에서 이어 로드맵 2단계 진행. Fable 하위 에이전트가 [[docs/stage2-record-structure]] 작성(4945629)
 - Q1~Q6 모두 추천안(A) 채택, Q5는 이후 에이전트가 직접 설정하는 방식으로 변경
 - 결정 "로드맵 2단계: 기록 구조 단순화" → [[System/Decisions#2026-10-18 — 로드맵 2단계: 기록 구조 단순화]]
-- 커밋 16a9399 템플릿 4종(2/8), 377d36e summary·전체 경로 링크·newLinkFormat=absolute(3/8), 092235c session-context.sh 색인·--handoff, doctor.sh 링크 점검(4/8)
-- 적용 커밋 b3949ef 명령·Rules·Decisions 갱신, intratnm Handoff 91→57줄, 결정 4건 이관(5·6/8)
+- 커밋 16a9399 템플릿 4종(2/8), 377d36e summary·전체 경로 링크·newLinkFormat=absolute(3/8), 092235c session-context.sh 색인·--handoff, doctor.sh 링크 점검(4/8), b3949ef 명령·Rules·Decisions 갱신·intratnm Handoff 91→57줄·결정 4건 이관(5·6/8)
 - 질문 방식을 선택 창(AskUserQuestion)으로 바꿔 step-choice 스킬 생성(a6562e7), install-commands.sh 스킬 설치 지원 — 로드맵 3단계 첫 스킬
 - 결정 "단계별 객관식 질문 스킬(step-choice)과 설정 직접 적용" → [[System/Decisions#2026-10-18 — 단계별 객관식 질문 스킬(step-choice)과 설정 직접 적용]]
 - 3단계 첫 커밋에 미추적 폴더 Projects/intratnm/INTRA_TNM_홈페이지_자료(69MB)가 섞임 → git reset --mixed로 재작성해 제외, 이후 .gitignore에 추가(226f4e8)
-- Codex 링크 복구: ~/.local/bin/codex를 ChatGPT.app 내 codex-cli로 재연결(0.158.0-alpha.2.1)
+- Codex 링크 복구: ~/.local/bin/codex를 ChatGPT.app 내 codex-cli로 재연결(0.158.0-alpha.2.1); 옵시디언 재로드 후 app.json newLinkFormat=absolute 유지 확인
 - 사용자 선택(선택 창)으로 두 저장소 push: brain-harness main 01e551e..226f4e8, intra-tnm master 0d11f9d..d99e7a5 (둘 다 origin과 같음)
-- 옵시디언 다시 불러온 뒤 .obsidian/app.json newLinkFormat=absolute 유지 확인
 - /handoff(8/8)로 brain-harness Handoff 재작성. 뺀 내용 → 1단계 완료·프로젝트 분리·구성도 이력과 Codex writable_roots 해결은 [[Projects/brain-harness/Sessions/2026-10-17-main-claude]], 짧은 링크 모호성은 2단계 결정으로 해결
+- /handoff 뒤 플랫폼 방향 회의(선택 창 7문항): 기능 확장 우선·4종 프로젝트·자동 후보+정기 일괄 승인·종류별 팩·자동 점검+자율성 기준표+규칙 등록 절차·비용은 측정 먼저
+  → 결정 [[Projects/brain-harness/Decisions#2026-10-18 — 플랫폼 방향 회의: 종류별 팩·지식 후보함·기반 우선 로드맵]]. 규칙 변경은 없음(3단계에서)
+- Fable 하위 에이전트가 기록: Overview(목적 비전, 3~6단계 재편, 백로그 — 블록체인 거래소 후보, 분할 수 TODO), Handoff 다음 할 일·관련 결정, Projects.md 상태
 ## 바꾼 파일
 - vault 안: 템플릿·스크립트·명령·Rules·Decisions·.gitignore — 위 커밋 참고
 - Projects/intratnm/Handoff.md — 91→57줄. 뺀 내용은 세션 로그·Knowledge·Decisions에 있음
@@ -35,4 +36,4 @@ tags: [brain-harness, session]
 ## 다음 세션에
 - 새 세션(intra-tnm Claude·Codex)에서 시작 맥락 길이·색인 확인 (2단계 7/8)
 - 1단계 효과 측정(costs.jsonl 세션별 최대값); doctor.sh에 ~/.claude/skills 동기화 점검 추가(작은 후속)
-- 로드맵 3단계(스킬) 검토 — step-choice 다음 스킬
+- 로드맵 3단계(플랫폼 기반) 계획 — 자동 점검·자율성 기준표·규칙 등록 절차·비용 기록. 사람 확인 후 적용
