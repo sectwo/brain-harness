@@ -16,7 +16,7 @@ tags: [{{project}}, overview]
 - TODO(확인 필요)
 
 ## 기술 스택
-- 미정. 결정되면 [[Decisions]]에 기록 후 여기 요약
+- 미정. 결정되면 [[Projects/{{project}}/Decisions]]에 기록 후 여기 요약
 
 ## 저장소
 - 로컬: `{{repo}}`
