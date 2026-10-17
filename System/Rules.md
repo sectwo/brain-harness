@@ -31,6 +31,7 @@ L1  전역(Global)  ~/Brain/System/            시스템 구성, 환경 설정, 
 | L1 | `Templates/Project/` | 새 프로젝트용 vault 틀 (`/new-project`가 사용) |
 | L1 | `scripts/` | 공통 훅·상태줄·점검 스크립트 (`install-commands.sh`, `doctor.sh` 포함) |
 | L1 | `commands/` | 공통 명령 **원본** (`/handoff`, `/cross-review`, `/new-project`, `/brain-sync`). Claude 전용 |
+| L1 | `skills/` | 공통 스킬 원본 (`install-commands.sh`가 `~/.claude/skills/`로 복사). Claude 전용 |
 | L1 | `diagrams/` | 브레인 구성도(archify HTML + 원본 JSON) |
 | L2 | `Overview.md` | 요구사항, 기술 스택, 구조. 사람이 작성 |
 | L2 | `Decisions.md` | 프로젝트 결정 기록 |
@@ -93,16 +94,16 @@ vault 자체도 하나의 프로젝트 `brain-harness`(L2)다. `System/`은 하�
   (fast-forward만 허용, merge/rebase로 히스토리를 바꾸지 않는다).
 - **커밋은 자유롭게 한다.** 의미 있는 단위로 로컬 커밋을 남기는 것은 승인 없이 해도 된다.
 - **`git push`는 매번 사람이 명시적으로 승인한 뒤에만 한다.** `/brain-sync`도 push는 하지 않는다.
-- `/brain-sync`로 원격의 새 커밋을 받았고 그 안에 `System/commands/*.md` 변경이 있으면
-  `~/Brain/System/scripts/install-commands.sh`로 `~/.claude/commands/`에 반영한다 (아래 "명령 원본" 참고).
+- `/brain-sync`로 원격의 새 커밋을 받았고 그 안에 `System/commands/*.md`·`System/skills/` 변경이 있으면
+  `~/Brain/System/scripts/install-commands.sh`로 `~/.claude/commands/`·`~/.claude/skills/`에 반영한다 (아래 "명령 원본" 참고).
 
-**명령 원본과 설치**
-- `~/.claude/commands/*.md`는 Claude Code가 실제로 읽는 위치이지만 **버전 관리 대상이 아니다.**
-  진짜 원본은 `~/Brain/System/commands/*.md`(vault, git 추적됨)이고, `install-commands.sh`가
+**명령·스킬 원본과 설치**
+- `~/.claude/commands/*.md`와 `~/.claude/skills/<이름>/`은 Claude Code가 실제로 읽는 위치이지만 **버전 관리 대상이 아니다.**
+  진짜 원본은 `~/Brain/System/commands/*.md`·`~/Brain/System/skills/<이름>/`(vault, git 추적됨)이고, `install-commands.sh`가
   단순 복사로 반영한다 (심링크가 아닌 이유: Claude Code가 심링크된 명령 파일을 읽는지 검증 전이라
   실패 시 명령이 통째로 사라지는 위험을 피하기 위함).
-- 명령 내용을 고칠 때는 **`~/Brain/System/commands/`의 원본을 고치고** `install-commands.sh`를 실행한다.
-  `~/.claude/commands/`를 직접 고치면 다음 pull/install 때 덮어써진다.
+- 명령·스킬 내용을 고칠 때는 **`~/Brain/System/commands/`·`skills/`의 원본을 고치고** `install-commands.sh`를 실행한다.
+  `~/.claude/commands/`·`~/.claude/skills/`를 직접 고치면 다음 pull/install 때 덮어써진다.
 
 ## 3. 작업 워크플로우
 모든 기능은 아래 순서를 따른다. **Orca에서 기능 하나당 worktree 하나.**
@@ -173,3 +174,7 @@ vault 자체도 하나의 프로젝트 `brain-harness`(L2)다. `System/`은 하�
   **Codex는 L1을 직접 고치지 않고** 세션 로그 "다음 할 일"에 제안으로만 남긴다.
 - **유도리 있게 진행한다.** 절차를 과하게 격식화하거나 사소한 것마다 허락을 구하지 않는다.
   단 push·되돌리기 어려운 작업·L1 변경의 사전 확인(위 불릿)은 그대로 유지한다 (사용자, 2026-10-03).
+- **사람이 고를 것이 있으면 한 번에 하나씩 객관식으로 묻는다.** 선택지마다 쉬운 설명과 추천을 붙이고 직접 입력도 받는다.
+  Claude는 `step-choice` 스킬(방향키 선택 창), Codex는 같은 구조를 채팅 번호 선택지로 묻는다 (사용자, 2026-10-18).
+- **설정 변경은 에이전트가 직접 한다.** 사람이 꼭 해야 하는 이유(앱 재시작 등)가 있을 때만 알리고 진행한다 (사용자 선호, 2026-10-18).
+  L1 변경의 사전 확인(위 불릿)은 그대로다.

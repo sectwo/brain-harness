@@ -16,8 +16,8 @@ tags: [system, environment]
 ## 도구와 설정 위치
 | 도구 | 역할 | 설정 위치 |
 |---|---|---|
-| Claude Code | 에이전트 | 전역 `~/.claude/settings.json`, `~/.claude/CLAUDE.md`, `~/.claude/commands/`(설치된 복사본, 원본은 `~/Brain/System/commands/`) / 프로젝트 `.claude/settings.json` |
-| Codex CLI | 에이전트 | `~/.codex/config.toml`, `~/.codex/AGENTS.md`. `~/.local/bin/codex` → ChatGPT 앱 내장 바이너리 링크 |
+| Claude Code | 에이전트 | 전역 `~/.claude/settings.json`, `~/.claude/CLAUDE.md`, `~/.claude/commands/`·`~/.claude/skills/`(설치된 복사본, 원본은 `~/Brain/System/commands/`·`skills/`) / 프로젝트 `.claude/settings.json` |
+| Codex CLI | 에이전트 | `~/.codex/config.toml`, `~/.codex/AGENTS.md`. `~/.local/bin/codex` → `/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex` 링크 (ChatGPT 앱 내장, 2026-10-18 기준 codex-cli 0.158.0). ChatGPT 앱 업데이트로 경로가 바뀌면 링크가 끊긴다 — `find /Applications/ChatGPT.app -path '*codex-cli/bin/codex'`로 찾아 `ln -sfn`으로 다시 건다 (2026-10-18, 이전 경로 `Resources/codex`가 사라져 한 번 끊겼음) |
 | Orca | worktree·에이전트 실행 | `~/Library/Application Support/orca/profiles/local-default/orca-data.json` |
 | Orca가 띄우는 Codex | | `CODEX_HOME=~/Library/Application Support/orca/codex-runtime-home/home` (config.toml, AGENTS.md를 여기서 읽음) |
 | Headroom | 프록시 압축 | `headroom proxy` (기본 127.0.0.1:8787), 로그 `~/.headroom/logs/` |
@@ -85,8 +85,8 @@ tags: [system, environment]
 | 안 씀 | `santa-loop`, `council`, `architecture-decision-records`, `knowledge-ops` | 반복 리뷰 비용 / Decisions·옵시디언과 중복 |
 
 ## 명령어 설치와 하네스 점검
-- 명령 원본(`/handoff`, `/cross-review`, `/new-project`, `/brain-sync`)은 `~/Brain/System/commands/`에 있고,
-  `~/Brain/System/scripts/install-commands.sh`가 `~/.claude/commands/`로 단순 복사한다.
+- 명령 원본(`/handoff`, `/cross-review`, `/new-project`, `/brain-sync`)은 `~/Brain/System/commands/`에, 스킬 원본(`step-choice`)은
+  `~/Brain/System/skills/<이름>/`에 있고, `~/Brain/System/scripts/install-commands.sh`가 `~/.claude/commands/`·`~/.claude/skills/`로 단순 복사한다.
   원본을 고쳤으면 이 스크립트를 다시 실행해야 반영된다 (자동으로 안 됨).
 - `brain-harness` 저장소 동기화는 `/brain-sync` 명령으로 사람이 원할 때만 한다 (자동 pull 없음, push는 별도 승인).
   → [[System/Rules#2. 기억 저장소 (옵시디언)]]
