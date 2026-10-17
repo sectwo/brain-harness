@@ -17,6 +17,7 @@ tags: [brain-harness, session]
 - `System/scripts/hippocampus-prune.sh`(30일, 일화 단위 CASCADE, 백업 3개) — 가짜 DB 시험 통과
 **5) 유지보수 질문** → 3단계 ②로 유지보수 체계(Upstreams.md·upstream-check.sh·정기 점검 순서) 당김, Overview 3단계 순서 갱신. 결정 [[Projects/brain-harness/Decisions#2026-10-18 — 3단계에 유지보수 체계를 ②로 추가: 원본 목록·upstream-check·정기 점검 순서]]
 **6) task-observer 적용** (사용자: 2주 대신 유즈케이스 확인 후 바로 적용·작업하며 보완) — v3.7.0 프로젝트 스킬·시작 훅·CLAUDE.md 블록, 작업 폴더 ~/.brain-experiments/task-observer, 리뷰 알림 분기 시험 통과. 해마 실험도 같은 방식(세션 5회 또는 1주 첫 리뷰)으로 변경. 결정 [[Projects/brain-harness/Decisions#2026-10-18 — 실험: one-skill(task-observer) — brain-harness만, 세션 5회 또는 1주]]
+**7) OmniRoute 보류** (사용자 결정) → [[Projects/brain-harness/Decisions#2026-10-18 — OmniRoute 보류: 해결할 문제가 생기면 제한 조건으로 실험]]
 ## 바꾼 파일
 - System/: commands/cross-review.md, Decisions.md, Rules.md, Environment.md, scripts/(doctor.sh, session-context.sh, precommit-check.sh·hippocampus-prune.sh·tests/precommit-check.test.sh 새)
 - Projects/brain-harness/Decisions.md·Overview.md, .claude/settings.json(새), 이 세션 로그

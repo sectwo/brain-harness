@@ -38,10 +38,10 @@ tags: [brain-harness, handoff]
    task-observer: 세션당 추가 토큰·관찰 수·승인된 제안 수. 결과로 계속·조정·중단을 사람에게 묻는다
 4. [ ] (Claude) Codex `~/.codex/hooks.json` pre_tool_use에 `precommit-check.sh` 연결 — 훅 형식 확인 후
 5. [ ] (Claude) 3단계 ③ 비용 기록 — 집계 스크립트(프로젝트별·세션별 최대값, 합산 금지) + 세션 jsonl 분석. 1단계 효과 측정은 여기에 흡수
-6. [ ] (사람) OmniRoute 보류 추천에 대한 결정. Codex 관련 스킬·내용 추가(추후). 백로그 DID 범위는 시작 전 논의, firecrawl 요금·보존 정책은 도입 전 확인
+6. [ ] (사람) Codex 관련 스킬·내용 추가(추후). 백로그 DID 범위는 시작 전 논의, firecrawl 요금·보존 정책은 도입 전 확인
 
 ## 막힌 점 / 확인 필요
-- OmniRoute: 에이전트는 보류를 추천했고 사용자 결정은 아직 없다(다음 할 일 6)
+- 없음
 
 ## 관련 결정
 - [[Projects/brain-harness/Decisions#2026-10-18 — 실험: claude-mem을 해마(임시 일화 기억)로 — brain-harness만, 2주]] — 설정값·성공 기준·되돌리기, 리뷰 기준 변경
