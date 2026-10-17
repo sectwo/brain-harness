@@ -47,9 +47,11 @@ tags: [brain-harness, session]
 - 모델: L1·결정 기록은 Fable, 세션 로그는 Sonnet.
 
 ## 막힌 점 / 확인 필요
-- Codex `writable_roots`(`~/.codex/config.toml`)에는 intratnm 경로만 있어 brain-harness 경로 추가가 필요하다. 사람 확인 대기.
+- (해결) Codex `writable_roots`에 `/Users/isaac/Brain/Projects/brain-harness` 추가 — 사용자 승인. `~/.codex/config.toml`과
+  Orca `~/Library/Application Support/orca/codex-runtime-home/home/config.toml` 둘 다. TOML 파싱 확인.
+  백업 `~/.brain-backups/2026-10-17/{codex-config.toml,orca-codex-config.toml}-harness-split`.
+- 사용자: Codex 관련 스킬·내용은 추후 별도로 추가할 예정.
 
 ## 다음 할 일
-- Codex `writable_roots`에 brain-harness 경로 추가 여부 확인.
 - 짧은 위키링크 모호성 해결 (2단계).
 - vault push 여부 사람에게 확인.
