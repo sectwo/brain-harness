@@ -224,3 +224,18 @@ tags: [system, decisions]
 - **결정**: 구현 후 다른 에이전트가 교차 리뷰한다(Claude ↔ Codex). 리뷰 전에는 항상 사람에게 변경 규모와 추천 강도를 보여 주고 강도(건너뛰기/가벼움/표준/심층)를 고르게 한다. 실행은 `/cross-review`. 모델은 작업 성격에 맞춰 고른다(설계·심층 = 고성능, 구현·표준 = 균형, 단순·가벼움 = 빠른 모델).
 - **이유**: 요금제 안에서 토큰을 무리하지 않게 쓰면서, 큰 변경에만 비싼 리뷰를 쓰기 위함. 사람이 매번 강도를 정해 예상 밖 사용량을 막는다.
 - **대안**: 매번 고정 강도로 자동 리뷰 → 작은 변경에도 토큰 낭비. ECC `santa-loop`(두 리뷰어 모두 승인할 때까지 반복) → 반복 횟수가 커질 수 있어 기본으로는 쓰지 않음.
+
+## 2026-10-18 — ECC 2.2.3 적용: 마켓플레이스 ref 태그 고정
+- **결정** (사용자 승인, 적용 완료): ECC를 e482e57 → **v2.2.3(c05b2d6)**으로 올렸다 (캐시 `~/.claude/plugins/cache/ecc/ecc/2.2.3`, `installed_plugins.json` sha c05b2d6). chrome-devtools MCP는 v2.2.3의 `.mcp.json`이 이미 `chrome-devtools-mcp@1.10.1`로 고정이라 별도 수정 없음.
+  고정 방법: `~/.claude/settings.json`의 `extraKnownMarketplaces.ecc.source`에 `"ref": "v2.2.3"`을 넣고 `claude plugin marketplace add "https://github.com/affaan-m/ECC.git#v2.2.3"` → `claude plugin update ecc@ecc`.
+  ECC marketplace.json의 plugin source가 `./`라 **마켓플레이스 ref 고정 = 플러그인 고정**이고, 이후 update가 main(당시 v2.2.3보다 892커밋 앞)으로 흐르지 않는다. 다음 버전은 ref만 바꿔 같은 절차.
+  함정: settings의 `extraKnownMarketplaces` 선언과 `known_marketplaces.json` 출처가 다르면 `marketplace add`는 "declared" 오류로 거부되고, 선언만 바꾸면 `marketplace update ecc`는 "not found"가 된다 → **선언을 먼저 바꾸고 같은 출처(#ref)로 add**.
+  백업·되돌리기: `~/.brain-backups/2026-10-18/plugins-ecc/`(installed_plugins.json, known_marketplaces.json, settings.json, cache-ecc-2.2.2/) 복원. 적용은 새 세션부터.
+- **정정**: 위 방침 항목의 "설치된 2.2.2(e482e57)"·"2.2.3은 이름·릴리스 워크플로 변경뿐"은 틀렸다. e482e57은 v2.2.2 태그(c70874f)보다 이전 main 커밋이고, e482e57..v2.2.3은 908파일 약 +9만 줄(대부분 테스트·문서·opencode).
+  실제 로드되는 변경: hooks.json의 MCP 상태 점검 훅 matcher `.*`→`^mcp__`(PostToolUse·PostToolUseFailure, MCP 도구에만 동작), gateguard-fact-force.js·block-no-verify.js·config-protection.js 보강,
+  `scripts/hooks/lib/shell-scan.js` 신규, session-start.js는 URL 한 줄.
+- **이유**: 공급망 점검 통과 — 추가된 훅 코드에 네트워크·child_process·eval·new Function 없음, require는 crypto/fs/path와 내부 lib뿐, package.json postinstall 없음.
+  우리 설정(GATEGUARD_EXEMPT_GLOBS, GATEGUARD_BASH_ROUTINE_DISABLED, ECC_DISABLED_HOOKS의 pre:observe·stop:evaluate-session) 모두 v2.2.3에서 동작.
+  검증: `claude plugin details` → ecc 2.2.3, 훅 7종·MCP 1개. 새 `claude -p` 세션에서 chrome-devtools MCP 도구 로드 확인. doctor.sh 오류 없음(기존 Codex WARN 2개만).
+- **대안**: `claude plugin update`만 실행 → main 최신으로 올라가 기각. 마켓플레이스 제거 후 재등록 → 플러그인 제거 위험으로 기각. 캐시 수동 교체 → CLI 메타데이터와 어긋나 기각.
+- **기록**: [[System/Decisions#2026-10-18 — L1 플러그인 갱신 방침: ECC 2.2.3·chrome-devtools MCP 고정·ui-ux-pro-max 2.15]], 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-브레인하네스-설정-claude]]
