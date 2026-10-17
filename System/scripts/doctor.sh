@@ -96,6 +96,24 @@ else
 fi
 echo
 
+echo "## 위키링크 (vault 루트 기준 전체 경로 — Rules.md 2절 링크 규칙)"
+# 짧은 링크([[Decisions]], [[Knowledge/…]] 등)는 프로젝트가 둘 이상이면 어느 파일인지 모호하다.
+# 템플릿의 [[Projects/{{project}}/…]] 치환자는 전체 경로라 이 검사에 걸리지 않는다.
+if [ -d "$BRAIN/System" ] || [ -d "$BRAIN/Projects" ]; then
+  short_links=$(grep -rn --include='*.md' '\[\[\(Decisions\|Handoff\|Overview\|Knowledge/\|Sessions/\)' "$BRAIN/System" "$BRAIN/Projects" 2>/dev/null)
+  if [ -z "$short_links" ]; then
+    ok "짧은 위키링크 없음 (System, Projects)"
+  else
+    short_count=$(echo "$short_links" | wc -l | tr -d ' ')
+    short_files=$(echo "$short_links" | cut -d: -f1 | sort -u | wc -l | tr -d ' ')
+    warn "짧은 위키링크 ${short_count}건 / ${short_files}개 파일 — [[Projects/<이름>/…]] 또는 [[System/…]] 전체 경로로 바꾼다"
+    echo "$short_links" | cut -d: -f1 | sort | uniq -c | sort -rn | head -10 | awk '{printf "       %s (%s건)\n", $2, $1}' | sed "s#$BRAIN/##"
+  fi
+else
+  warn "$BRAIN/System 또는 Projects 없음"
+fi
+echo
+
 echo "## ECC 훅 설정"
 SETTINGS="$HOME/.claude/settings.json"
 if [ -f "$SETTINGS" ] && command -v jq >/dev/null 2>&1; then
