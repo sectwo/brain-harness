@@ -4,9 +4,19 @@ tags: [system, decisions]
 ---
 # Decisions — Level 1 (전역)
 
-> 모든 프로젝트에 영향을 주는 결정. 새 결정은 맨 아래에 추가한다. 형식: 날짜 — 제목 / 결정 / 이유 / 대안
-> 이 PC 하네스의 초기 결정(도구 구성, 기억 파일 쓰기 규칙, 세션 맥락 주입, 교차 리뷰)은
-> intratnm에서 먼저 정했다 → [[Projects/intratnm/Decisions]]
+> 모든 프로젝트에 영향을 주는 결정(규칙·설정 자체를 바꾸는 것). 프로젝트 안의 선택은 그 프로젝트의 `Decisions.md`에 쓴다.
+> 새 항목은 맨 아래에. 제목 형식 `## YYYY-MM-DD — 제목`은 링크 앵커라 **나중에 바꾸지 않는다**.
+> 항목은 15줄 이내. 적용 절차·백업 경로·바꾼 파일은 세션 로그에, 긴 근거는 Knowledge에 두고 링크한다.
+> 이 PC 하네스의 초기 결정(도구 구성, 기억 파일 쓰기 규칙, 세션 맥락 주입, 교차 리뷰)은 intratnm에서 먼저 정했다
+> → 맨 아래 "2026-09-25 — intratnm에서 이관: 하네스 초기 결정 4건" (2026-10-18에 옮김).
+
+<!-- 항목 틀 (복사해서 쓴다)
+## YYYY-MM-DD — 제목
+- **결정**: 무엇을 어떻게 하기로 했는가. 사용자 결정이면 "(사용자 결정)".
+- **이유**: 왜. 근거 수치가 길면 [[System/Knowledge/<주제>]] 링크.
+- **대안**: 검토한 다른 안과 기각 이유. 한 안에 한 줄.
+- **기록**: 세션 로그 [[Projects/<프로젝트>/Sessions/YYYY-MM-DD-<worktree>-<agent>]] (적용·백업·파일 목록은 거기)
+-->
 
 ## 2026-09-25 — 하네스 트리 구조 (L1 → L2 → L3)
 - **결정**: 하네스를 L1(PC 전체: 시스템 구성·환경·공통 규칙·공통 지식, `~/Brain/System`) → L2(프로젝트, `~/Brain/Projects/<이름>` + 저장소 AGENTS.md) → L3(에이전트·세션, `Agents/`, `Sessions/`) 트리로 나눈다. 아래 계층은 위를 상속하고, 충돌하면 가까운 계층이 우선한다. 공통 명령(`/handoff`, `/cross-review`, `/new-project`)과 훅·상태줄은 전역(`~/.claude`)에 두고 스크립트 원본은 `~/Brain/System/scripts`에 둔다. 프로젝트는 저장소 루트 `.harness-project`로 vault와 연결한다.
@@ -153,3 +163,44 @@ tags: [system, decisions]
   intratnm에 계속 기록 → 프로젝트 분리 원칙 위반이라 기각.
 - **백업**: `~/.brain-backups/2026-10-17/` — `System_Rules.md-harness-split`, `System_Decisions.md-harness-split`,
   `System_Projects.md-harness-split`, `Projects_intratnm_Sessions_2026-10-17-master-claude.md-harness-split`.
+
+## 2026-10-18 — 로드맵 2단계: 기록 구조 단순화
+- **결정**: 설계 [[docs/stage2-record-structure]]대로 적용한다 (사용자 결정, 질문 6개를 하나씩 확인).
+  문서마다 역할 하나·상한(세션 로그 40줄, Handoff 60줄, Decisions 항목 15줄, Knowledge 60줄 — 4단계 측정 때 조정),
+  템플릿 4종(`System/Templates/Project/`), 색인은 파일 없이 `session-context.sh`가 세션 시작 때 생성(Codex는 `--handoff`),
+  위키링크는 vault 루트 기준 전체 경로(`.obsidian/app.json` `newLinkFormat: absolute`는 에이전트가 직접 씀),
+  두 프로젝트 `CLAUDE.md`에서 Overview import 제거(색인에 절 제목만), intratnm 문서(Handoff 재작성·Decisions 4건 이관)도 함께 정리,
+  intratnm Handoff "기록 후보" 3건은 삭제(근거는 로그·Knowledge·코드에 있음),
+  vault 밖 파일(`~/.codex/AGENTS.md`, intra-tnm `CLAUDE.md`)은 에이전트가 diff를 보여 주고 확인 후 백업·수정.
+  설정 변경은 에이전트가 직접 하고, 사람이 꼭 해야 하는 이유가 있을 때만 알린다(사용자 선호).
+- **이유**: 세션 시작에 읽는 양이 intra-tnm 기준 약 51KB였고, Handoff가 변경 이력이 되어 세션 로그·Decisions와 겹쳤다.
+  수치와 진단은 설계 문서 1절.
+- **대안**: `Index.md` 파일을 `/handoff`가 유지(그 사이에 낡음), Dataview(에이전트가 못 읽음), 옛 로그 재작성(이득 없음),
+  같은 프로젝트 안 짧은 링크 허용(규칙이 둘이 됨) — 모두 기각. 상세는 설계 문서 9절.
+- **기록**: [[Projects/brain-harness/Sessions/2026-10-18-main-claude]] (적용 순서·백업 `~/.brain-backups/2026-10-18/stage2/`는 거기)
+
+## 2026-09-25 — intratnm에서 이관: 하네스 초기 결정 4건
+> 2026-10-18 로드맵 2단계에서 [[Projects/intratnm/Decisions]]의 2026-09-25 항목 4건을 본문 그대로 옮겼다 (하네스 결정이라 L1 소속).
+> 날짜는 원래 결정일. 본문의 "하네스를 L1/L2/L3 트리로 분리"는 이 파일의 "2026-09-25 — 하네스 트리 구조 (L1 → L2 → L3)"다.
+> 이관 항목이라 15줄 상한은 적용하지 않는다.
+
+### 하네스 구성
+- **결정**: Orca(worktree) + Claude Code·Codex + ECC(하네스) + Headroom(프록시 압축) + 옵시디언(기억)
+- **이유**: 두 에이전트를 병렬로 쓰면서 세션이 바뀌어도 맥락을 잃지 않기 위함
+- **규칙**: 공통 규칙은 `AGENTS.md` 하나로 관리. 기억의 기준은 옵시디언. Headroom 메모리는 사용 안 함
+  (→ 2026-09-25 "하네스를 L1/L2/L3 트리로 분리" 결정으로 공통 규칙 일부가 L1로 옮겨짐, 아래 참고)
+- **대안**: Headroom/ECC 자체 메모리 사용 → 기억이 여러 곳으로 나뉘어 제외
+
+### 기억 파일 쓰기 규칙
+- **결정**: 각 에이전트는 `Sessions/`에 자기 로그만 쓰고, `Handoff.md`는 `/handoff`로만 갱신
+- **이유**: 여러 worktree의 에이전트가 동시에 같은 노트를 덮어쓰는 것을 막기 위함
+
+### 세션 시작 시 맥락 자동 주입
+- **결정**: `.claude/hooks/session-context.sh`를 Claude Code SessionStart 훅(startup·resume·clear·compact)으로 실행해, 마지막 `/handoff` 이후 세션 로그(최대 5개)와 현재 worktree 상태를 자동으로 불러온다. Codex는 AGENTS.md에 따라 같은 스크립트를 직접 실행한다. (→ 현재 실제 경로는 `~/Brain/System/scripts/session-context.sh`로 이동함)
+- **이유**: Handoff.md는 `/handoff` 때만 갱신되므로, 그 사이에 재시작하거나 다른 worktree·에이전트로 넘어가면 최근 작업이 빠진다. 스크립트 하나를 두 에이전트가 같이 써서 맥락을 맞춘다.
+- **대안**: 세션 로그 전체를 CLAUDE.md에 `@` import → 로그가 쌓이면 컨텍스트가 커지고 Codex는 import를 못 써서 제외. ECC 세션 요약(`~/.claude/session-data`) → Claude 전용이고 옵시디언과 이중 관리라 제외.
+
+### 교차 리뷰 방식과 모델 선택
+- **결정**: 구현 후 다른 에이전트가 교차 리뷰한다(Claude ↔ Codex). 리뷰 전에는 항상 사람에게 변경 규모와 추천 강도를 보여 주고 강도(건너뛰기/가벼움/표준/심층)를 고르게 한다. 실행은 `/cross-review`. 모델은 작업 성격에 맞춰 고른다(설계·심층 = 고성능, 구현·표준 = 균형, 단순·가벼움 = 빠른 모델).
+- **이유**: 요금제 안에서 토큰을 무리하지 않게 쓰면서, 큰 변경에만 비싼 리뷰를 쓰기 위함. 사람이 매번 강도를 정해 예상 밖 사용량을 막는다.
+- **대안**: 매번 고정 강도로 자동 리뷰 → 작은 변경에도 토큰 낭비. ECC `santa-loop`(두 리뷰어 모두 승인할 때까지 반복) → 반복 횟수가 커질 수 있어 기본으로는 쓰지 않음.

@@ -26,8 +26,14 @@ GitHub에서 처음 보는 사람은 이 페이지에서 시작하면 된다. �
 - [Projects.md](../System/Projects.md) — 프로젝트 목록과 상태
 - [Reviews.md](../System/Reviews.md) — 브레인 정기 점검 주기와 기록
 - [Knowledge/README.md](../System/Knowledge/README.md) — 프로젝트를 넘어 쓰는 지식 목록
+- [Templates/Project/](../System/Templates/Project/) — 새 프로젝트용 vault 틀. 기록 템플릿 4종(세션 로그 `Sessions/_template.md`,
+  `Handoff.md`, `Decisions.md` 머리말+항목 틀, `Knowledge/_template.md`)과 각 문서의 역할·길이 상한
 - [diagrams/README.md](../System/diagrams/README.md) — 브레인 구성도(archify HTML + 원본 JSON), 보는 법·갱신법
 - [commands/](../System/commands/) — 공통 명령 원본(`/handoff`, `/cross-review`, `/new-project`, `/brain-sync`)
+
+**정리 문서 (`docs/`)**
+- [stage2-record-structure.md](./stage2-record-structure.md) — 로드맵 2단계 설계안: 기록 구조 단순화(문서별 역할·상한, 템플릿 4종,
+  세션 시작 색인, 링크 규칙, 기존 문서 정리 계획)
 
 **L2 프로젝트 — intratnm 홈페이지 (`Projects/intratnm/`)**
 - [Handoff.md](../Projects/intratnm/Handoff.md) — 현재 상태와 다음 할 일 (`/handoff`로만 갱신)

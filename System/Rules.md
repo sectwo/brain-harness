@@ -27,7 +27,7 @@ L1  전역(Global)  ~/Brain/System/            시스템 구성, 환경 설정, 
 | L1 | `Decisions.md` | 전역 결정 기록 |
 | L1 | `Projects.md` | 프로젝트 목록과 상태 (트리 전체 지도) |
 | L1 | `Reviews.md` | 브레인 정기 점검 주기와 기록 |
-| L1 | `Knowledge/` | 프로젝트를 넘어 쓰는 지식 (도구 사용법, 문제 해결, 패턴) |
+| L1 | `Knowledge/` | 프로젝트를 넘어 쓰는 지식 (도구 사용법, 문제 해결, 패턴). 새 문서는 `Knowledge/_template.md`를 복사해 쓴다 |
 | L1 | `Templates/Project/` | 새 프로젝트용 vault 틀 (`/new-project`가 사용) |
 | L1 | `scripts/` | 공통 훅·상태줄·점검 스크립트 (`install-commands.sh`, `doctor.sh` 포함) |
 | L1 | `commands/` | 공통 명령 **원본** (`/handoff`, `/cross-review`, `/new-project`, `/brain-sync`). Claude 전용 |
@@ -35,7 +35,7 @@ L1  전역(Global)  ~/Brain/System/            시스템 구성, 환경 설정, 
 | L2 | `Overview.md` | 요구사항, 기술 스택, 구조. 사람이 작성 |
 | L2 | `Decisions.md` | 프로젝트 결정 기록 |
 | L2 | `Handoff.md` | 현재 상태, 다음 할 일. `/handoff`로만 갱신 |
-| L2 | `Knowledge/` | 이 프로젝트에서만 쓰는 지식 |
+| L2 | `Knowledge/` | 이 프로젝트에서만 쓰는 지식 (틀은 `Knowledge/_template.md`) |
 | L3 | `Agents/Claude.md`, `Agents/Codex.md` | 이 프로젝트에서 에이전트별 역할·설정·알게 된 특이점 |
 | L3 | `Sessions/` | 세션별 작업 로그. 각 에이전트는 자기 파일만 쓴다 |
 
@@ -66,15 +66,21 @@ vault 자체도 하나의 프로젝트 `brain-harness`(L2)다. `System/`은 하�
 
 **작업 시작 전**
 1. 세션 시작 맥락을 읽는다. Claude Code는 SessionStart 훅이 자동으로 넣는다.
-   Codex는 `sh ~/Brain/System/scripts/session-context.sh`를 직접 실행한다.
-   (L1 요약 + 프로젝트 Handoff 이후 세션 로그 + 현재 worktree 상태가 나온다)
-2. 프로젝트 `Handoff.md`, `Overview.md`를 읽는다. Handoff와 세션 로그가 다르면 더 최근 로그를 따른다.
+   Codex는 `sh ~/Brain/System/scripts/session-context.sh --handoff`를 직접 실행한다.
+   (L1 요약 + 현재 worktree 상태 + 색인(Overview 절 제목·결정·지식·세션 로그 요약) + 마지막 `/handoff` 이후 세션 로그의
+   요약·막힌 점·다음 할 일이 나온다. `--handoff`는 Handoff.md 본문까지 붙인다 — Claude는 CLAUDE.md가 불러오므로 불필요)
+2. 프로젝트 `Handoff.md`를 읽는다. `Overview.md`는 세션 맥락의 색인에서 필요한 절만 찾아 읽는다
+   (회사 정보 대조처럼 전체가 필요하면 전체를 읽는다). Handoff와 세션 로그가 다르면 더 최근 로그를 따른다.
 3. 설계에 영향을 주는 작업이면 해당 계층의 `Decisions.md`도 읽는다.
 
 **작업 중**
 - 설계 결정을 내리면 해당 계층의 `Decisions.md` 맨 아래에 추가한다.
   형식: `## YYYY-MM-DD — 결정 제목` / 결정 / 이유 / 대안
   (Codex가 L1에 해당하는 결정을 내렸으면 직접 쓰지 않고 세션 로그에 제안만 남긴다 — 아래 7절)
+- **링크 규칙**: 위키링크는 항상 vault 루트 기준 전체 경로로 쓴다 (`[[Projects/<이름>/Decisions#YYYY-MM-DD — 제목]]`,
+  `[[System/Knowledge/<주제>]]`). 같은 프로젝트 안이라도 예외 없다. Decisions 항목 제목은 앵커라 만든 뒤 바꾸지 않는다.
+- **문서별 상한**: 세션 로그 40줄, Handoff 60줄, Decisions 항목 15줄, Knowledge 60줄. 한 문서에 역할 하나, 한 사실은 한 곳에 —
+  역할·금지 내용은 각 템플릿(`System/Templates/Project/`) 머리말을 따른다. 넘으면 쪼개거나 다른 문서로 옮긴다.
 
 **작업 종료 전**
 - `Sessions/YYYY-MM-DD-<worktree명>-<claude|codex>.md`에 **자기 세션 로그만** 쓴다.

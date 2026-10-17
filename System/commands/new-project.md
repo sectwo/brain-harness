@@ -11,7 +11,8 @@ description: 하네스 트리에 새 프로젝트(L2)를 만든다 — vault 폴
    - 루트에 `.harness-project` (내용: `<이름>` 한 줄)
    - `AGENTS.md`: 맨 위에 "L1 공통 규칙 `~/Brain/System/Rules.md`를 먼저 읽고 따른다. 이 파일은 프로젝트 고유 규칙만 담는다."
      그 아래 프로젝트 목적, vault 경로, 추가 품질 게이트, 고유 규칙만 쓴다. 공통 규칙은 반복하지 않는다.
-   - `CLAUDE.md`: `@AGENTS.md`와 `@~/Brain/Projects/<이름>/Handoff.md`, `@.../Overview.md` import
+   - `CLAUDE.md`: `@AGENTS.md`와 `@~/Brain/Projects/<이름>/Handoff.md`만 import. `Overview.md`는 import하지 않는다 —
+     세션 시작 맥락의 색인에 절 제목이 나오고, 필요한 절만 찾아 읽는다 (Rules 2절)
    - `.claude/settings.json`: `permissions.additionalDirectories`에 vault 경로. 전역에 있는 훅·명령은 넣지 않는다.
 4. **L1 갱신**: `~/Brain/System/Projects.md`에 행 추가.
 5. **Codex 쓰기 권한 안내**: `~/.codex/config.toml`과 Orca `codex-runtime-home/home/config.toml`의
