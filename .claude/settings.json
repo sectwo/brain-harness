@@ -1,0 +1,19 @@
+{
+  "extraKnownMarketplaces": {
+    "thedotmack": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/thedotmack/claude-mem.git",
+        "ref": "v14.0.1"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "claude-mem@thedotmack": true
+  },
+  "env": {
+    "DO_NOT_TRACK": "1",
+    "CLAUDE_MEM_TELEMETRY": "0",
+    "CLAUDE_MEM_TELEMETRY_ERRORS": "0"
+  }
+}

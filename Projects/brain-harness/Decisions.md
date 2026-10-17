@@ -56,3 +56,17 @@ tags: [brain-harness, decisions]
 - **이유**: 3~5단계에 필요한 것(규칙 정리, 비용 집계, 후보함, 팩 규칙)은 이미 검증된 틀을 각색하면 빠르고, 플러그인·훅을 늘리면 공급망·비용 부담이 커진다. ponytail 자체 벤치마크는 재현하지 않았다.
 - **대안**: ECC main 추종 → 미공개 GateGuard 재작업·새 UserPromptSubmit 훅(250커밋) 검증 부담으로 기각. ponytail 플러그인 설치 → 훅 3종·웹훅 추가 대비 얻는 것은 규칙 몇 줄이라 각색으로. firecrawl 지금 도입 → 요금·보존 정책 미확인·도구 27개라 조건부로. my-skills 설치 → 라이선스 없음·빌드 산출물·개인 설정 커밋이라 기각.
 - **기록**: 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-main-claude]] (분석 원본은 세션 scratchpad 읽기 전용 클론)
+
+## 2026-10-18 — 실험: claude-mem을 해마(임시 일화 기억)로 — brain-harness만, 2주
+- **결정** (사용자 결정, 선택 창 — "claude-mem 시험 설치", 범위 "brain-harness 프로젝트만", 실험안 "이대로 시작"): 사용자 제안 비유대로 옵시디언은 **대뇌피질**(시냅스, 느리게 골라 굳힌 의미 기억), claude-mem은 **해마**(빠른 자동 일화 기억, 일시적). 기간 2026-10-18 ~ 2026-11-01 (실험 트랙, [[System/Rules]] 1절).
+  설치: bun 1.4.3은 공식 GitHub 릴리스 zip을 SHASUMS256·코드 서명 확인 후 `~/.bun/bin`(+`~/.local/bin/bun` 링크)에 설치(brew는 Command Line Tools 14.3이 낡아 실패, 사람 승인), 플러그인 `thedotmack/claude-mem` 태그 v14.0.1 고정, `~/Brain` 저장소 `.claude/settings.json`(project scope)에서만 켬. 스킬 27개(`claude-mem:handoff` 이름 겹침 주의)·상시 약 2,500토큰.
+  설정(`~/.claude-mem/settings.json`): 텔레메트리 끔(DO_NOT_TRACK=1, CLAUDE_MEM_TELEMETRY=0, _ERRORS=0), Chroma 끔, FILE_READ_GATE 끔, transcript watcher 끔, 하위 에이전트 관찰 끔, 비밀 가리기 켬(일반 패턴 포함), worker idle 종료 1800초, 주입 관찰 5·세션 요약 2, 관찰 묶음 8, 모델 기본(Haiku 4.5, Claude 구독 인증).
+  피질(옵시디언): 결정·규칙·검증된 지식·Handoff·세션 요약. 골라서 쓰고 사람 승인, 기준(source of truth), 오래 감.
+  해마(claude-mem): 도구 호출 관찰(시도·실패·오류·읽은 파일). 훅이 자동 수집, 필요할 때만 검색(mem_search)·시작 주입 최소, 30일 뒤 삭제(`hippocampus-prune.sh`, 자체 TTL 없음), 기준 아님.
+  정리(해마→피질): `/handoff` 때 해마 검색으로 후보 제안, 사람 승인 후 피질에. 실험이 채택되면 분담표를 Rules.md 2절에 반영.
+  성공 기준: ① "지난번 그거" 검색이 jsonl grep 기준선보다 잘 찾음 ② `/handoff` 후보로 쓸 만한 것 나옴 ③ 사용량 증가 감당 가능(주당 호출 수·사용량 기록) ④ DB 비밀 값 패턴 0건. 시작 맥락 80줄 기준 유지.
+  되돌리기: `claude-mem stop` → 플러그인 제거·마켓 제거 → `~/.claude-mem/`·`~/.local/bin/claude-mem` 삭제 → 선택 `~/.bun`·`~/.local/bin/bun` 삭제. 백업 `~/.brain-backups/2026-10-18/claude-mem-experiment/`.
+- **이유**: 세션 로그 40줄 요약은 시도·실패·명령 같은 일화가 빠진다(해마 빈자리). 코드 조사 결과 플러그인 방식은 `~/.claude/settings.json`을 고치지 않고 bun 자동 설치·전역 transcript 감시가 없으며 텔레메트리·호스티드 서비스를 끌 수 있어 격리 실험이 가능하다.
+  상보적 학습 시스템 이론(McClelland 외 1995: 빠른 일화 저장소 + 느린 의미 저장소)과도 맞다.
+- **대안**: 완전 격리 CLAUDE_CONFIG_DIR → ECC 없는 환경이라 측정이 비현실적이어서 기각. jsonl grep 기준선만 → 비교 기준선으로 함께 씀. 기본 설정 그대로 → 텔레메트리 기본 켬·자동 소멸 없음·주입 50개라 기각.
+- **기록**: [[System/Decisions#2026-10-18 — 실험 트랙 추가: 검증 전 도구를 격리해 시험, 기억·학습 방침 문구 정리]], 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
