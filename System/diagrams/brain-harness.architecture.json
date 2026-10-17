@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "브레인 하네스 구성도 (2026-10-17)",
+    "output": "brain-harness.html",
+    "quality_profile": "showcase",
+    "locale": "ko"
+  },
+  "components": [
+    {
+      "id": "user",
+      "type": "external",
+      "label": "사람 (사용자)",
+      "sublabel": "계획 승인 · push 승인",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "orca",
+      "type": "frontend",
+      "label": "Orca",
+      "sublabel": "기능당 worktree 1개",
+      "pos": [
+        250,
+        40
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "claude",
+      "type": "backend",
+      "label": "Claude Code",
+      "sublabel": "Opus 5.5 · 기록은 Fable",
+      "pos": [
+        470,
+        40
+      ],
+      "size": [
+        160,
+        60
+      ]
+    },
+    {
+      "id": "headroom",
+      "type": "security",
+      "label": "Headroom 프록시",
+      "sublabel": "localhost:8787 압축",
+      "pos": [
+        720,
+        40
+      ],
+      "size": [
+        160,
+        60
+      ]
+    },
+    {
+      "id": "anthropic",
+      "type": "external",
+      "label": "Anthropic API",
+      "sublabel": "모델 호출",
+      "pos": [
+        960,
+        40
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "codex",
+      "type": "backend",
+      "label": "Codex",
+      "sublabel": "교차 리뷰 · read-only",
+      "pos": [
+        470,
+        200
+      ],
+      "size": [
+        160,
+        60
+      ]
+    },
+    {
+      "id": "repo",
+      "type": "cloud",
+      "label": "intra-tnm 저장소",
+      "sublabel": "Next.js 홈페이지 코드",
+      "pos": [
+        720,
+        200
+      ],
+      "size": [
+        160,
+        60
+      ]
+    },
+    {
+      "id": "github",
+      "type": "cloud",
+      "label": "GitHub",
+      "sublabel": "sectwo · private 저장소 2개",
+      "pos": [
+        960,
+        200
+      ],
+      "size": [
+        160,
+        60
+      ],
+      "tag": "push는 매번 승인"
+    },
+    {
+      "id": "scripts",
+      "type": "backend",
+      "label": "L1 스크립트",
+      "sublabel": "session-context · usage-check",
+      "pos": [
+        40,
+        380
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "훅·상태줄"
+    },
+    {
+      "id": "commands",
+      "type": "backend",
+      "label": "명령 원본",
+      "sublabel": "handoff · cross-review",
+      "pos": [
+        250,
+        380
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "install-commands.sh"
+    },
+    {
+      "id": "l1",
+      "type": "database",
+      "label": "L1 System/",
+      "sublabel": "Rules · Decisions · Knowledge",
+      "pos": [
+        470,
+        380
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "PC 전체 공통"
+    },
+    {
+      "id": "l2",
+      "type": "database",
+      "label": "L2 Projects/intratnm",
+      "sublabel": "Overview · Handoff · Decisions",
+      "pos": [
+        720,
+        380
+      ],
+      "size": [
+        180,
+        64
+      ],
+      "tag": "프로젝트 고유"
+    },
+    {
+      "id": "l3",
+      "type": "database",
+      "label": "L3 Sessions · Agents",
+      "sublabel": "에이전트별 세션 로그",
+      "pos": [
+        960,
+        380
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "자기 파일만"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "옵시디언 vault ~/Brain (git, 기억의 기준)",
+      "wraps": [
+        "scripts",
+        "commands",
+        "l1",
+        "l2",
+        "l3"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "user-orca",
+      "from": "user",
+      "to": "orca",
+      "label": "작업 지시",
+      "variant": "emphasis"
+    },
+    {
+      "id": "orca-claude",
+      "from": "orca",
+      "to": "claude",
+      "label": "세션",
+      "variant": "emphasis"
+    },
+    {
+      "id": "claude-headroom",
+      "from": "claude",
+      "to": "headroom",
+      "label": "API 요청"
+    },
+    {
+      "id": "headroom-api",
+      "from": "headroom",
+      "to": "anthropic",
+      "label": "압축 후 전달"
+    },
+    {
+      "id": "claude-codex",
+      "from": "claude",
+      "to": "codex",
+      "label": "/cross-review",
+      "variant": "dashed"
+    },
+    {
+      "id": "codex-repo",
+      "from": "codex",
+      "to": "repo",
+      "label": "diff 리뷰"
+    },
+    {
+      "id": "scripts-claude",
+      "from": "scripts",
+      "to": "claude",
+      "label": "SessionStart 맥락 주입"
+    },
+    {
+      "id": "commands-l1",
+      "from": "commands",
+      "to": "l1",
+      "label": "System/commands 원본"
+    },
+    {
+      "id": "l1-l2",
+      "from": "l1",
+      "to": "l2",
+      "label": "상속"
+    },
+    {
+      "id": "l2-l3",
+      "from": "l2",
+      "to": "l3",
+      "label": "상속"
+    },
+    {
+      "id": "l3-github",
+      "from": "l3",
+      "to": "github",
+      "label": "vault push",
+      "variant": "security"
+    },
+    {
+      "id": "claude-repo",
+      "from": "claude",
+      "to": "repo",
+      "label": "구현·커밋"
+    },
+    {
+      "id": "repo-github",
+      "from": "repo",
+      "to": "github",
+      "label": "git push",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "계층 (L3 > L2 > L1 우선)",
+      "items": [
+        "L1 System/: 공통 규칙·환경·결정·지식 9개",
+        "L2 Projects/<이름>/: 요구사항·Handoff·결정·지식",
+        "L3 Sessions/·Agents/: 세션 로그와 에이전트 특이점",
+        "아래에서 위로 승격은 사람이 승인한 것만"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "작업 흐름",
+      "items": [
+        "계획 → 구현(worktree) → 교차 리뷰 → 품질 게이트 → 핸드오프",
+        "Claude 구현은 Codex가, Codex 구현은 Claude가 리뷰",
+        "리뷰 강도는 사람이 고름(건너뛰기·가벼움·표준·심층)"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "기록 방침",
+      "items": [
+        "기억의 기준은 옵시디언 vault 하나",
+        "vault 기록·커밋은 Fable 하위 에이전트",
+        "Handoff.md는 /handoff로만 갱신"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "안전 규칙",
+      "items": [
+        "git push·L1 변경·되돌리기 어려운 작업은 사전 확인",
+        "회사 정보는 지어내지 않고 TODO(확인 필요)",
+        "실명 대신 역할명"
+      ]
+    }
+  ]
+}

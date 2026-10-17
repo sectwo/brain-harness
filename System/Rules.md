@@ -31,12 +31,15 @@ L1  전역(Global)  ~/Brain/System/            시스템 구성, 환경 설정, 
 | L1 | `Templates/Project/` | 새 프로젝트용 vault 틀 (`/new-project`가 사용) |
 | L1 | `scripts/` | 공통 훅·상태줄·점검 스크립트 (`install-commands.sh`, `doctor.sh` 포함) |
 | L1 | `commands/` | 공통 명령 **원본** (`/handoff`, `/cross-review`, `/new-project`, `/brain-sync`). Claude 전용 |
+| L1 | `diagrams/` | 브레인 구성도(archify HTML + 원본 JSON) |
 | L2 | `Overview.md` | 요구사항, 기술 스택, 구조. 사람이 작성 |
 | L2 | `Decisions.md` | 프로젝트 결정 기록 |
 | L2 | `Handoff.md` | 현재 상태, 다음 할 일. `/handoff`로만 갱신 |
 | L2 | `Knowledge/` | 이 프로젝트에서만 쓰는 지식 |
 | L3 | `Agents/Claude.md`, `Agents/Codex.md` | 이 프로젝트에서 에이전트별 역할·설정·알게 된 특이점 |
 | L3 | `Sessions/` | 세션별 작업 로그. 각 에이전트는 자기 파일만 쓴다 |
+
+계층 밖, vault 루트의 `docs/`는 GitHub용 문서 목차와 사람이 읽는 정리 문서(가이드·설계안 등)를 둔다. 규칙·결정·지식의 원본은 위 표의 위치가 기준이고 `docs/`는 목차만 담는다.
 
 **어디에 둘지 판단**: 새 규칙·설정·지식은 "다른 프로젝트에도 쓰이나?"로 정한다.
 쓰이면 L1, 이 프로젝트만이면 L2, 특정 에이전트·세션에만 해당하면 L3.

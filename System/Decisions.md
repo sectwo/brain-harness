@@ -95,3 +95,18 @@ tags: [system, decisions]
   2026-10-03 확인) — 기존 명령 예시가 실제로 실행되지 않았다.
 - **대안**: `opusplan` 유지 → 사용자가 Opus 5.5로 직접 전환해 기각. `codex review`를 지시문 없이 사용 →
   프로젝트 품질 게이트·사실 확인 지시를 못 넣어 기각.
+
+## 2026-10-17 — 브레인 구성도(System/diagrams)와 문서 목차(docs/) 추가
+- **결정**:
+  1. L1에 `System/diagrams/`를 만들고 브레인 하네스 구성도를 둔다 — archify로 만든 단독 실행 HTML
+     (`brain-harness.html`)과 원본 명세(`brain-harness.architecture.json`), 보는 법·갱신법을 적은 README.
+     구조가 바뀌면(`/handoff`·정기 점검) JSON을 고쳐 다시 만든다. `Rules.md` 1절 표에 `diagrams/` 행 추가.
+  2. vault 루트에 `docs/`를 만들고 `docs/README.md`를 GitHub용 문서 목차(허브)로 쓴다. 앞으로 사람이 읽는
+     정리 문서(가이드·설계안 등)는 `docs/` 아래에 둔다. 규칙·결정·지식의 원본 위치는 바뀌지 않는다.
+  3. archify는 전역 설치하지 않고 필요할 때 임시 clone에서 `node archify/bin/archify.mjs finalize`로만 실행한다
+     (`ARCHIFY_UPDATE_CHECK_DISABLED=1`). 사전 점검: 의존성 0, 설치 훅 없음, 네트워크는 선택적 업데이트 확인뿐.
+- **이유**: 사용자 요청("추천사항대로 진행 + 깃허브에 별도 문서정리 폴더"). 하네스 구조를 한눈에 보고,
+  GitHub에서 처음 보는 사람도 문서를 찾기 쉽게 하기 위함. 구성도는 Rules.md를 그린 것이라 L1이 맞다.
+- **대안**: 구성도를 세션 임시 폴더에만 보관 → 세션이 끝나면 사라지고 공유가 안 돼 기각.
+  archify를 전역 스킬·CLI로 설치 → L1 도구 추가라 별도 확인이 필요하고, 설치 없이 임시 clone으로 실행
+  가능해 불필요하다고 판단해 보류.
