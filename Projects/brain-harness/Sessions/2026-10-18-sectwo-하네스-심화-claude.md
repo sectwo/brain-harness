@@ -23,8 +23,8 @@ tags: [brain-harness, session]
 ## 검증
 - 위 "한 일"의 확인 결과가 검증 전부. 코드 diff 없음 → 교차 리뷰 해당 없음
 ## 막힌 점 / 확인 필요
-- 없음. starter principles(v4, 29개)는 비워 두고 시작으로 결정(마커 starter-principles-reviewed.txt=4). 기존 기록 백필은 실험 리뷰 때 판단
+- 없음. starter principles(v4, 29개)는 지금은 비워 두고, 다음 세션에서 근거와 함께 추천한 뒤 적용 여부를 사람에게 묻는다(마커 starter-principles-reviewed.txt 일부러 없음 → 시작 프로토콜이 다시 묻는다). 백필은 실험 리뷰 때 판단
 ## 다음 세션에
 - Handoff 2번: 3단계 ② 유지보수 체계 (새 worktree, 계획 확인 후)
 - 실험 첫 리뷰 때: claude-mem 프로젝트 키 분리 여부, 요약 생성 사용량 확인
-- 위 사람 선택 대기 2건 답 받기
+- 시작 직후 task-observer starter principles 29개를 읽고 우리 하네스에 맞는 것을 근거와 함께 추천 → 적용 여부를 사람에게 확인 (사용자 요청)
