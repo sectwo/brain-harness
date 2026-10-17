@@ -239,3 +239,17 @@ tags: [system, decisions]
   검증: `claude plugin details` → ecc 2.2.3, 훅 7종·MCP 1개. 새 `claude -p` 세션에서 chrome-devtools MCP 도구 로드 확인. doctor.sh 오류 없음(기존 Codex WARN 2개만).
 - **대안**: `claude plugin update`만 실행 → main 최신으로 올라가 기각. 마켓플레이스 제거 후 재등록 → 플러그인 제거 위험으로 기각. 캐시 수동 교체 → CLI 메타데이터와 어긋나 기각.
 - **기록**: [[System/Decisions#2026-10-18 — L1 플러그인 갱신 방침: ECC 2.2.3·chrome-devtools MCP 고정·ui-ux-pro-max 2.15]], 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-브레인하네스-설정-claude]]
+
+## 2026-10-18 — ui-ux-pro-max 2.15.0 적용: main 커밋, 태그 고정 불가
+- **결정** (사용자 선택, 선택 창으로 두 번 결정, 적용 완료): ui-ux-pro-max를 09170ee(2.13.0) → main **56ea9cf**(plugin.json 2.15.0)으로 올렸다 (캐시 `~/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.15.0`, `installed_plugins.json` sha 56ea9cf). 훅·MCP·postinstall 없음, Skills 7개만.
+  방식: ref 없이 main을 따르는 등록은 그대로 두고, 원격 main이 56ea9cf인지 `git ls-remote`로 확인한 뒤 `claude plugin marketplace update` → `claude plugin update`.
+  **고정이 아니다** — "다음에 직접 update하지 않는 한 유지"일 뿐이고, update 한 번이면 main 최신으로 올라간다(ECC의 태그 고정과 다름). 갱신 전엔 아래와 같은 공급망 점검 필수.
+  고정 시도 실패: settings `extraKnownMarketplaces.ui-ux-pro-max-skill.source.ref`에 커밋 SHA를 넣고 `marketplace add …#<sha>` → "Remote branch <sha> not found" (CLI는 ref를 브랜치·태그 이름으로만 받음, `git clone --branch`). settings는 백업대로 되돌림.
+  백업·되돌리기: `~/.brain-backups/2026-10-18/plugins-uiux/`(installed_plugins.json, known_marketplaces.json, settings.json, cache-uiux-2.13.0/) 복원.
+- **정정**: 위 방침 항목의 "2.15.0"은 두 가지를 가리켰다. GitHub 릴리스 태그 v2.15.0(a38d04c, 2026-08-13)은 설치본과 갈라진 이전 줄기로, 올리면 약 7천 줄이 사라지고 SVG 손상 수정(#526, 2026-10-12)이 없다.
+  plugin.json 2.15.0은 main의 7246805(2026-10-12)부터이고 SVG 수정은 main에만 있다.
+- **이유**: 공급망 점검 통과 — 09170ee..56ea9cf 52파일 +2060/-199, 로드되는 `.claude/skills/` 11파일(design 스크립트 icon·logo·cip generate.py 수정·테스트, brand sync-brand-to-tokens.cjs). 추가된 줄에 네트워크·subprocess·eval·exec 없음.
+  design 스크립트의 Gemini API 호출은 기존부터 있었고 스킬을 직접 실행할 때만 동작.
+  검증: `claude plugin details` → ui-ux-pro-max 2.15.0(Skills 7, Hooks 0). 새 `claude -p` 세션에서 ui-ux-pro-max:ui-ux-pro-max 스킬 로드 확인. doctor.sh 오류 없음(기존 Codex WARN 2개만).
+- **대안**: 릴리스 태그 v2.15.0 → 퇴행·SVG 수정 없음으로 기각. 7246805 → #532 오류 수정 빠져 기각. 로컬 폴더 마켓플레이스로 완전 고정 → 출처 선언 변경·수작업 갱신 부담으로 기각(나중에 필요하면 재검토). 보류 → SVG 버그 남아 기각.
+- **기록**: [[System/Decisions#2026-10-18 — L1 플러그인 갱신 방침: ECC 2.2.3·chrome-devtools MCP 고정·ui-ux-pro-max 2.15]], 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-브레인하네스-설정-claude]]
