@@ -253,3 +253,13 @@ tags: [system, decisions]
   검증: `claude plugin details` → ui-ux-pro-max 2.15.0(Skills 7, Hooks 0). 새 `claude -p` 세션에서 ui-ux-pro-max:ui-ux-pro-max 스킬 로드 확인. doctor.sh 오류 없음(기존 Codex WARN 2개만).
 - **대안**: 릴리스 태그 v2.15.0 → 퇴행·SVG 수정 없음으로 기각. 7246805 → #532 오류 수정 빠져 기각. 로컬 폴더 마켓플레이스로 완전 고정 → 출처 선언 변경·수작업 갱신 부담으로 기각(나중에 필요하면 재검토). 보류 → SVG 버그 남아 기각.
 - **기록**: [[System/Decisions#2026-10-18 — L1 플러그인 갱신 방침: ECC 2.2.3·chrome-devtools MCP 고정·ui-ux-pro-max 2.15]], 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-브레인하네스-설정-claude]]
+
+## 2026-10-18 — /cross-review 표준·심층 점검표에 6관점 추가
+- **결정** (사용자 승인, 선택 창): `System/commands/cross-review.md` 3단계 실행에 **강도별 점검표**를 넣었다. 가벼움은 그대로(치명적 문제만: 동작 깨짐, 비밀·데이터 노출, 되돌리기 어려운 변경).
+  표준·심층은 6관점(버그·보안·부하·테스트·속도·비대함)을 차례로 보고, 해당 없으면 "해당 없음" 한 줄. 표준은 diff + 직접 관련 파일, 심층은 기능 전체 맥락 + 구조(경계·결합)·배포 영향.
+  Codex 지시문과 Claude 하위 에이전트 지시에 모두 넣고, 결과 정리에서 표준·심층은 지적마다 관점을 붙인다. Rules.md 4절 표는 바꾸지 않았다(세부는 명령 원본이 담당).
+  6관점 이름은 dietrichgebert/ponytail review/audit(MIT)에서 각색. 플러그인은 설치하지 않았고, 각 관점의 설명 문구는 이번에 새로 쓴 것(ponytail 원문 복사 아님).
+  백업: `~/.brain-backups/2026-10-18/cross-review.claude-commands.md`, `cross-review.system-commands.md`. 반영은 main 병합 후 `install-commands.sh`.
+- **이유**: 표준 리뷰가 "버그 + 품질 게이트"만 보면 부하·속도·비대함처럼 동작은 맞아도 나중에 비용이 되는 문제를 놓친다. 관점을 고정 목록으로 주면 Claude·Codex 리뷰어가 같은 기준으로 보고 결과를 비교하기 쉽다. 가벼움은 비용을 낮게 유지하려고 그대로 둔다.
+- **대안**: ponytail 플러그인 설치 → 훅 3종·웹훅 추가 대비 얻는 것이 점검표 몇 줄이라 기각(벤치마킹 결정과 같은 이유). Rules.md 4절 표에도 6관점 기재 → 같은 사실이 두 곳에 생겨 "한 사실은 한 곳" 규칙에 어긋나 기각. 가벼움에도 6관점 → diff 100줄 미만에 과하고 비용 증가로 기각.
+- **기록**: [[Projects/brain-harness/Decisions#2026-10-18 — 외부 저장소 벤치마킹 6종: 채택·각색·보류]] (④번), 세션 로그 [[Projects/brain-harness/Sessions/2026-10-18-sectwo-하네스-업데이트-자업-claude]]
