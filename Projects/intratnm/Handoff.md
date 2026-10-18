@@ -24,7 +24,7 @@ tags: [intratnm, handoff]
 - SEO 기본 갖춤 → [[Projects/intratnm/Knowledge/SEO-And-OG-Image]]. Lighthouse 성능 점수는 모의 계산과 실측이 크게 달라 기본 점수만으로
   판단하지 않는다(Fonts 지식 "주의"). 디자인 기준은 저장소 `design-system/intra-tnm/MASTER.md`(요약 [[Projects/intratnm/Knowledge/Design-Tokens]]), GSAP 미도입.
 - 카카오맵: `NEXT_PUBLIC_KAKAO_MAP_KEY` 미발급 → 자리표시자 + 외부 링크. 자동 테스트 없음(도입 여부는 배포 방식 정할 때 판단).
-- 저장소: `~/orca/projects/intra-tnm` `master` (origin보다 로컬 1커밋 앞섬, push 안 함). 원격 `github.com/sectwo/intra-tnm`(private).
+- 저장소: `~/orca/projects/intra-tnm` `master` (origin과 같음). 원격 `github.com/sectwo/intra-tnm`(private).
 
 ## 진행 중인 worktree
 | worktree | 담당 | 작업 | 상태 |
@@ -42,7 +42,7 @@ tags: [intratnm, handoff]
 7. [ ] (개발자) 카카오맵 앱키 발급(허용 도메인 `www.intratnm.com` + 로컬) → `NEXT_PUBLIC_KAKAO_MAP_KEY` 적용
 8. [ ] (요청자) CONTACT 개인정보 수집·이용 동의 문구 작성·검토 → TODO 자리표시자 교체
 9. [ ] (Claude) 브랜드 공식 홈페이지 링크 10개 오픈 직전 재확인(URYU `/en/`, HIOS `hios.com` 포함)
-10. [ ] (사람) `intra-tnm` master 1커밋(CONTACT 개편) push 승인 · `backup/pre-name-scrub` 로컬 브랜치(vault, 요청자 실명 원본) 삭제 여부
+10. [ ] (사람) `backup/pre-name-scrub` 로컬 브랜치(vault, 요청자 실명 원본) 삭제 여부
 
 ## 막힌 점 / 확인 필요
 - 배포 서버: 호스팅사 나야나(NAYANA)까지 확인됨. 계약 상품·Node.js 실행 가능 여부 미확인 — NOTICE·CONTACT API·배포 전 보안 작업이 여기 걸림.
