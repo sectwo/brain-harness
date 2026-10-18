@@ -16,7 +16,8 @@ description: 현재 변경을 다른 에이전트로 교차 리뷰한다 (강도
      함께 쓸 수 없다 (`the argument '--base <BRANCH>' cannot be used with '[PROMPT]'`, 2026-10-03 확인).
      그래서 지시문을 넣는 리뷰는 `codex exec` 읽기 전용으로 돌린다:
      1. 커밋 안 된 변경이 있으면 먼저 기능 브랜치에 로컬 커밋한다 (규칙상 로컬 커밋은 자유).
-     2. `codex exec -m "<모델>" -c model_reasoning_effort="<low|medium|high>" -s read-only "<지시: 먼저 git diff <기준>...HEAD로 변경을 확인하라. 파일은 수정하지 말고 리뷰만 한다. …>"`
+     2. `codex exec -m "<모델>" -c model_reasoning_effort="<low|medium|high>" -s read-only -o <결과파일> "<지시: 먼저 git diff <기준>...HEAD로 변경을 확인하라. 파일은 수정하지 말고 리뷰만 한다. …>" < /dev/null`
+        (`< /dev/null` 필수 — 없으면 stdin 입력을 기다리며 멈춘다. [[System/Knowledge/Codex-Review-Output]])
      지시에는 강도별 범위와 점검표(아래), 심각도 표기(치명/높음/참고), 프로젝트 품질 게이트, "사실 정보 지어내기 금지" 확인을 넣는다.
      지시문 없이 기본 리뷰만 할 때는 `codex review --base <기준> -c model="<모델>" -c model_reasoning_effort="<low|medium|high>"`도 가능하다.
    - Claude 리뷰: 강도에 맞는 모델(가벼움 Haiku, 표준 Sonnet, 심층 Opus)의 하위 에이전트로 diff를 리뷰하거나

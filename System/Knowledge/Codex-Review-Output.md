@@ -1,8 +1,8 @@
 ---
 level: 1
-summary: "`codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기"
+summary: "`codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기 · 비대화형 실행은 `< /dev/null`로 stdin을 닫기"
 tags: [knowledge, codex, cross-review]
-source: intratnm 2026-10-02
+source: intratnm 2026-10-02, 2026-10-19
 ---
 # Codex 리뷰 출력은 잘라 보지 말고 파일로 끝까지 받기
 
@@ -18,6 +18,13 @@ Codex 쪽 버그가 아니라 `head` 절단이 원인이었다. 옵션 자체는
 ## 해결
 - `codex review` / `codex exec` 출력은 **절대 `head -c`로 자르지 않는다.**
 - 출력을 파일로 리다이렉트해 끝까지 받은 뒤 그 파일을 읽는다. 이렇게 하면 정상 동작한다.
+- 최종 답만 필요하면 `codex exec -o <파일>`로 마지막 메시지만 따로 받는다.
+
+## 함정: stdin을 열어 두면 멈춘다 (2026-10-19)
+- 에이전트 Bash·백그라운드·파이프에서 `codex exec "<지시>"`를 돌리면 로그에 `Reading additional input from stdin...`만 찍히고
+  리뷰를 시작하지 않은 채 멈춘다(10분 타임아웃까지 대기). 지시문을 인자로 줘도 stdin이 열려 있으면 추가 입력을 기다린다.
+- 해결: 항상 `< /dev/null`을 붙인다 — `codex exec … "<지시>" < /dev/null > log.txt 2>&1`.
 
 ## 출처
 - [[Projects/intratnm/Sessions/2026-10-02-master-claude]] — "교차 리뷰 (Codex, 가벼움 강도)" 디버깅 메모
+- [[Projects/intratnm/Sessions/2026-10-19-sectwo-개발-claude]] — stdin 대기로 표준 리뷰가 멈춘 사례

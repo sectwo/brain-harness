@@ -12,7 +12,7 @@ tags: [system, knowledge]
 | [[System/Knowledge/Orca-Codex-Headroom]] | Orca에서 띄우는 Codex를 Headroom 프록시로 보내는 법 |
 | [[System/Knowledge/ECC-GateGuard]] | ECC GateGuard 훅이 작업을 멈출 때 대응, 현재 예외 설정, 훅 판정을 가짜 입력으로 확인하는 법 |
 | [[System/Knowledge/Headroom-Output-Compression]] | Headroom이 도구 출력을 압축할 때 원문 보는 법 |
-| [[System/Knowledge/Codex-Review-Output]] | `codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기 |
+| [[System/Knowledge/Codex-Review-Output]] | `codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기 · 비대화형 실행은 `< /dev/null`로 stdin을 닫기 |
 | [[System/Knowledge/Claude-Plugin-Install]] | 세션 중 설치한 플러그인은 로드 안 됨(완전 재시작 필요) + 한 프로젝트에만 태그 고정 설치(--scope project) |
 | [[System/Knowledge/Nextjs-Worktree]] | Next.js(Turbopack) worktree: `npm install`·`next typegen`·`agentRules: false` |
 | [[System/Knowledge/Chrome-DevTools-MCP]] | `fullPage`/`resize_page` 캡처 artifact — 실제 스크롤·실측으로 재확인, MCP 프로필이 막히면 headless Chrome + CDP로 대체 촬영 |
