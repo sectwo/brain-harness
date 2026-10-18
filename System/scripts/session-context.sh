@@ -7,6 +7,7 @@
 # Handoff.md는 프로젝트 CLAUDE.md가 불러오고(Codex는 `--handoff` 옵션으로 여기서 출력),
 # Overview.md는 색인(절 제목)만 보여 준다. 그 밖에 현재 worktree 상태, 색인(결정·지식·세션 로그 요약),
 # 마지막 /handoff 이후에 쌓인 세션 로그의 요약·막힌 점·다음 할 일을 보여 준다.
+# 첫 메시지가 `시작`·`이어서`뿐일 때 에이전트가 할 일(할 수 있는 일/기다리는 일 정리, 추천 1개)도 한 절로 지시한다.
 #
 # 옵션:
 #   --handoff   마지막에 프로젝트 Handoff.md 본문을 그대로 붙인다 (Codex용)
@@ -148,6 +149,12 @@ echo "- 브랜치(worktree명): \`$branch\`"
 echo "- 커밋 안 된 변경: ${changes}개"
 echo "- 최근 커밋: $(git log -1 --format='%h %s' 2>/dev/null)"
 echo "- 이번 세션 로그: \`Sessions/${today}-${branch}-<claude|codex>.md\` (이미 있으면 이어서 쓴다)"
+echo
+
+echo "## 첫 메시지가 \`시작\`·\`이어서\`처럼 구체적 요청이 없으면"
+echo "- Handoff의 다음 할 일과 아래 '/handoff 이후 세션 로그'를 보고 '지금 바로 할 수 있는 일 / 사람 답을 기다리는 일'로 나눠 정리한다."
+echo "- 추천 다음 작업 1개를 계획과 함께 제안한다 (구현은 사람 확인 후)."
+echo "- 현재 worktree가 그 작업에 맞지 않으면(코드 작업인데 master, 병합 끝난 worktree 등) 함께 알린다."
 echo
 
 # --- 색인 (저장하지 않고 매번 만든다: Overview 절 제목, Decisions 제목, frontmatter summary) ---
