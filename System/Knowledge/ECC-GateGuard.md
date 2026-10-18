@@ -2,13 +2,17 @@
 level: 1
 summary: "ECC GateGuard 훅이 작업을 멈출 때 대응, 현재 예외 설정, 훅 판정을 가짜 입력으로 확인하는 법"
 tags: [knowledge, ecc]
-source: intratnm 2026-09-25, brain-harness 2026-10-18
+source: intratnm 2026-09-25, brain-harness 2026-10-18, intratnm 2026-10-18
 ---
 # ECC GateGuard 대응
 
 - ECC의 GateGuard 훅은 세션의 **첫 Bash 명령**과 **파일별 첫 Edit/Write** 전에 작업을 막고 사실 확인을 요구한다.
   (요청 한 줄 요약, 명령이 확인하는 것, 파일을 불러가는 곳, 사용자 지시 원문 등)
 - 대응: 요구한 사실을 답변에 적고 **같은 작업을 다시 실행**하면 통과한다. 우회하지 않는다.
+- 파일을 바꾸거나 지우는 위험 명령(예: `git checkout -- <파일>`)에는 **Fact-Forcing Gate**가 뜬다: 바뀌거나 지워지는 파일 목록,
+  한 줄 되돌리기 방법, 사용자의 현재 지시 원문을 **답변 본문에 먼저 적은 뒤** 같은 명령을 다시 보내야 통과한다.
+  적지 않고 다시 보내면 또 막힌다 (2026-10-18 intratnm에서 확인).
+- 같은 효과를 내는 다른 명령(`git show HEAD:<경로> > <경로>` 등)으로 돌아가지 않는다 — 우회다. 위 사실을 적고 원래 명령을 다시 실행한다.
 - 병렬로 여러 수정을 보냈다면 일부는 이미 적용됐을 수 있다. 파일을 다시 읽고 이어간다.
 - 특정 경로를 제외하려면 `GATEGUARD_EXEMPT_GLOBS`, 완전히 끄려면 `ECC_GATEGUARD=off`. 전역 설정 변경이므로 사람 승인 후에만.
 - **현재 설정 (`~/.claude/settings.json` env, 2026-10-17 사용자 승인, 백업 `~/.brain-backups/2026-10-17/claude-settings.json`)**
