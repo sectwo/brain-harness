@@ -24,7 +24,7 @@ tags: [intratnm, session]
 - Codex 표준 교차 리뷰(`gpt-5.6-terra`, medium) 위 5커밋: 치명·높음 0, 참고 2.
   - (a) BrandLogo `next/image` sizes — 반영: width/height를 표시 높이 56px 기준으로 넘겨 srcset 축소(`04f046b`).
   - (b) 자동 테스트 없음 — 사용자 결정으로 보류(테스트 도입은 배포 방식 정할 때 판단).
-- 추가 수정: 메인 NOTICE 폭 max-w-4xl → max-w-6xl로 다른 섹션과 정렬(`2691c2e`).
+- 추가: 메인 NOTICE 폭 max-w-6xl 정렬(`2691c2e`). /handoff 뒤 CONTACT 2열(안내 카드+폼, 문의 유형 선택 칸, `195da78`) — Codex 가벼움(luna low) 치명 0, master 병합, push 대기.
 - master fast-forward 병합 완료(master = `a7670dc`), 사용자 승인 후 push 완료(origin = master).  vault: Overview 브랜드 문구 동기화, Decisions에 문구 다듬기·`02_회사정보` 활용 항목 추가.
 ## 검증
 - eslint·tsc·next build 통과. 데스크톱은 headless Chrome 캡처로 확인. 모바일은 headless 최소 창 너비 문제로 확인 불가.

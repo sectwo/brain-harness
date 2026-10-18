@@ -17,14 +17,14 @@ tags: [intratnm, handoff]
   단일 출처(Overview와 동일). 고객사 실명은 `company.ts` `clientGroups` 하나로 메인 TRUSTED EXPERIENCE·COMPANY 주요 거래처가 공유(잠정 승인).
 - 이미지: 요청자 원본(저장소 밖)을 `scripts/brand-images.mjs`(브랜드, `whiten` 옵션 포함)·`scripts/company-images.mjs`(인사말 사진)로 가공해
   `public/brands/<slug>/`·`public/company/`에 생성 → [[Projects/intratnm/Knowledge/Brand-Images-Pipeline]]. `image` 없는 제품은 자리표시자.
-- CONTACT: 문의 유형 선택, `?brand=코드` 자동 선택, 허니팟·입력 검증·본문 크기 상한. `resend` 전송, 키 미설정 시 503 + 회사 이메일 안내.
+- CONTACT: 2열(왼쪽 연락처·문의 절차 안내, 오른쪽 폼), 문의 유형 선택 칸, `?brand=코드` 자동 선택, 허니팟·입력 검증·본문 크기 상한. `resend` 전송, 키 미설정 시 503 + 회사 이메일 안내.
   IP 요청 수 제한은 보류. 개인정보 동의 문구는 TODO 자리표시자가 화면에 노출 중 → [[Projects/intratnm/Knowledge/Env-Vars-And-Fallbacks]].
 - NOTICE: 파일 저장소(`.data/notices.json`, 직렬화·원자적 쓰기, 단일 프로세스 전제) + HMAC 세션 쿠키 관리자 로그인(비밀번호 1개, 해시 비교,
   쓰기 API Origin 검사). 다중 프로세스 배포면 DB로 전환 필요 → [[Projects/intratnm/Knowledge/Notice-Admin-Structure]].
 - SEO 기본 갖춤 → [[Projects/intratnm/Knowledge/SEO-And-OG-Image]]. Lighthouse 성능 점수는 모의 계산과 실측이 크게 달라 기본 점수만으로
   판단하지 않는다(Fonts 지식 "주의"). 디자인 기준은 저장소 `design-system/intra-tnm/MASTER.md`(요약 [[Projects/intratnm/Knowledge/Design-Tokens]]), GSAP 미도입.
 - 카카오맵: `NEXT_PUBLIC_KAKAO_MAP_KEY` 미발급 → 자리표시자 + 외부 링크. 자동 테스트 없음(도입 여부는 배포 방식 정할 때 판단).
-- 저장소: `~/orca/projects/intra-tnm` `master` (origin과 같음). 원격 `github.com/sectwo/intra-tnm`(private).
+- 저장소: `~/orca/projects/intra-tnm` `master` (origin보다 로컬 1커밋 앞섬, push 안 함). 원격 `github.com/sectwo/intra-tnm`(private).
 
 ## 진행 중인 worktree
 | worktree | 담당 | 작업 | 상태 |
@@ -35,14 +35,14 @@ tags: [intratnm, handoff]
 1. [ ] (요청자) 배포 서버 상품·Node.js 실행 가능 여부 확인 → NOTICE 저장소(파일→DB)·CONTACT API·배포 방식 확정 (최우선). 확정 후 배포 전
    보안 작업(관리자 로그인 시도 제한, CONTACT 요청 수 제한, 세션 토큰 무효화·비밀키 회전 절차)과 폰트 OFL 고지·자동 테스트 도입 여부를 함께 판단
 2. [ ] (요청자→개발자) 빌드 머신의 인터넷 연결 가능 여부 확인 — 오프라인 빌드면 Chakra Petch를 서체 파일 포함으로 바꿔야 함
-3. [ ] (사람) 모바일 실제 화면 확인 — 브랜드 로고 크기·인사말 사진·주요 거래처·브랜드 상세 줄맞춤(headless 캡처로는 모바일 확인 불가)
+3. [ ] (사람) 모바일 실제 화면 확인 — 브랜드 로고 크기·인사말 사진·주요 거래처·브랜드 상세 줄맞춤·CONTACT 2열(headless 캡처로는 모바일 확인 불가)
 4. [ ] (사람) 실제 관리자 화면에서 로그인·공지 작성 확인 — 쓰기 API Origin 검사 추가 후 미확인
 5. [ ] (사람→요청자) 다듬은 브랜드 소개 문구 공유·확인 — [[Projects/intratnm/Decisions#2026-10-19 — 브랜드 소개 문구 문법 다듬기]]
 6. [ ] (요청자) 사진·도면 교체/보충 요청 전달 — 목록은 아래 "막힌 점". 수령 시 Claude가 파이프라인으로 반영
 7. [ ] (개발자) 카카오맵 앱키 발급(허용 도메인 `www.intratnm.com` + 로컬) → `NEXT_PUBLIC_KAKAO_MAP_KEY` 적용
 8. [ ] (요청자) CONTACT 개인정보 수집·이용 동의 문구 작성·검토 → TODO 자리표시자 교체
 9. [ ] (Claude) 브랜드 공식 홈페이지 링크 10개 오픈 직전 재확인(URYU `/en/`, HIOS `hios.com` 포함)
-10. [ ] (사람) `backup/pre-name-scrub` 로컬 브랜치(vault, 요청자 실명 원본) 삭제 여부
+10. [ ] (사람) `intra-tnm` master 1커밋(CONTACT 개편) push 승인 · `backup/pre-name-scrub` 로컬 브랜치(vault, 요청자 실명 원본) 삭제 여부
 
 ## 막힌 점 / 확인 필요
 - 배포 서버: 호스팅사 나야나(NAYANA)까지 확인됨. 계약 상품·Node.js 실행 가능 여부 미확인 — NOTICE·CONTACT API·배포 전 보안 작업이 여기 걸림.
