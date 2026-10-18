@@ -14,3 +14,4 @@ tags: [intratnm, knowledge]
 | [[Projects/intratnm/Knowledge/Design-Tokens]] | 개편 A안 디자인 토큰·컴포넌트 요약과 결정 근거 (상세는 저장소 `design-system/intra-tnm/MASTER.md`) |
 | [[Projects/intratnm/Knowledge/SEO-And-OG-Image]] | sitemap·robots·metadataBase·CONTACT layout metadata, OG 라우트 특이점(react-dom/server 금지·한글 어절 span·Node 런타임) |
 | [[Projects/intratnm/Knowledge/Brand-Images-Pipeline]] | 브랜드 로고·제품사진 생성 파이프라인(`scripts/brand-images.mjs`): 요청자 원본 위치·가공 규칙·사진 추가/교체 절차·NFD·EPIPE 함정 |
+| [[Projects/intratnm/Knowledge/Fonts-Pretendard-Subset]] | 본문 Pretendard 동적 서브셋·히어로 Chakra Petch가 어디서 어떻게 로드되는지. 서체를 바꾸거나, Lighthouse 성능 점수를 해석하거나, 오프라인 빌드·라이선스 고지를 다룰 때 연다 |
