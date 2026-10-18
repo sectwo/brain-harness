@@ -13,3 +13,4 @@ tags: [intratnm, knowledge]
 | [[Projects/intratnm/Knowledge/Env-Vars-And-Fallbacks]] | `.env.example` 변수 5개와 미설정 시 자리표시 동작 |
 | [[Projects/intratnm/Knowledge/Design-Tokens]] | 개편 A안 디자인 토큰·컴포넌트 요약과 결정 근거 (상세는 저장소 `design-system/intra-tnm/MASTER.md`) |
 | [[Projects/intratnm/Knowledge/SEO-And-OG-Image]] | sitemap·robots·metadataBase·CONTACT layout metadata, OG 라우트 특이점(react-dom/server 금지·한글 어절 span·Node 런타임) |
+| [[Projects/intratnm/Knowledge/Brand-Images-Pipeline]] | 브랜드 로고·제품사진 생성 파이프라인(`scripts/brand-images.mjs`): 요청자 원본 위치·가공 규칙·사진 추가/교체 절차·NFD·EPIPE 함정 |

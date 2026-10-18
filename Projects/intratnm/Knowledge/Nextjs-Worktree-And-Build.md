@@ -2,7 +2,7 @@
 project: intratnm
 summary: "intratnm 고유: dev 포트 3001, proxy.ts·Web Crypto, ESLint set-state-in-effect, 검증 루틴 (worktree 범용 내용은 L1 [[System/Knowledge/Nextjs-Worktree]])"
 tags: [intratnm, knowledge, nextjs, worktree]
-source: Sessions 2026-09-26-design-refresh, 2026-09-26-master, 2026-10-01-master-codex, 2026-10-03-master
+source: Sessions 2026-09-26-design-refresh, 2026-09-26-master, 2026-10-01-master-codex, 2026-10-03-master, 2026-10-18-sectwo-개발-claude
 ---
 # Next.js 16 worktree·빌드 특이점 (intratnm 고유)
 
@@ -26,4 +26,6 @@ source: Sessions 2026-09-26-design-refresh, 2026-09-26-master, 2026-10-01-master
 ## 검증 루틴 (매 기능)
 `npm run lint` → `npx tsc --noEmit` → `npm run build` → Chrome DevTools MCP로 1440px·375px 스크린샷
 (캡처 주의점은 [[System/Knowledge/Chrome-DevTools-MCP]]).
+- DevTools MCP 프로필이 다른 세션 Chrome에 잡혀 있으면 별도 `--user-data-dir` headless Chrome + CDP `Emulation.setDeviceMetricsOverride`로
+  촬영(headless `--window-size` 390은 데스크톱 최소 폭 때문에 잘림). 출처: [[Projects/intratnm/Sessions/2026-10-18-sectwo-개발-claude]]
 `package-lock.json`은 실제 의존성 추가가 아니면 되돌려 diff를 깨끗하게 유지한다.

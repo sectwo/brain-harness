@@ -36,4 +36,5 @@ tags: [intratnm, session]
 - 요청자 요청: HIOS BLG-5000BC2·PGFA-5000 사진, URYU Testers 사진, B-15 도면 원본, 저해상도·배경 다른 사진 교체
   (OM-26M 하늘색 배경, TW-800R-SCL·Mega Hose·MK 시리즈·BIX 도면 저해상도, ECT 3종 묶음 이미지에서 잘라냄).
 ## 다음 세션에
-- Pretendard 폰트 경량화(서브셋) 검토, master 병합 여부 사람 확인, `/handoff`.
+- master 병합 완료(fast-forward, push 안 함), /handoff 완료. 다음: Pretendard 폰트 경량화(서브셋) 검토.
+- 뺀 내용 → 남아 있는 곳: 브랜드 8개·워드마크·레거시 사진 재사용 계획(폐기, [[Projects/intratnm/Sessions/2026-10-18-master-claude]]), 스냅·Chakra Petch 결정 링크([[Projects/intratnm/Decisions]]).
