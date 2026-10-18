@@ -7,7 +7,6 @@ summary: "10/16 기준안 1단계(내용·데이터) 구현, Codex 표준 교차
 tags: [intratnm, session]
 ---
 # 세션 — 2026-10-18 / sectwo/개발 / claude
-
 ## 한 일
 - 계획: 1단계(내용·데이터) 계획을 보여 주고 사용자 승인. 메인 COMPANY 요약 섹션은 빼기(기준안 순서).
   기본값: CONTACT 브랜드 단일 선택, 이메일 필수·전화 선택.
@@ -22,24 +21,20 @@ tags: [intratnm, session]
   반영(`51b05df`): fetch 네트워크 실패 처리, API 타입·길이 검증·본문 20KB 상한·메일 제목 줄바꿈 제거, 허니팟,
   Footer 구분자 `·`. 보류: IP 요청 수 제한(배포 서버 확정 후, Decisions 기록).
   반박: 자동 테스트 없음 — 테스트 설정 없는 프로젝트라 curl·스크린샷 수동 검증. 재리뷰 안 함.
-- 특이사항: Chrome DevTools MCP 프로필이 이전 세션 Chrome에 잡혀 있어 별도 프로필 headless Chrome 사용(기존
-  프로세스 미접촉). `--window-size 390`은 최소 폭 때문에 잘려 CDP Emulation으로 재촬영.
-
+- 특이사항: DevTools MCP 프로필이 이전 세션 Chrome에 잡혀 별도 프로필 headless Chrome 사용(기존 프로세스 미접촉).
+  `--window-size 390`은 최소 폭 때문에 잘려 CDP Emulation으로 재촬영.
 ## 바꾼 파일
 - 저장소 `src/`: `data/brands.ts`·`company.ts`·`contact.ts`(신규), `app/page.tsx`·`company/page.tsx`·`brands/page.tsx`·
   `brands/[slug]/page.tsx`·`contact/page.tsx`(서버)·`api/contact/route.ts`·`layout.tsx`·`notice/page.tsx`,
   `components/ContactForm.tsx`(구 contact/page)·`BrandShowcase.tsx`·`BrandPhotoPlaceholder.tsx`·`Footer.tsx`.
   커밋 `cceb371`, `51b05df` (push 안 함).
-
 ## 검증
 - lint·tsc·build 통과. 1440px + CDP 모바일 390px 스크린샷(메인·COMPANY·URYU/BIX/KTC 상세·CONTACT): 가로 넘침 없음,
   `?brand=HIOS` 자동 선택 확인. Overview 문구 대조: 데이터 문자열 전부 일치(UI 라벨 제외). 외부 링크 10개 target+rel 확인.
 - `/brands/ohtake-root` 404(배포 전이라 리다이렉트 없음). API: 형식 오류·길이 초과·동의 누락 400/413,
   정상 요청 503 대체 안내(키 미설정), 허니팟 200.
-
 ## 막힌 점 / 확인 필요
 - URYU `/en/`·HIOS `hios.com` 링크 유효성(오픈 직전), FUJITEC MK-3020 vs MK-3020V(기준안대로 MK-3020), HERUTU 취급 연도,
   개인정보 동의 문구(TODO 유지), CONTACT 요청 수 제한과 배포 서버 Node.js 여부.
-
 ## 다음 세션에
 - 2단계 이미지: 브랜드 로고 10종, 제품사진 선별·최적화, 대표 제품 카드 사진 교체, BIX 도면형. master 병합 여부 확인, `/handoff`.
