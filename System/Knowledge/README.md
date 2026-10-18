@@ -15,7 +15,9 @@ tags: [system, knowledge]
 | [[System/Knowledge/Codex-Review-Output]] | `codex review`/`exec` 출력은 `head`로 자르지 말고 파일로 끝까지 받기 |
 | [[System/Knowledge/Claude-Plugin-Install]] | 세션 중 설치한 플러그인은 로드 안 됨(완전 재시작 필요) + 한 프로젝트에만 태그 고정 설치(--scope project) |
 | [[System/Knowledge/Nextjs-Worktree]] | Next.js(Turbopack) worktree: `npm install`·`next typegen`·`agentRules: false` |
-| [[System/Knowledge/Chrome-DevTools-MCP]] | `fullPage`/`resize_page` 캡처 artifact — 실제 스크롤·실측으로 재확인 |
+| [[System/Knowledge/Chrome-DevTools-MCP]] | `fullPage`/`resize_page` 캡처 artifact — 실제 스크롤·실측으로 재확인, MCP 프로필이 막히면 headless Chrome + CDP로 대체 촬영 |
 | [[System/Knowledge/Plugin-Supply-Chain-Check]] | 서드파티 Claude Code 플러그인 설치 전 공급망 점검 체크리스트 |
 | [[System/Knowledge/Binary-Install-Without-Brew]] | brew가 CLT 버전 때문에 막힐 때 GitHub 공식 릴리스 바이너리를 체크섬·코드 서명 확인 후 ~/.local/bin에 두는 법 |
 | [[System/Knowledge/PreToolUse-Commit-Guard]] | Claude Code PreToolUse(Bash) 훅으로 에이전트 git commit을 막는 패턴과 함정 6가지 (precommit-check.sh) |
+| [[System/Knowledge/macOS-Korean-Filename-NFD]] | macOS 한글 파일명은 NFD — 스크립트에서 경로를 정규식·문자열로 비교하기 전에 normalize("NFC") |
+| [[System/Knowledge/Lighthouse-LCP-Diagnosis]] | Lighthouse 성능이 낮을 때 LCP 요소·단계(TTFB/로드 지연/로드/렌더 지연)로 원인을 가르고, 바꾸지 않은 페이지와 비교해 변경 탓인지 확인 |

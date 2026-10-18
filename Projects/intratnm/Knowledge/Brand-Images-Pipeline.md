@@ -30,7 +30,7 @@ tags: [intratnm, knowledge, images]
   3. `src/data/brands.ts`의 해당 제품에 `image` 설정. `image`가 없으면 자리표시자(`BrandPhotoPlaceholder`)가 뜬다.
 
 ## 주의
-- macOS는 한글 파일명을 NFD로 저장한다. 경로에 정규식·필터를 걸 때는 `.normalize("NFC")`를 먼저 적용한다.
+- 한글 파일명 정규식 필터 → L1 [[System/Knowledge/macOS-Korean-Filename-NFD]].
 - 스크립트 출력을 `head`로 파이프하면 도중에 EPIPE로 중단된다. 파일이나 `/dev/null`로 리다이렉트한다.
 - 교체가 필요한 사진 목록(저해상도·배경 다름·묶음 이미지에서 잘라냄)은 [[Projects/intratnm/Handoff]] "막힌 점" 참고.
 
