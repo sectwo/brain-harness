@@ -38,7 +38,7 @@ tags: [intratnm, agent]
   줄바꿈을 못 하며, `runtime = "nodejs"`를 명시해야 한다(10-03) → [[Projects/intratnm/Knowledge/SEO-And-OG-Image]].
 - 세션이 길어지면(10-03 → 10-17 연속) 비용 추적 훅 경고가 누적 기준($50)을 크게 넘긴다(10-17 약 $231). 경고가
   오면 사용자에게 알리고 하위 작업 모델 하향을 제안한다 — 바꾸는 건 사용자 결정 뒤.
-- ECC PreToolUse 훅이 `git checkout -- <path>`(작업 파일 되돌리기)를 막는다(10-18). 원복은 `git show HEAD:<path> > <path>`로 한다.
+- ECC 훅이 `git checkout -- <path>`(작업 파일 되돌리기)를 막는다(10-18). 요구 사실을 답변에 먼저 적고 같은 명령을 다시 보낸다 — `git show HEAD:<path> >` 같은 동등 명령은 우회라 쓰지 않는다 → [[System/Knowledge/ECC-GateGuard]].
 - DevTools MCP 프로필이 다른 세션의 Chrome에 잡혀 있으면 별도 프로필 headless Chrome + CDP로 촬영한다(10-18)
   → [[System/Knowledge/Chrome-DevTools-MCP]].
 - Headroom 연결 확인법(10-17): `ANTHROPIC_BASE_URL`이 `http://localhost:8787`인지, 8787 LISTEN 프로세스와
